@@ -78,11 +78,10 @@
             </div>
           </div>
         </div>
-        <!-- video column -->
-        <div style="position:relative; height:82%; max-height:520px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-          <video id="cl-vid" muted playsinline preload="auto" style="width:100%; height:100%; object-fit:contain; mix-blend-mode:multiply; filter:contrast(1.1) brightness(1.02); transform:scale(1.1);">
-            <source src="uploads/do_you_think_you_would_be_capa.mp4" type="video/mp4" />
-          </video>
+        <!-- animated logo column -->
+        <div id="cl-anim-col" style="position:relative; height:82%; max-height:520px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+          <div id="cl-anim-root" style="width:100%; height:100%; mix-blend-mode:multiply;"></div>
+          <img id="cl-logo-static" src="site/assets/Capsule logo for profile's.png" alt="CAPSuLe" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; transition:opacity 0.8s ease; pointer-events:none; mix-blend-mode:multiply;" />
           <div id="cl-vid-hint" style="position:absolute; bottom:16px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:rgba(11,27,38,.35); white-space:nowrap; transition:opacity .4s;">Scroll to play ↓</div>
         </div>
       </div>
@@ -289,17 +288,186 @@
 
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{
-  &quot;videoScrubEnabled&quot;: {
-    &quot;editor&quot;: &quot;boolean&quot;,
-    &quot;default&quot;: true,
-    &quot;tsType&quot;: &quot;boolean&quot;
-  },
   &quot;showScrollHint&quot;: {
     &quot;editor&quot;: &quot;boolean&quot;,
     &quot;default&quot;: true,
     &quot;tsType&quot;: &quot;boolean&quot;
   }
 }">
+
+// ── Capsule logo animation — icon SVG builders ───────────────────────────────
+
+function _capIconApple(s) {
+  return '<g transform="scale('+s+')">'
+    +'<rect x="-2" y="-24" width="4" height="9" rx="2" fill="#4a7c20"/>'
+    +'<ellipse cx="7" cy="-22" rx="7" ry="4" fill="#5a9e28" transform="rotate(-30,7,-22)"/>'
+    +'<path d="M0,-15 C-20,-15 -22,2 -19,13 C-16,23 -9,25 0,25 C9,25 16,23 19,13 C22,2 20,-15 0,-15Z" fill="#e53935"/>'
+    +'<ellipse cx="-7" cy="-3" rx="4" ry="8" fill="rgba(255,255,255,0.38)" transform="rotate(-20,-7,-3)"/>'
+    +'</g>';
+}
+function _capIconBooks(s) {
+  return '<g transform="scale('+s+')">'
+    +'<rect x="-22" y="-16" width="13" height="30" rx="2" fill="#1565c0"/>'
+    +'<rect x="-7" y="-18" width="14" height="34" rx="2" fill="#1e88e5"/>'
+    +'<rect x="9" y="-13" width="14" height="27" rx="2" fill="#0d47a1"/>'
+    +'<line x1="-22" y1="-6" x2="-9" y2="-6" stroke="#fff" stroke-width="1.5"/>'
+    +'<line x1="-7" y1="-5" x2="7" y2="-5" stroke="#fff" stroke-width="1.5"/>'
+    +'<line x1="9" y1="-3" x2="23" y2="-3" stroke="#fff" stroke-width="1.5"/>'
+    +'</g>';
+}
+function _capIconSun(s) {
+  var rays = '';
+  for (var i = 0; i < 8; i++) {
+    var a = i / 8 * Math.PI * 2;
+    rays += '<line x1="'+(Math.cos(a)*14).toFixed(1)+'" y1="'+(Math.sin(a)*14).toFixed(1)
+          +'" x2="'+(Math.cos(a)*22).toFixed(1)+'" y2="'+(Math.sin(a)*22).toFixed(1)
+          +'" stroke="#f9a825" stroke-width="3.5" stroke-linecap="round"/>';
+  }
+  return '<g transform="scale('+s+')">' + rays + '<circle r="12" fill="#fdd835"/><circle r="7" fill="#fff176"/></g>';
+}
+function _capIconPalette(s) {
+  return '<g transform="scale('+s+')">'
+    +'<path d="M0,-22 C-24,-22 -24,12 -11,20 C-2,25 7,20 7,11 C7,4 11,2 15,5 C22,9 24,2 17,-11 C10,-22 5,-22 0,-22Z" fill="#ab47bc"/>'
+    +'<circle cx="-12" cy="-1" r="4.5" fill="#e53935"/>'
+    +'<circle cx="-5" cy="-15" r="4.5" fill="#1565c0"/>'
+    +'<circle cx="7" cy="-15" r="4.5" fill="#fdd835"/>'
+    +'<circle cx="13" cy="-1" r="4.5" fill="#43a047"/>'
+    +'</g>';
+}
+function _capIconHeart(s) {
+  return '<g transform="scale('+s+')">'
+    +'<path d="M0,20 C0,20 -24,-5 -24,-13 C-24,-22 -13,-27 0,-16 C13,-27 24,-22 24,-13 C24,-5 0,20 0,20Z" fill="#e53935"/>'
+    +'<ellipse cx="-8" cy="-11" rx="4" ry="6" fill="rgba(255,255,255,0.35)" transform="rotate(-30,-8,-11)"/>'
+    +'</g>';
+}
+function _capIconDumbbell(s) {
+  return '<g transform="scale('+s+')">'
+    +'<rect x="-26" y="-5.5" width="52" height="11" rx="5.5" fill="#1976d2"/>'
+    +'<rect x="-34" y="-14" width="12" height="28" rx="5" fill="#0d47a1"/>'
+    +'<rect x="22" y="-14" width="12" height="28" rx="5" fill="#0d47a1"/>'
+    +'</g>';
+}
+function _capIconFigure(s) {
+  var C1='#d61669', C2='#fc5c33';
+  return '<g transform="scale('+s+')">'
+    +'<circle cx="0" cy="-28" r="9" fill="'+C1+'"/>'
+    +'<line x1="0" y1="-19" x2="0" y2="-2" stroke="'+C2+'" stroke-width="6" stroke-linecap="round"/>'
+    +'<line x1="-2" y1="-13" x2="-20" y2="-4" stroke="'+C1+'" stroke-width="4.5" stroke-linecap="round"/>'
+    +'<line x1="2" y1="-13" x2="20" y2="-2" stroke="'+C1+'" stroke-width="4.5" stroke-linecap="round"/>'
+    +'<line x1="-2" y1="-2" x2="-14" y2="18" stroke="'+C2+'" stroke-width="4.5" stroke-linecap="round"/>'
+    +'<line x1="2" y1="-2" x2="16" y2="16" stroke="'+C2+'" stroke-width="4.5" stroke-linecap="round"/>'
+    +'</g>';
+}
+
+// ── Capsule logo animation — SVG scene builder ───────────────────────────────
+
+function buildCapsuleScene(t) {
+  var W=1280, H=720, CW=100, CH2=90, CR=50;
+  var CORAL1='#d61669', CORAL2='#fc5c33', BLUE1='#21367f', BLUE2='#0298ca', TEAL1='#5af0d0', TEAL2='#2bb6c7';
+  var lr=function(a,b,u){return a+(b-a)*u;};
+  var cl=function(u){return Math.max(0,Math.min(1,u));};
+  var eob=function(u){var c1=1.70158,c3=c1+1;return 1+c3*Math.pow(u-1,3)+c1*Math.pow(u-1,2);};
+  var eio=function(u){return u<0.5?4*u*u*u:(u-1)*(2*u-2)*(2*u-2)+1;};
+  var eos=function(u){return Math.sin((u*Math.PI)/2);};
+  var ez=function(raw,fn){return (fn||eio)(cl(raw));};
+  var n=function(v,d){return +(v.toFixed(d||2));};
+
+  var capScale=ez(t/0.7,eob);
+  var CX_A=W/2, CY_A=H/2-10, finalCX=172, finalCY=330;
+  var opening=ez((t-0.7)/1.3,eio), closing=ez((t-4.8)/1.2,eio);
+  var openFrac=Math.max(0,opening-closing);
+  var topDX=-28*openFrac, topDY=-112*openFrac, botDY=68*openFrac, topRot=-22*openFrac;
+  var settling=ez((t-5)/2.0,eio);
+  var capCX=lr(CX_A,finalCX,settling), capCY=lr(CY_A,finalCY,settling);
+  var TX=capCX+topDX, TY=capCY+topDY, BX=capCX, BY=capCY+botDY;
+  var arcP=ez((t-2.0)/1.6,eio);
+  var asx=capCX+8, asy=capCY-30;
+  var amx=lr(W*0.52,W*0.46,settling), amy=lr(H*0.18,H*0.16,settling);
+  var aex=W*0.85, aey=lr(H*0.40,H*0.34,settling);
+
+  var bquad=function(prog,sx,sy,mx,my,ex,ey){
+    var steps=80; var pts=[];
+    for(var i=0;i<=Math.round(steps*prog);i++){
+      var tp=i/steps;
+      var x=(1-tp)*(1-tp)*sx+2*(1-tp)*tp*mx+tp*tp*ex;
+      var y=(1-tp)*(1-tp)*sy+2*(1-tp)*tp*my+tp*tp*ey;
+      pts.push((i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1));
+    }
+    return pts.join(' ');
+  };
+  var qpt=function(tp,sx,sy,mx,my,ex,ey){return {
+    x:(1-tp)*(1-tp)*sx+2*(1-tp)*tp*mx+tp*tp*ex,
+    y:(1-tp)*(1-tp)*sy+2*(1-tp)*tp*my+tp*tp*ey
+  };};
+
+  var a1=bquad(arcP,asx,asy,amx,amy,aex,aey-18);
+  var a2=bquad(arcP,asx,asy+18,amx-2,amy+24,aex,aey+12);
+  var a3=bquad(arcP,asx,asy+34,amx+6,amy+46,aex,aey+32);
+
+  var ICONS=[
+    {fn:_capIconApple,   tp:0.10,t0:2.8},
+    {fn:_capIconBooks,   tp:0.24,t0:3.15},
+    {fn:_capIconSun,     tp:0.38,t0:3.45},
+    {fn:_capIconPalette, tp:0.52,t0:3.75},
+    {fn:_capIconHeart,   tp:0.65,t0:4.05},
+    {fn:_capIconDumbbell,tp:0.78,t0:4.35},
+    {fn:_capIconFigure,  tp:0.94,t0:4.65}
+  ];
+  var iconsSVG='';
+  ICONS.forEach(function(ic){
+    var s=ez((t-ic.t0)/0.45,eob);
+    if(s<=0) return;
+    var pt=qpt(ic.tp,asx,asy+12,amx-4,amy+18,aex,aey+6);
+    iconsSVG+='<g transform="translate('+pt.x.toFixed(1)+','+pt.y.toFixed(1)+')">'+ic.fn(+(s*1.05).toFixed(3))+'</g>';
+  });
+
+  var textP=ez((t-6.5)/1.2,eos), subtextP=ez((t-8.0)/1.0,eos);
+  var wX=600, wY=468;
+
+  var html='<svg width="100%" height="100%" viewBox="0 0 '+W+' '+H+'" style="display:block">';
+  html+='<defs>'
+    +'<linearGradient id="cl-gCoral" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="'+CORAL1+'"/><stop offset="100%" stop-color="'+CORAL2+'"/></linearGradient>'
+    +'<linearGradient id="cl-gBlue" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="'+BLUE1+'"/><stop offset="100%" stop-color="'+BLUE2+'"/></linearGradient>'
+    +'<linearGradient id="cl-gTeal" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="'+TEAL1+'"/><stop offset="100%" stop-color="'+TEAL2+'"/></linearGradient>'
+    +'<linearGradient id="cl-gTop" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="'+BLUE1+'"/><stop offset="100%" stop-color="'+BLUE2+'"/></linearGradient>'
+    +'<linearGradient id="cl-gBot" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="'+CORAL1+'"/><stop offset="100%" stop-color="'+CORAL2+'"/></linearGradient>'
+    +'<radialGradient id="cl-bgGlow" cx="50%" cy="45%" r="60%"><stop offset="0%" stop-color="#eef7ff"/><stop offset="100%" stop-color="#ffffff"/></radialGradient>'
+    +'<filter id="cl-shadow"><feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#00000028"/></filter>'
+    +'</defs>';
+  html+='<rect width="'+W+'" height="'+H+'" fill="#fff"/>';
+  html+='<rect width="'+W+'" height="'+H+'" fill="url(#cl-bgGlow)"/>';
+  if(arcP>0.01){
+    html+='<g opacity="0.9">'
+      +'<path d="'+a1+'" fill="none" stroke="url(#cl-gTeal)" stroke-width="7" stroke-linecap="round"/>'
+      +'<path d="'+a2+'" fill="none" stroke="url(#cl-gTeal)" stroke-width="5" stroke-linecap="round" opacity="0.75"/>'
+      +'<path d="'+a3+'" fill="none" stroke="url(#cl-gTeal)" stroke-width="3.5" stroke-linecap="round" opacity="0.55"/>'
+      +'</g>';
+  }
+  html+='<g>'+iconsSVG+'</g>';
+  html+='<g transform="translate('+n(capCX)+','+n(capCY)+') scale('+n(capScale,4)+') translate('+n(-capCX)+','+n(-capCY)+')" filter="url(#cl-shadow)">';
+  html+='<g transform="translate('+n(TX)+','+n(TY)+') rotate('+n(topRot,3)+',0,0)">'
+    +'<rect x="'+(-CR)+'" y="'+(-CH2)+'" width="'+CW+'" height="'+CH2+'" fill="url(#cl-gTop)"/>'
+    +'<ellipse cx="0" cy="'+(-CH2)+'" rx="'+CR+'" ry="'+n(CR*0.52)+'" fill="url(#cl-gTop)"/>'
+    +'<ellipse cx="'+n(-CR*0.3)+'" cy="'+n(-CH2+CR*0.22)+'" rx="'+n(CR*0.25)+'" ry="'+n(CR*0.13)+'" fill="rgba(255,255,255,0.5)" transform="rotate(-15,'+n(-CR*0.3)+','+n(-CH2+CR*0.22)+')"/>'
+    +'</g>';
+  html+='<g transform="translate('+n(BX)+','+n(BY)+')">'
+    +'<rect x="'+(-CR)+'" y="0" width="'+CW+'" height="'+CH2+'" fill="url(#cl-gBot)"/>'
+    +'<ellipse cx="0" cy="'+CH2+'" rx="'+CR+'" ry="'+n(CR*0.52)+'" fill="url(#cl-gBot)"/>'
+    +'<ellipse cx="'+n(-CR*0.3)+'" cy="'+n(CR*0.2)+'" rx="'+n(CR*0.25)+'" ry="'+n(CR*0.13)+'" fill="rgba(255,255,255,0.4)" transform="rotate(-15,'+n(-CR*0.3)+','+n(CR*0.2)+')"/>'
+    +'</g>';
+  html+='</g>';
+  if(textP>0){
+    var sc=n(0.72+0.28*textP,4);
+    html+='<g opacity="'+n(textP,4)+'" transform="translate('+wX+','+wY+') scale('+sc+') translate('+(-wX)+','+(-wY)+')">'
+      +'<text x="'+wX+'" y="'+wY+'" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="900" font-size="108" letter-spacing="5" fill="url(#cl-gCoral)">CAPS<tspan font-size="80" dy="10">u</tspan><tspan font-size="108" dy="-10">Le</tspan></text>'
+      +'</g>';
+  }
+  if(subtextP>0){
+    html+='<text x="'+wX+'" y="'+(wY+52)+'" text-anchor="middle" opacity="'+n(subtextP,4)+'" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="400" font-size="21" letter-spacing="3" fill="url(#cl-gBlue)">Child and Adolescent Performance Science Laboratory</text>';
+  }
+  html+='</svg>';
+  return html;
+}
 
 class Component extends DCLogic {
   componentDidMount() {
@@ -311,32 +479,31 @@ class Component extends DCLogic {
     };
     window.addEventListener('scroll', this._sc, { passive: true });
 
-    // Video — scroll-scrub or autoplay, controlled by props
-    const vid = document.getElementById('cl-vid');
+    // Animated logo — scroll-scrubbed (0→10 s over the full scroll zone)
+    const animRoot = document.getElementById('cl-anim-root');
+    const logoStatic = document.getElementById('cl-logo-static');
     const wrap = document.getElementById('cl-vidwrap');
     const hint = document.getElementById('cl-vid-hint');
-    const scrubEnabled = this.props.videoScrubEnabled !== false;
     const hintVisible = this.props.showScrollHint !== false;
     if (hint && !hintVisible) hint.style.opacity = '0';
-    if (vid && wrap) {
-      if (scrubEnabled) {
-        this._vu = () => {
-          if (!vid.duration) return;
-          const r = wrap.getBoundingClientRect();
-          const h = wrap.offsetHeight - window.innerHeight;
-          if (h <= 0) return;
-          const p = Math.max(0, Math.min(1, -r.top / h));
-          vid.currentTime = p * vid.duration;
-          if (hint && hintVisible) hint.style.opacity = p > 0.05 ? '0' : '1';
-        };
-        vid.addEventListener('loadedmetadata', this._vu);
-        window.addEventListener('scroll', this._vu, { passive: true });
-      } else {
-        // Autoplay loop fallback
-        vid.loop = true;
-        vid.muted = true;
-        vid.play().catch(() => {});
-      }
+
+    if (animRoot && wrap) {
+      animRoot.innerHTML = buildCapsuleScene(0);
+
+      this._vu = () => {
+        const r = wrap.getBoundingClientRect();
+        const h = wrap.offsetHeight - window.innerHeight;
+        if (h <= 0) return;
+        const p = Math.max(0, Math.min(1, -r.top / h));
+        animRoot.innerHTML = buildCapsuleScene(p * 10);
+        // After animation nears completion (~82 % scroll) fade in the static logo
+        if (logoStatic) {
+          const fp = Math.max(0, Math.min(1, (p - 0.82) / 0.18));
+          logoStatic.style.opacity = fp.toFixed(3);
+        }
+        if (hint && hintVisible) hint.style.opacity = p > 0.05 ? '0' : '1';
+      };
+      window.addEventListener('scroll', this._vu, { passive: true });
     }
 
     // IntersectionObserver scroll reveals
