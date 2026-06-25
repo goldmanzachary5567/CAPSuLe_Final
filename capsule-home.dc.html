@@ -28,8 +28,8 @@
 
 <div style="background:#F5EFE2; color:#0B1B26; font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;">
 
-  <!-- ── Sticky nav ── -->
-  <header style="position:sticky; top:0; z-index:50; background:#E8E2D1; border-bottom:1.5px solid #0B1B26;">
+  <!-- ── Sticky nav (hides on scroll-down, reappears on scroll-up) ── -->
+  <header id="cl-nav" style="position:fixed; top:0; left:0; right:0; z-index:50; background:#E8E2D1; border-bottom:1.5px solid #0B1B26; transition:transform .3s ease;">
     <div style="max-width:1260px; margin:0 auto; padding:0 32px; height:72px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
       <a href="capsule-home.dc.html" style="display:flex; align-items:center; flex-shrink:0; text-decoration:none;">
         <img src="site/assets/capsule-logo.png" alt="CAPSuLe" style="height:46px; width:auto; display:block;" />
@@ -50,8 +50,8 @@
   </header>
 
   <!-- ── Scroll-video hero wrapper (280vh = scroll zone) ── -->
-  <div id="cl-vidwrap" style="position:relative; height:280vh;">
-    <div style="position:sticky; top:72px; height:calc(100vh - 75px); overflow:hidden; background:radial-gradient(ellipse 160% 230% at 80% -10%, #FAF0DC 0%, #F5EFE2 58%);">
+  <div id="cl-vidwrap" style="position:relative; height:280vh; padding-top:75px;">
+    <div style="position:sticky; top:75px; height:calc(100vh - 75px); overflow:hidden; background:radial-gradient(ellipse 160% 230% at 80% -10%, #FAF0DC 0%, #F5EFE2 58%);">
       <!-- file header strip -->
       <div style="max-width:1260px; margin:0 auto; padding:0 32px;">
         <div style="display:flex; justify-content:space-between; align-items:baseline; padding:18px 0 14px; border-bottom:1px solid rgba(11,27,38,.12); flex-wrap:wrap; gap:8px;">
@@ -82,7 +82,7 @@
         <div id="cl-anim-col" style="position:relative; height:82%; max-height:520px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
           <div id="cl-anim-root" style="width:100%; height:100%; mix-blend-mode:multiply;"></div>
           <img id="cl-logo-static" src="site/assets/Capsule logo for profile's.png" alt="CAPSuLe" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; transition:opacity 0.8s ease; pointer-events:none; mix-blend-mode:multiply;" />
-          <div id="cl-vid-hint" style="position:absolute; bottom:16px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:rgba(11,27,38,.35); white-space:nowrap; transition:opacity .4s;">Scroll to play ↓</div>
+          <div id="cl-vid-hint" style="position:absolute; bottom:16px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:rgba(11,27,38,.35); white-space:nowrap; transition:opacity .4s; display:flex; flex-direction:column; align-items:center; gap:4px;">Scroll<svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:block;"><path d="M8 3v10M4 9l4 4 4-4" stroke="rgba(11,27,38,.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
       </div>
     </div>
@@ -226,21 +226,37 @@
       </div>
       <div class="cl-rv" data-d="120" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:repeat(3,1fr) auto; gap:0; border:1.5px solid #F5EFE2;">
         <div style="padding:28px 24px; border-right:1px solid rgba(245,239,226,.25); display:flex; flex-direction:column; gap:8px; transition:background .15s;" style-hover="background:rgba(245,239,226,.06);">
-          <div style="font-family:'Fraunces',serif; font-size:44px; font-weight:500; letter-spacing:-.025em; color:#F5EFE2;">$250</div>
+          <div style="font-family:'Fraunces',serif; font-size:36px; font-weight:500; letter-spacing:-.025em; color:#F5EFE2;">$250–$499.99</div>
           <div style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:14px; color:rgba(245,239,226,.75); line-height:1.4;">Sponsor a Prescribed Dose article</div>
         </div>
         <div style="padding:28px 24px; border-right:1px solid rgba(245,239,226,.25); display:flex; flex-direction:column; gap:8px; transition:background .15s;" style-hover="background:rgba(245,239,226,.06);">
-          <div style="font-family:'Fraunces',serif; font-size:44px; font-weight:500; letter-spacing:-.025em; color:#F5EFE2;">$500</div>
+          <div style="font-family:'Fraunces',serif; font-size:36px; font-weight:500; letter-spacing:-.025em; color:#F5EFE2;">$500–$999.99</div>
           <div style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:14px; color:rgba(245,239,226,.75); line-height:1.4;">Fund one Effective Dose episode</div>
         </div>
         <div style="padding:28px 24px; border-right:1px solid rgba(245,239,226,.25); display:flex; flex-direction:column; gap:8px; transition:background .15s;" style-hover="background:rgba(245,239,226,.06);">
-          <div style="font-family:'Fraunces',serif; font-size:44px; font-weight:500; letter-spacing:-.025em; color:#F5EFE2;">$1,000</div>
-          <div style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:14px; color:rgba(245,239,226,.75); line-height:1.4;">Present a community lecture</div>
+          <div style="font-family:'Fraunces',serif; font-size:36px; font-weight:500; letter-spacing:-.025em; color:#F5EFE2;">$1,000–$4,999.99+</div>
+          <div style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:14px; color:rgba(245,239,226,.75); line-height:1.4;">Sponsor a community lecture</div>
         </div>
         <a href="capsule-donate.dc.html" style="background:#C84B32; color:#F5EFE2; padding:0 36px; display:flex; align-items:center; justify-content:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; text-decoration:none; min-width:180px; transition:background .15s;" style-hover="background:#E05A3F;">Donate →</a>
       </div>
     </div>
   </section>
+
+  <!-- ── Blog post modal ── -->
+  <div id="cl-modal-bg" style="position:fixed; inset:0; z-index:200; background:rgba(11,27,38,.55); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; transition:opacity .35s ease; pointer-events:none;">
+    <div id="cl-modal" style="background:#F5EFE2; max-width:460px; width:100%; border:1.5px solid #0B1B26; position:relative; transform:translateY(20px); transition:transform .35s ease; padding:40px 36px 32px;">
+      <button id="cl-modal-close" aria-label="Close" style="position:absolute; top:14px; right:14px; background:none; border:none; cursor:pointer; padding:4px; color:#0B1B26; line-height:1;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:18px;">
+        <span style="width:7px; height:7px; background:#C84B32; border-radius:50%; display:inline-block; flex-shrink:0;"></span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32;">New Blog Post</span>
+      </div>
+      <h2 style="font-family:'Fraunces',serif; font-size:28px; font-weight:500; line-height:1.1; letter-spacing:-.02em; color:#0B1B26; margin:0 0 12px;">Can Sound Rewire a Child's Brain?</h2>
+      <p style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; line-height:1.6; color:rgba(11,27,38,.7); margin:0 0 24px;">What does the science actually say about music, auditory training, and brain development in kids? This week's Prescribed Dose breaks it down into what it means for parents, teachers, and coaches.</p>
+      <a href="https://www.thecapsl.org/post/can-sound-rewire-a-child-s-brain" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; padding:12px 20px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; transition:background .15s;" style-hover="background:#C84B32;">Read the post →</a>
+    </div>
+  </div>
 
   <!-- ── Footer ── -->
   <footer style="background:#E8E2D1; border-top:1.5px solid #0B1B26;">
@@ -471,13 +487,48 @@ function buildCapsuleScene(t) {
 
 class Component extends DCLogic {
   componentDidMount() {
-    // Reading progress bar
+    // Nav hide-on-scroll-down / show-on-scroll-up
+    let _lastY = 0, _navHidden = false;
+    const nav = document.getElementById('cl-nav');
+
+    // Reading progress bar + nav hide/show (single scroll listener)
     this._sc = () => {
-      const s = window.pageYOffset, t = document.documentElement.scrollHeight - window.innerHeight;
+      const s = window.pageYOffset;
+      const t = document.documentElement.scrollHeight - window.innerHeight;
       const b = document.getElementById('cl-prog');
       if (b) b.style.width = (t > 0 ? Math.min(100, s / t * 100) : 0) + '%';
+      if (nav) {
+        const delta = s - _lastY;
+        if (delta > 6 && s > 80 && !_navHidden) {
+          nav.style.transform = 'translateY(-100%)';
+          _navHidden = true;
+        } else if (delta < -6 && _navHidden) {
+          nav.style.transform = 'translateY(0)';
+          _navHidden = false;
+        }
+        _lastY = s;
+      }
     };
     window.addEventListener('scroll', this._sc, { passive: true });
+
+    // Blog post modal — show once per session
+    const modalBg = document.getElementById('cl-modal-bg');
+    const modalClose = document.getElementById('cl-modal-close');
+    if (modalBg && !sessionStorage.getItem('cl-modal-seen')) {
+      setTimeout(() => {
+        modalBg.style.pointerEvents = 'auto';
+        modalBg.style.opacity = '1';
+        const m = document.getElementById('cl-modal');
+        if (m) m.style.transform = 'translateY(0)';
+      }, 800);
+      const closeModal = () => {
+        modalBg.style.opacity = '0';
+        modalBg.style.pointerEvents = 'none';
+        sessionStorage.setItem('cl-modal-seen', '1');
+      };
+      if (modalClose) modalClose.addEventListener('click', closeModal);
+      modalBg.addEventListener('click', (e) => { if (e.target === modalBg) closeModal(); });
+    }
 
     // Animated logo — scroll-scrubbed (0→10 s over the full scroll zone)
     const animRoot = document.getElementById('cl-anim-root');
