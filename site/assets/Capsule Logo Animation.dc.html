@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; background: #fff; }
+    @keyframes none {}
+  </style>
+</helmet>
+
+<x-import component="Stage" from="./animations.jsx" width="{{ w }}" height="{{ h }}" duration="{{ dur }}" background="#ffffff" hint-size="100%,100%">
+  {{ scene }}
+</x-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {};
+
+  renderVals() {
+    const W = 1280, H = 720, dur = 10;
+
+    const CORAL1 = '#d61669', CORAL2 = '#fc5c33';
+    const BLUE1  = '#21367f', BLUE2  = '#0298ca';
+    const TEAL1  = '#5af0d0', TEAL2  = '#2bb6c7';
+
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const clamp01 = t => Math.max(0, Math.min(1, t));
+    const ease = (t, fn) => { const E = window.Easing || {}; return (fn || E.easeInOutCubic || (x=>x))(clamp01(t)); };
+    const tween = (t, t0, t1, a, b, fn) => lerp(a, b, ease((t - t0) / (t1 - t0), fn));
+
+    // capsule dims — half-height per half
+    const CW = 100, CH2 = 90, CR = CW / 2;
+
+    // icon sub-components
+    function Apple({ s=1 }) {
+      return React.createElement('g', { transform: `scale(${s})` },
+        React.createElement('rect', { x:-2, y:-24, width:4, height:9, rx:2, fill:'#4a7c20' }),
+        React.createElement('ellipse', { cx:7, cy:-22, rx:7, ry:4, fill:'#5a9e28', transform:'rotate(-30,7,-22)' }),
+        React.createElement('path', { d:'M0,-15 C-20,-15 -22,2 -19,13 C-16,23 -9,25 0,25 C9,25 16,23 19,13 C22,2 20,-15 0,-15Z', fill:'#e53935' }),
+        React.createElement('ellipse', { cx:-7, cy:-3, rx:4, ry:8, fill:'rgba(255,255,255,0.38)', transform:'rotate(-20,-7,-3)' })
+      );
+    }
+    function Books({ s=1 }) {
+      return React.createElement('g', { transform: `scale(${s})` },
+        React.createElement('rect', { x:-22, y:-16, width:13, height:30, rx:2, fill:'#1565c0' }),
+        React.createElement('rect', { x:-7,  y:-18, width:14, height:34, rx:2, fill:'#1e88e5' }),
+        React.createElement('rect', { x:9,   y:-13, width:14, height:27, rx:2, fill:'#0d47a1' }),
+        React.createElement('line', { x1:-22, y1:-6,  x2:-9,  y2:-6,  stroke:'#fff', strokeWidth:1.5 }),
+        React.createElement('line', { x1:-7,  y1:-5,  x2:7,   y2:-5,  stroke:'#fff', strokeWidth:1.5 }),
+        React.createElement('line', { x1:9,   y1:-3,  x2:23,  y2:-3,  stroke:'#fff', strokeWidth:1.5 })
+      );
+    }
+    function Sun({ s=1 }) {
+      const rays = Array.from({length:8}, (_,i) => {
+        const a = i/8*Math.PI*2;
+        return React.createElement('line', {key:i, x1:Math.cos(a)*14, y1:Math.sin(a)*14, x2:Math.cos(a)*22, y2:Math.sin(a)*22, stroke:'#f9a825', strokeWidth:3.5, strokeLinecap:'round'});
+      });
+      return React.createElement('g', { transform: `scale(${s})` }, ...rays,
+        React.createElement('circle', { r:12, fill:'#fdd835' }),
+        React.createElement('circle', { r:7, fill:'#fff176' })
+      );
+    }
+    function Palette({ s=1 }) {
+      return React.createElement('g', { transform: `scale(${s})` },
+        React.createElement('path', { d:'M0,-22 C-24,-22 -24,12 -11,20 C-2,25 7,20 7,11 C7,4 11,2 15,5 C22,9 24,2 17,-11 C10,-22 5,-22 0,-22Z', fill:'#ab47bc' }),
+        React.createElement('circle', { cx:-12, cy:-1, r:4.5, fill:'#e53935' }),
+        React.createElement('circle', { cx:-5,  cy:-15, r:4.5, fill:'#1565c0' }),
+        React.createElement('circle', { cx:7,   cy:-15, r:4.5, fill:'#fdd835' }),
+        React.createElement('circle', { cx:13,  cy:-1,  r:4.5, fill:'#43a047' })
+      );
+    }
+    function Heart({ s=1 }) {
+      return React.createElement('g', { transform: `scale(${s})` },
+        React.createElement('path', { d:'M0,20 C0,20 -24,-5 -24,-13 C-24,-22 -13,-27 0,-16 C13,-27 24,-22 24,-13 C24,-5 0,20 0,20Z', fill:'#e53935' }),
+        React.createElement('ellipse', { cx:-8, cy:-11, rx:4, ry:6, fill:'rgba(255,255,255,0.35)', transform:'rotate(-30,-8,-11)' })
+      );
+    }
+    function Dumbbell({ s=1 }) {
+      return React.createElement('g', { transform: `scale(${s})` },
+        React.createElement('rect', { x:-26, y:-5.5, width:52, height:11, rx:5.5, fill:'#1976d2' }),
+        React.createElement('rect', { x:-34, y:-14, width:12, height:28, rx:5, fill:'#0d47a1' }),
+        React.createElement('rect', { x:22,  y:-14, width:12, height:28, rx:5, fill:'#0d47a1' })
+      );
+    }
+    function Figure({ s=1 }) {
+      return React.createElement('g', { transform: `scale(${s})` },
+        React.createElement('circle', { cx:0, cy:-28, r:9, fill:CORAL1 }),
+        React.createElement('line', { x1:0, y1:-19, x2:0, y2:-2, stroke:CORAL2, strokeWidth:6, strokeLinecap:'round' }),
+        React.createElement('line', { x1:-2, y1:-13, x2:-20, y2:-4, stroke:CORAL1, strokeWidth:4.5, strokeLinecap:'round' }),
+        React.createElement('line', { x1:2,  y1:-13, x2:20,  y2:-2, stroke:CORAL1, strokeWidth:4.5, strokeLinecap:'round' }),
+        React.createElement('line', { x1:-2, y1:-2,  x2:-14, y2:18, stroke:CORAL2, strokeWidth:4.5, strokeLinecap:'round' }),
+        React.createElement('line', { x1:2,  y1:-2,  x2:16,  y2:16, stroke:CORAL2, strokeWidth:4.5, strokeLinecap:'round' })
+      );
+    }
+
+    function bquad(prog, sx, sy, mx, my, ex, ey) {
+      const steps = 80;
+      const pts = [];
+      for (let i = 0; i <= Math.round(steps * prog); i++) {
+        const tp = i / steps;
+        const x = (1-tp)*(1-tp)*sx + 2*(1-tp)*tp*mx + tp*tp*ex;
+        const y = (1-tp)*(1-tp)*sy + 2*(1-tp)*tp*my + tp*tp*ey;
+        pts.push((i===0?'M':'L') + x.toFixed(1) + ',' + y.toFixed(1));
+      }
+      return pts.join(' ');
+    }
+    function qpt(tp, sx, sy, mx, my, ex, ey) {
+      return {
+        x: (1-tp)*(1-tp)*sx + 2*(1-tp)*tp*mx + tp*tp*ex,
+        y: (1-tp)*(1-tp)*sy + 2*(1-tp)*tp*my + tp*tp*ey
+      };
+    }
+
+    const ICON_LIST = [
+      { Ic: Apple,    tp: 0.10, t0: 2.8 },
+      { Ic: Books,    tp: 0.24, t0: 3.15 },
+      { Ic: Sun,      tp: 0.38, t0: 3.45 },
+      { Ic: Palette,  tp: 0.52, t0: 3.75 },
+      { Ic: Heart,    tp: 0.65, t0: 4.05 },
+      { Ic: Dumbbell, tp: 0.78, t0: 4.35 },
+      { Ic: Figure,   tp: 0.94, t0: 4.65 },
+    ];
+
+    const Scene = () => {
+      const t = (window.useTime || (() => 0))();
+      const E = window.Easing || {};
+      const eob = E.easeOutBack || (x=>x);
+      const eio = E.easeInOutCubic || (x=>x);
+      const eos = E.easeOutSine || (x=>x);
+
+      // ── capsule scale-in 0→1 from t=0 to t=0.7
+      const capScale = ease(t / 0.7, eob);
+
+      // Center of screen (open phase)
+      const CX_A = W / 2, CY_A = H / 2 - 10;
+      // Final pill seam position (left side, logo layout)
+      const finalCX = 172, finalCY = 330;
+
+      // Open fraction: opens t=0.7→2.0, closes t=4.8→6.0
+      const opening = ease((t - 0.7) / 1.3, eio);
+      const closing = ease((t - 4.8) / 1.2, eio);
+      const openFrac = Math.max(0, opening - closing);
+
+      // Offset of each half from center (when open)
+      const topDX_frac = -28 * openFrac;
+      const topDY_frac = -112 * openFrac;
+      const botDY_frac =  68 * openFrac;
+      const topRot_frac = -22 * openFrac;
+
+      // Settle progress: moves pill from center to final position t=5→7
+      const settling = ease((t - 5) / 2.0, eio);
+
+      // Current capsule center position (moves to final during settling)
+      const capCX = lerp(CX_A, finalCX, settling);
+      const capCY = lerp(CY_A, finalCY, settling);
+
+      // Final world positions of each half's seam point
+      const TX = capCX + topDX_frac;
+      const TY = capCY + topDY_frac;
+      const topRot = topRot_frac;
+      const BX = capCX;
+      const BY = capCY + botDY_frac;
+
+      // ── Arc
+      const arcP = ease((t - 2.0) / 1.6, eio);
+
+      // Arc control points — follow capsule center during settling
+      const asx = capCX + 8;
+      const asy = capCY - 30;
+      const amx = lerp(W * 0.52, W * 0.46, settling);
+      const amy = lerp(H * 0.18, H * 0.16, settling);
+      const aex = W * 0.85;
+      const aey = lerp(H * 0.40, H * 0.34, settling);
+
+      const a1 = bquad(arcP, asx, asy,       amx,     amy,      aex, aey - 18);
+      const a2 = bquad(arcP, asx, asy + 18,  amx - 2, amy + 24, aex, aey + 12);
+      const a3 = bquad(arcP, asx, asy + 34,  amx + 6, amy + 46, aex, aey + 32);
+
+      // ── Icons
+      const iconEls = ICON_LIST.map(({ Ic, tp, t0 }, i) => {
+        const s = ease((t - t0) / 0.45, eob);
+        if (s <= 0) return null;
+        const pt = qpt(tp, asx, asy + 12, amx - 4, amy + 18, aex, aey + 6);
+        return React.createElement('g', { key: i, transform: `translate(${pt.x.toFixed(1)},${pt.y.toFixed(1)})` },
+          React.createElement(Ic, { s: s * 1.05 })
+        );
+      });
+
+      // ── Wordmark
+      const textP    = ease((t - 6.5) / 1.2, eos);
+      const subtextP = ease((t - 8.0) / 1.0, eos);
+      const wX = 600, wY = 468;
+
+      // Capsule top half (blue dome up)
+      const TopHalf = ({ x, y, rot }) =>
+        React.createElement('g', { transform: `translate(${x},${y}) rotate(${rot},0,0)` },
+          React.createElement('rect', { x:-CR, y:-CH2, width:CW, height:CH2, fill:'url(#gCapsuleTop)' }),
+          React.createElement('ellipse', { cx:0, cy:-CH2, rx:CR, ry:CR*0.52, fill:'url(#gCapsuleTop)' }),
+          React.createElement('ellipse', { cx:-CR*0.3, cy:-CH2+CR*0.22, rx:CR*0.25, ry:CR*0.13, fill:'rgba(255,255,255,0.5)', transform:`rotate(-15,${-CR*0.3},${-CH2+CR*0.22})` })
+        );
+
+      // Capsule bottom half (pink dome down)
+      const BotHalf = ({ x, y }) =>
+        React.createElement('g', { transform: `translate(${x},${y})` },
+          React.createElement('rect', { x:-CR, y:0, width:CW, height:CH2, fill:'url(#gCapsuleBot)' }),
+          React.createElement('ellipse', { cx:0, cy:CH2, rx:CR, ry:CR*0.52, fill:'url(#gCapsuleBot)' }),
+          React.createElement('ellipse', { cx:-CR*0.3, cy:CR*0.2, rx:CR*0.25, ry:CR*0.13, fill:'rgba(255,255,255,0.4)', transform:`rotate(-15,${-CR*0.3},${CR*0.2})` })
+        );
+
+      const scaleOriginX = capCX, scaleOriginY = capCY;
+
+      return React.createElement('svg', {
+          width: W, height: H,
+          viewBox: `0 0 ${W} ${H}`,
+          style: { display: 'block' }
+        },
+        // defs
+        React.createElement('defs', null,
+          React.createElement('linearGradient', { id:'gCoral', x1:'0%', y1:'0%', x2:'100%', y2:'0%' },
+            React.createElement('stop', { offset:'0%',   stopColor:CORAL1 }),
+            React.createElement('stop', { offset:'100%', stopColor:CORAL2 })),
+          React.createElement('linearGradient', { id:'gBlue', x1:'0%', y1:'0%', x2:'100%', y2:'0%' },
+            React.createElement('stop', { offset:'0%',   stopColor:BLUE1 }),
+            React.createElement('stop', { offset:'100%', stopColor:BLUE2 })),
+          React.createElement('linearGradient', { id:'gTeal', x1:'0%', y1:'0%', x2:'100%', y2:'0%' },
+            React.createElement('stop', { offset:'0%',   stopColor:TEAL1 }),
+            React.createElement('stop', { offset:'100%', stopColor:TEAL2 })),
+          React.createElement('linearGradient', { id:'gCapsuleTop', x1:'0%', y1:'0%', x2:'100%', y2:'0%' },
+            React.createElement('stop', { offset:'0%',   stopColor:BLUE1 }),
+            React.createElement('stop', { offset:'100%', stopColor:BLUE2 })),
+          React.createElement('linearGradient', { id:'gCapsuleBot', x1:'0%', y1:'0%', x2:'100%', y2:'0%' },
+            React.createElement('stop', { offset:'0%',   stopColor:CORAL1 }),
+            React.createElement('stop', { offset:'100%', stopColor:CORAL2 })),
+          React.createElement('radialGradient', { id:'bgGlow', cx:'50%', cy:'45%', r:'60%' },
+            React.createElement('stop', { offset:'0%',   stopColor:'#eef7ff' }),
+            React.createElement('stop', { offset:'100%', stopColor:'#ffffff' })),
+          React.createElement('filter', { id:'shadow' },
+            React.createElement('feDropShadow', { dx:'0', dy:'6', stdDeviation:'12', floodColor:'#00000028' }))
+        ),
+
+        // background
+        React.createElement('rect', { width:W, height:H, fill:'#ffffff' }),
+        React.createElement('rect', { width:W, height:H, fill:'url(#bgGlow)' }),
+
+        // arc lines
+        arcP > 0.01 && React.createElement('g', { opacity: 0.9 },
+          React.createElement('path', { d:a1, fill:'none', stroke:'url(#gTeal)', strokeWidth:7, strokeLinecap:'round' }),
+          React.createElement('path', { d:a2, fill:'none', stroke:'url(#gTeal)', strokeWidth:5, strokeLinecap:'round', opacity:0.75 }),
+          React.createElement('path', { d:a3, fill:'none', stroke:'url(#gTeal)', strokeWidth:3.5, strokeLinecap:'round', opacity:0.55 })
+        ),
+
+        // icons
+        React.createElement('g', null, ...iconEls.filter(Boolean)),
+
+        // capsule (scale from center during intro)
+        React.createElement('g', {
+            transform: `translate(${scaleOriginX},${scaleOriginY}) scale(${capScale}) translate(${-scaleOriginX},${-scaleOriginY})`,
+            filter: 'url(#shadow)'
+          },
+          React.createElement(TopHalf, { x:TX, y:TY, rot:topRot }),
+          React.createElement(BotHalf, { x:BX, y:BY })
+        ),
+
+        // wordmark
+        textP > 0 && React.createElement('g', {
+            opacity: textP,
+            transform: `translate(${wX},${wY}) scale(${0.72 + 0.28 * textP}) translate(${-wX},${-wY})`
+          },
+          React.createElement('text', {
+            x: wX, y: wY,
+            textAnchor: 'middle',
+            fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif',
+            fontWeight: '900',
+            fontSize: '108',
+            letterSpacing: '5',
+            fill: 'url(#gCoral)'
+          },
+            'CAPS',
+            React.createElement('tspan', { fontSize:'80', dy:'10' }, 'u'),
+            React.createElement('tspan', { fontSize:'108', dy:'-10' }, 'Le')
+          )
+        ),
+
+        // subtext
+        subtextP > 0 && React.createElement('text', {
+          x: wX, y: wY + 52,
+          textAnchor: 'middle',
+          opacity: subtextP,
+          fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif',
+          fontWeight: '400',
+          fontSize: '21',
+          letterSpacing: '3',
+          fill: 'url(#gBlue)'
+        }, 'Child and Adolescent Performance Science Laboratory')
+      );
+    };
+
+    return { w: W, h: H, dur, scene: React.createElement(Scene) };
+  }
+}
+
+</script>
+</body>
+</html>
