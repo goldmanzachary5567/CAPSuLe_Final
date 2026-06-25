@@ -234,7 +234,7 @@
           <div style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:14px; color:rgba(245,239,226,.75); line-height:1.4;">Fund one Effective Dose episode</div>
         </div>
         <div style="padding:28px 24px; border-right:1px solid rgba(245,239,226,.25); display:flex; flex-direction:column; gap:8px; transition:background .15s;" style-hover="background:rgba(245,239,226,.06);">
-          <div style="font-family:'Fraunces',serif; font-size:36px; font-weight:500; letter-spacing:-.025em; color:#F5EFE2;">$1,000–$4,999.99+</div>
+          <div style="font-family:'Fraunces',serif; font-size:36px; font-weight:500; letter-spacing:-.025em; color:#F5EFE2;">$1,000–$4,999.99</div>
           <div style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:14px; color:rgba(245,239,226,.75); line-height:1.4;">Sponsor a community lecture</div>
         </div>
         <a href="capsule-donate.dc.html" style="background:#C84B32; color:#F5EFE2; padding:0 36px; display:flex; align-items:center; justify-content:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; text-decoration:none; min-width:180px; transition:background .15s;" style-hover="background:#E05A3F;">Donate →</a>
@@ -547,10 +547,9 @@ class Component extends DCLogic {
         const h = wrap.offsetHeight - window.innerHeight;
         if (h <= 0) return;
         const p = Math.max(0, Math.min(1, -r.top / h));
-        // Map scroll 0→1 to animation time 0.7→10 s (pill present from the start)
-        const animT = 0.7 + p * 9.3;
-        // Cross-fade: animation fades out as static logo fades in (82–100 % scroll)
-        const fp = Math.max(0, Math.min(1, (p - 0.82) / 0.18));
+        // Animation completes at 82 % scroll, holds complete from 82–92 %, then fades 92–100 %
+        const animT = Math.min(10, 0.7 + (p / 0.82) * 9.3);
+        const fp = Math.max(0, Math.min(1, (p - 0.92) / 0.08));
         if (fp < 1) {
           animRoot.innerHTML = buildCapsuleScene(animT);
         }
