@@ -20,7 +20,7 @@
   <!-- Nav -->
   <header style="position:sticky; top:0; z-index:50; background:#E8E2D1; border-bottom:1.5px solid #0B1B26;">
     <div style="max-width:1260px; margin:0 auto; padding:0 32px; height:72px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
-      <a href="capsule-home.dc.html" style="display:flex; align-items:center; flex-shrink:0; text-decoration:none;"><img src="site/assets/capsule-logo.png" alt="CAPSuLe" style="height:46px; width:auto; display:block;" /></a>
+      <a href="capsule-home.dc.html" style="display:flex; align-items:center; flex-shrink:0; text-decoration:none;"><img src="site/assets/capsule-logo.png" alt="CAPSuLe" style="height:62px; width:auto; display:block;" /></a>
       <nav style="display:flex; gap:28px; flex:1; justify-content:center;">
         <a href="capsule-home.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Home</a>
         <a href="capsule-about.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">About</a>
@@ -53,11 +53,11 @@
     <div style="max-width:1260px; margin:0 auto; padding:80px 32px; position:relative;">
       <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #0B1B26; padding-bottom:16px; margin-bottom:48px; flex-wrap:wrap; gap:8px;">
         <div style="display:flex; align-items:center; gap:9px;"><span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">PRX-DOSE · Research Blog</span></div>
-        <span style="padding:5px 10px; border:1px solid #0B1B26; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#0B1B26;">Weekly</span>
+        <span style="padding:5px 10px; border:1px solid #0B1B26; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#0B1B26;">Rolling</span>
       </div>
       <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1fr 1.6fr; gap:80px;">
         <div>
-          <div style="width:120px; height:120px; border-radius:4px; overflow:hidden; margin-bottom:18px; border:1px solid rgba(11,27,38,.1);"><img src="site/assets/PrescribedDose_logo.png" alt="Prescribed Dose" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
+          <div style="width:168px; height:168px; border-radius:4px; overflow:hidden; margin-bottom:20px; border:1px solid rgba(11,27,38,.1); transition:transform .28s ease;" style-hover="transform:scale(1.09);"><img src="site/assets/PrescribedDose_logo.png" alt="Prescribed Dose" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
           <h2 style="font-family:'Fraunces',serif; font-size:56px; font-weight:500; line-height:.95; letter-spacing:-.025em; margin:0 0 14px; color:#0B1B26;">Prescribed<br /><em style="color:#C84B32;">Dose</em></h2>
           <p style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:17px; color:#C84B32; margin:0 0 28px; line-height:1.4;">Research, written like advice from a friend.</p>
           <a href="https://www.thecapsl.org/blog" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; padding:14px 24px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; transition:background .15s;" style-hover="background:#C84B32;">Read the Blog →</a>
@@ -87,7 +87,7 @@
       </div>
       <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1fr 1.6fr; gap:80px; margin-bottom:56px;">
         <div>
-          <div style="width:120px; height:120px; border-radius:4px; overflow:hidden; margin-bottom:18px; border:1px solid rgba(11,27,38,.1);"><img src="site/assets/EffectiveDose_logo.png" alt="Effective Dose" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
+          <div style="width:168px; height:168px; border-radius:4px; overflow:hidden; margin-bottom:20px; border:1px solid rgba(11,27,38,.1); transition:transform .28s ease;" style-hover="transform:scale(1.09);"><img src="site/assets/EffectiveDose_logo.png" alt="Effective Dose" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
           <h2 style="font-family:'Fraunces',serif; font-size:56px; font-weight:500; line-height:.95; letter-spacing:-.025em; margin:0 0 14px; color:#0B1B26;">Effective<br /><em style="color:#C84B32;">Dose</em></h2>
           <p style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:17px; color:#C84B32; margin:0 0 28px; line-height:1.4;">Conversations with the people doing the science.</p>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
@@ -104,29 +104,13 @@
           </div>
         </div>
       </div>
-      <!-- Featured episodes with thumbnails -->
+      <!-- Featured episodes — carousel with YouTube thumbnails -->
       <div class="cl-rv" data-d="100" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease;">
-        <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:20px;">Featured Episodes</div>
-        <div style="border-top:1.5px solid #0B1B26;">
-          <a href="https://www.youtube.com/watch?v=0-orytSlVVs" target="_blank" rel="noopener" style="display:grid; grid-template-columns:64px 1fr auto; gap:20px; align-items:center; padding:20px 0; border-bottom:1px solid rgba(11,27,38,.1); text-decoration:none; transition:background .15s;" style-hover="background:rgba(11,27,38,.02);">
-            <div style="width:56px; height:56px; border-radius:3px; overflow:hidden; background:#1B4066; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><img src="site/assets/EffectiveDose_logo.png" alt="" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
-            <div><div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; margin-bottom:5px;">EP 01 · Dr. Susan Helm</div><div style="font-family:'Fraunces',serif; font-size:18px; font-weight:500; line-height:1.2; color:#0B1B26;">How parents &amp; educators can correct nutritional deficiencies among youth</div></div>
-            <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#C84B32; flex-shrink:0;">Watch →</span>
-          </a>
-          <a href="https://www.youtube.com/watch?v=4rEC33XY6Jg" target="_blank" rel="noopener" style="display:grid; grid-template-columns:64px 1fr auto; gap:20px; align-items:center; padding:20px 0; border-bottom:1px solid rgba(11,27,38,.1); text-decoration:none; transition:background .15s;" style-hover="background:rgba(11,27,38,.02);">
-            <div style="width:56px; height:56px; border-radius:3px; overflow:hidden; background:#1B4066; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><img src="site/assets/EffectiveDose_logo.png" alt="" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
-            <div><div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; margin-bottom:5px;">EP 02 · Dr. Christy Wise</div><div style="font-family:'Fraunces',serif; font-size:18px; font-weight:500; line-height:1.2; color:#0B1B26;">How parents &amp; educators can lead development of socio-emotional skills among youth</div></div>
-            <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#C84B32; flex-shrink:0;">Watch →</span>
-          </a>
-          <a href="https://www.youtube.com/watch?v=dcOqvhIQw3M" target="_blank" rel="noopener" style="display:grid; grid-template-columns:64px 1fr auto; gap:20px; align-items:center; padding:20px 0; border-bottom:1px solid rgba(11,27,38,.1); text-decoration:none; transition:background .15s;" style-hover="background:rgba(11,27,38,.02);">
-            <div style="width:56px; height:56px; border-radius:3px; overflow:hidden; background:#1B4066; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><img src="site/assets/EffectiveDose_logo.png" alt="" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
-            <div><div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; margin-bottom:5px;">EP 03 · Dr. Jonathan Jenkins</div><div style="font-family:'Fraunces',serif; font-size:18px; font-weight:500; line-height:1.2; color:#0B1B26;">Sport as a Laboratory for Learning Confidence in Youth</div></div>
-            <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#C84B32; flex-shrink:0;">Watch →</span>
-          </a>
-          <div style="padding-top:20px;">
-            <a href="https://www.youtube.com/@Effective-Dose" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; padding:12px 24px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; transition:background .15s;" style-hover="background:#C84B32;">All episodes on YouTube →</a>
-          </div>
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:20px; flex-wrap:wrap; gap:8px;">
+          <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(11,27,38,.5);">Featured Episodes</span>
+          <a href="https://www.youtube.com/@Effective-Dose" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; text-decoration:none; border-bottom:1px solid #C84B32; padding-bottom:2px; transition:opacity .15s;" style-hover="opacity:.65;">All episodes on YouTube →</a>
         </div>
+        {{ episodeCarousel }}
       </div>
     </div>
   </section>
@@ -141,7 +125,7 @@
       </div>
       <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1fr 1.6fr; gap:80px; margin-bottom:72px;">
         <div>
-          <div style="width:120px; height:120px; border-radius:4px; overflow:hidden; margin-bottom:20px; border:1px solid rgba(11,27,38,.1);"><img src="site/assets/MicroDose_logo.png" alt="MicroDose" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
+          <div style="width:168px; height:168px; border-radius:4px; overflow:hidden; margin-bottom:20px; border:1px solid rgba(11,27,38,.1); transition:transform .28s ease;" style-hover="transform:scale(1.09);"><img src="site/assets/MicroDose_logo.png" alt="MicroDose" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
           <h2 style="font-family:'Fraunces',serif; font-size:56px; font-weight:500; line-height:.95; letter-spacing:-.025em; margin:0 0 14px; color:#0B1B26;">Micro<em style="color:#C84B32;">Dose</em></h2>
           <p style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:17px; color:#C84B32; margin:0; line-height:1.4;">Science-based courses for the people raising the next generation.</p>
         </div>
@@ -191,19 +175,17 @@
         <div style="display:flex; align-items:center; gap:9px;"><span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">PRX-WORDRX · Documentary Film</span></div>
         <span style="padding:5px 10px; border:1px solid rgba(245,239,226,.4); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#F5EFE2;">In Production</span>
       </div>
-      <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1fr 1.6fr; gap:80px; margin-bottom:56px;">
+      <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1fr 1.7fr; gap:64px; margin-bottom:56px; align-items:start;">
         <div>
-          <div style="width:120px; height:120px; border-radius:4px; overflow:hidden; margin-bottom:18px; border:1px solid rgba(245,239,226,.2);"><img src="site/assets/WordRX_logio.jpg" alt="WordRx" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
+          <div style="width:168px; height:168px; border-radius:4px; overflow:hidden; margin-bottom:20px; border:1px solid rgba(245,239,226,.2); transition:transform .28s ease;" style-hover="transform:scale(1.09);"><img src="site/assets/WordRX_logio.jpg" alt="WordRx" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
           <h2 style="font-family:'Fraunces',serif; font-size:72px; font-weight:500; line-height:.9; letter-spacing:-.03em; margin:0 0 16px; color:#F5EFE2;">Word<em style="color:#C84B32;">Rx</em></h2>
           <p style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:17px; color:#C84B32; margin:0 0 24px; line-height:1.4;">The hidden prescription behind healing.</p>
-          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:rgba(245,239,226,.55); line-height:2.2;">Filming · December 2026<br />Location · Belleair, FL<br />Distribution · Amazon Prime Video</div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:rgba(245,239,226,.55); line-height:2.2; margin-bottom:24px;">Filming · December 2026<br />Location · Belleair, FL<br />Distribution · Amazon Prime Video</div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.65; color:rgba(245,239,226,.85); margin:0 0 24px; text-wrap:pretty;">Our flagship feature documentary. Following four "word pharmacists" — a teacher, a parent, a clinician, a coach — making the case that language itself is a therapeutic tool. This is not a film about reading. It is a film about what the right words, at the right time, in the right hands, can actually do.</p>
+          <a href="capsule-donate.dc.html" style="display:inline-flex; align-items:center; gap:10px; padding:14px 24px; background:#C84B32; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; transition:background .15s;" style-hover="background:#E05A3F;">Fund WordRx →</a>
         </div>
-        <div style="display:flex; flex-direction:column; gap:24px;">
-          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:19px; line-height:1.6; color:rgba(245,239,226,.85); margin:0; text-wrap:pretty;">Our flagship feature documentary. Following four "word pharmacists" — a teacher, a parent, a clinician, a coach — making the case that language itself is a therapeutic tool. This is not a film about reading. It is a film about what the right words, at the right time, in the right hands, can actually do.</p>
-          <div style="border:1px solid rgba(245,239,226,.25); overflow:hidden; display:flex; justify-content:center; background:rgba(245,239,226,.05);">
-            <img src="site/assets/WORDRX POSTER EP.png" alt="WordRx" style="width:auto; max-height:420px; max-width:100%; object-fit:contain; display:block;" />
-          </div>
-          <a href="capsule-donate.dc.html" style="display:inline-flex; align-items:center; gap:10px; padding:14px 24px; background:#C84B32; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; align-self:flex-start; transition:background .15s;" style-hover="background:#E05A3F;">Fund WordRx →</a>
+        <div style="border:1px solid rgba(245,239,226,.25); overflow:hidden; display:flex; justify-content:center; align-items:flex-start; background:rgba(245,239,226,.05);">
+          <img src="site/assets/WORDRX POSTER EP.png" alt="WordRx poster" style="width:100%; max-width:100%; height:auto; object-fit:contain; display:block;" />
         </div>
       </div>
     </div>
@@ -295,6 +277,7 @@
             <a href="capsule-donate.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Donate</a>
             <a href="capsule-joinus.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Join the team</a>
             <a href="capsule-joinus.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Partner with us</a>
+            <a href="https://www.thecapsl.org/join-us" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Join newsletter</a>
           </div>
         </div>
         <div>
@@ -343,38 +326,57 @@ class Component extends DCLogic {
     'Harvard University', 'Cornell University', 'Columbia University',
     'Johns Hopkins University', 'McGill University',
   ];
+  static _episodes = [
+    { ep: 'EP 01', guest: 'Dr. Susan Helm',       title: 'How parents & educators can correct nutritional deficiencies among youth',         id: '0-orytSlVVs' },
+    { ep: 'EP 02', guest: 'Dr. Christy Wise',      title: 'How parents & educators can lead development of socio-emotional skills among youth', id: '4rEC33XY6Jg' },
+    { ep: 'EP 03', guest: 'Dr. Jonathan Jenkins',  title: 'Sport as a Laboratory for Learning Confidence in Youth',                            id: 'dcOqvhIQw3M' },
+  ];
 
-  state = { hovered: null };
+  // trackerPhase: 'empty' (letters empty) -> 'full' (red water pours to 100%) -> 'settled' (drains to 15%)
+  state = { hovered: null, epIdx: 0, trackerPhase: 'empty' };
 
   renderVals() {
-    const { hovered } = this.state;
+    const { hovered, epIdx, trackerPhase } = this.state;
     const L = Component._letters;
     const MK = 'JetBrains Mono, monospace';
     const FR = 'Fraunces, serif';
     const SS = "'Source Serif 4', Georgia, serif";
+    // Red "water" gradient matching the CAPSuLe logo letters.
+    const WATER = 'linear-gradient(180deg,#E0654A 0%,#C84B32 55%,#A6371F 100%)';
 
-    const capsuleTracker = React.createElement('div', null,
+    const capsuleTracker = React.createElement('div', { id: 'cl-tracker' },
       // Letter row
       React.createElement('div', { style: { fontFamily: MK, fontSize: 10, letterSpacing: '.2em', textTransform: 'uppercase', color: 'rgba(11,27,38,.5)', marginBottom: 20 } }, 'HOVER EACH CHAPTER · COURSE PROGRESS — EACH CHAPTER 15% COMPLETE'),
       React.createElement('div', { style: { fontFamily: MK, fontSize: 9, letterSpacing: '.14em', color: 'rgba(11,27,38,.4)', marginBottom: 16, marginTop: -12 } }, '3 courses · 7 chapters each · 15 modules per chapter · 5 min per module'),
       React.createElement('div', { style: { display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 20 } },
-        ...L.map(lt => React.createElement('div', {
-          key: lt.l,
-          onMouseEnter: () => this.setState({ hovered: lt.l }),
-          onMouseLeave: () => this.setState({ hovered: null }),
-          style: { cursor: 'default', display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }
-        },
-          React.createElement('div', { style: { position: 'relative', lineHeight: 1 } },
-            React.createElement('div', { style: { fontFamily: FR, fontSize: 80, fontWeight: 500, letterSpacing: '-0.02em', color: 'rgba(11,27,38,.12)', userSelect: 'none' } }, lt.l),
-            React.createElement('div', { style: { position: 'absolute', top: 0, left: 0, overflow: 'hidden', width: '100%', height: lt.pct + '%' } },
-              React.createElement('div', { style: { fontFamily: FR, fontSize: 80, fontWeight: 500, letterSpacing: '-0.02em', color: hovered === lt.l ? '#C84B32' : '#0B1B26', transition: 'color .2s', userSelect: 'none' } }, lt.l)
-            )
-          ),
-          React.createElement('div', { style: { width: '100%', height: 3, background: 'rgba(11,27,38,.1)', borderRadius: 3, overflow: 'hidden' } },
-            React.createElement('div', { style: { height: '100%', width: lt.pct + '%', background: hovered === lt.l ? '#C84B32' : '#0B1B26', transition: 'background .2s, width .4s' } })
-          ),
-          React.createElement('div', { style: { fontFamily: MK, fontSize: 9, letterSpacing: '.12em', color: 'rgba(11,27,38,.5)' } }, lt.pct + '%')
-        ))
+        ...L.map((lt, i) => {
+          // Height of the red water column inside each letter, by phase.
+          const fill = trackerPhase === 'empty' ? 0 : trackerPhase === 'full' ? 100 : lt.pct;
+          // Stagger the pour left-to-right; drain together.
+          const delay = trackerPhase === 'full' ? (i * 0.09) : 0;
+          return React.createElement('div', {
+            key: lt.l,
+            onMouseEnter: () => this.setState({ hovered: lt.l }),
+            onMouseLeave: () => this.setState({ hovered: null }),
+            style: { cursor: 'default', display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }
+          },
+            React.createElement('div', { style: { position: 'relative', lineHeight: 1, display: 'inline-block' } },
+              // Faint empty letter (defines the glyph box)
+              React.createElement('div', { style: { fontFamily: FR, fontSize: 80, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1, color: 'rgba(11,27,38,.13)', userSelect: 'none' } }, lt.l),
+              // Bottom-anchored water column that clips the red glyph
+              React.createElement('div', { style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: fill + '%', overflow: 'hidden', transition: 'height 1.25s cubic-bezier(.42,0,.28,1)', transitionDelay: delay + 's' } },
+                // water surface highlight
+                React.createElement('div', { style: { position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'rgba(255,255,255,.55)', zIndex: 2 } }),
+                // red-filled glyph, bottom-aligned to match the faint letter
+                React.createElement('div', { style: { position: 'absolute', left: 0, bottom: 0, fontFamily: FR, fontSize: 80, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1, whiteSpace: 'nowrap', userSelect: 'none', color: 'transparent', backgroundImage: WATER, WebkitBackgroundClip: 'text', backgroundClip: 'text' } }, lt.l)
+              )
+            ),
+            React.createElement('div', { style: { width: '100%', height: 3, background: 'rgba(11,27,38,.1)', borderRadius: 3, overflow: 'hidden' } },
+              React.createElement('div', { style: { height: '100%', width: (trackerPhase === 'settled' ? lt.pct : trackerPhase === 'full' ? 100 : 0) + '%', background: '#C84B32', transition: 'width 1.25s cubic-bezier(.42,0,.28,1)', transitionDelay: delay + 's' } })
+            ),
+            React.createElement('div', { style: { fontFamily: MK, fontSize: 9, letterSpacing: '.12em', color: 'rgba(11,27,38,.5)' } }, lt.pct + '%')
+          );
+        })
       ),
       // Tooltip
       hovered ? React.createElement('div', { style: { marginBottom: 28, padding: '14px 20px', background: '#0B1B26', color: '#F5EFE2', display: 'inline-flex', flexDirection: 'column', gap: 4 } },
@@ -410,7 +412,45 @@ class Component extends DCLogic {
         )
       )
     );
-    return { capsuleTracker };
+
+    // ── Effective Dose — featured episode carousel (YouTube thumbnails) ──
+    const EP = Component._episodes;
+    const ep = EP[epIdx];
+    const epGo = (d) => this.setState({ epIdx: (((epIdx + d) % EP.length) + EP.length) % EP.length });
+    const arrowStyle = { width: 56, height: 56, border: '1.5px solid #0B1B26', background: 'transparent', color: '#0B1B26', fontSize: 22, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontFamily: 'Georgia, serif', transition: 'background .15s, color .15s' };
+    const episodeCarousel = React.createElement('div', null,
+      React.createElement('div', { style: { display: 'grid', gridTemplateColumns: '56px 1fr 56px', gap: 20, alignItems: 'center' } },
+        React.createElement('button', { onClick: () => epGo(-1), 'aria-label': 'Previous episode', style: arrowStyle }, '←'),
+        React.createElement('a', { href: 'https://www.youtube.com/watch?v=' + ep.id, target: '_blank', rel: 'noopener', style: { textDecoration: 'none', border: '1.5px solid #0B1B26', background: '#F5EFE2', display: 'block', overflow: 'hidden' } },
+          React.createElement('div', { style: { position: 'relative', width: '100%', paddingBottom: '56.25%', background: '#1B4066', overflow: 'hidden' } },
+            React.createElement('img', { src: 'https://img.youtube.com/vi/' + ep.id + '/hqdefault.jpg', alt: ep.title, style: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' } }),
+            React.createElement('div', { style: { position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+              React.createElement('div', { style: { width: 66, height: 66, borderRadius: '50%', background: 'rgba(200,75,50,.92)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 6px 20px rgba(0,0,0,.3)' } },
+                React.createElement('div', { style: { width: 0, height: 0, borderLeft: '20px solid #F5EFE2', borderTop: '12px solid transparent', borderBottom: '12px solid transparent', marginLeft: 5 } })
+              )
+            )
+          ),
+          React.createElement('div', { style: { padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 20, borderTop: '1.5px solid #0B1B26' } },
+            React.createElement('div', null,
+              React.createElement('div', { style: { fontFamily: MK, fontSize: 9, letterSpacing: '.18em', textTransform: 'uppercase', color: '#C84B32', marginBottom: 6 } }, ep.ep + ' · ' + ep.guest),
+              React.createElement('div', { style: { fontFamily: FR, fontSize: 20, fontWeight: 500, lineHeight: 1.2, color: '#0B1B26' } }, ep.title)
+            ),
+            React.createElement('span', { style: { fontFamily: MK, fontSize: 10, letterSpacing: '.14em', textTransform: 'uppercase', color: '#C84B32', flexShrink: 0 } }, 'Watch →')
+          )
+        ),
+        React.createElement('button', { onClick: () => epGo(1), 'aria-label': 'Next episode', style: arrowStyle }, '→')
+      ),
+      React.createElement('div', { style: { marginTop: 24, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8 } },
+        ...EP.map((_, i) => React.createElement('button', {
+          key: i,
+          onClick: () => this.setState({ epIdx: i }),
+          'aria-label': 'Go to episode ' + (i + 1),
+          style: { width: i === epIdx ? 24 : 8, height: 8, background: i === epIdx ? '#C84B32' : 'rgba(11,27,38,.2)', border: 'none', borderRadius: 4, cursor: 'pointer', padding: 0, flexShrink: 0, transition: 'width .25s ease, background .25s ease' }
+        }))
+      )
+    );
+
+    return { capsuleTracker, episodeCarousel };
   }
 
   componentDidMount() {
@@ -429,10 +469,27 @@ class Component extends DCLogic {
       });
     }, { threshold: 0.08 });
     document.querySelectorAll('.cl-rv').forEach(el => this._obs.observe(el));
+
+    // Progress tracker — pour red water into the letters when scrolled into view,
+    // then let it drain to the 15% completion level.
+    this._trackerDone = false;
+    this._trackObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting || this._trackerDone) return;
+        this._trackerDone = true;
+        this._trackObs.disconnect();
+        this.setState({ trackerPhase: 'full' });
+        this._trackTimer = setTimeout(() => this.setState({ trackerPhase: 'settled' }), 1600);
+      });
+    }, { threshold: 0.35 });
+    const trackerEl = document.getElementById('cl-tracker');
+    if (trackerEl) this._trackObs.observe(trackerEl);
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this._sc);
     if (this._obs) this._obs.disconnect();
+    if (this._trackObs) this._trackObs.disconnect();
+    if (this._trackTimer) clearTimeout(this._trackTimer);
   }
 }
 
