@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after{box-sizing:border-box} html,body{margin:0;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    .cl-burger{display:none;}
+    .cl-mobmenu{display:none;}
+    .cl-post-body{display:none;}
+    @media (max-width:820px){
+      .cl-navlinks{display:none !important;}
+      .cl-navdonate{display:none !important;}
+      .cl-burger{display:flex !important;}
+      .cl-2col,.cl-3col,.cl-4col,.cl-5col{grid-template-columns:1fr !important;}
+      .cl-gap{gap:32px !important;}
+      .cl-pad{padding-left:20px !important;padding-right:20px !important;}
+      .cl-h1{font-size:44px !important;}
+      .cl-bignum{font-size:170px !important;}
+    }
+    @media (max-width:480px){
+      .cl-h1{font-size:34px !important;}
+      .cl-pad{padding-left:16px !important;padding-right:16px !important;}
+    }
+  </style>
+</helmet>
+
+<div style="background:#F5EFE2; color:#0B1B26; font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;">
+
+  <!-- Nav -->
+  <header style="position:sticky; top:0; z-index:50; background:#E8E2D1; border-bottom:1.5px solid #0B1B26;">
+    <div class="cl-pad" style="max-width:1260px; margin:0 auto; padding:0 32px; height:72px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="capsule-home.dc.html" style="display:flex; align-items:center; flex-shrink:0; text-decoration:none;"><img src="site/assets/capsule-logo.png" alt="CAPSuLe" style="height:62px; width:auto; display:block;" /></a>
+      <nav class="cl-navlinks" style="display:flex; gap:28px; flex:1; justify-content:center;">
+        <a href="capsule-home.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Home</a>
+        <a href="capsule-about.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">About</a>
+        <a href="capsule-programs.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Programs</a>
+        <a href="capsule-blog.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; text-decoration:none;">Blog</a>
+        <a href="capsule-joinus.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Join Us</a>
+      </nav>
+      <a href="capsule-donate.dc.html" class="cl-navdonate" style="display:inline-flex; align-items:center; gap:8px; padding:10px 16px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; flex-shrink:0; transition:background .15s;" style-hover="background:#C84B32;"><span style="width:5px; height:5px; border-radius:50%; background:#C84B32; display:inline-block;"></span>Donate</a>
+      <button class="cl-burger" aria-label="Open menu" style="align-items:center; justify-content:center; width:44px; height:44px; background:transparent; border:1.5px solid #0B1B26; cursor:pointer; flex-shrink:0; padding:0;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 5h16M2 10h16M2 15h16" stroke="#0B1B26" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="cl-mobmenu" class="cl-mobmenu" style="flex-direction:column; border-top:1.5px solid #0B1B26; background:#E8E2D1;">
+      <a href="capsule-home.dc.html" style="padding:16px 24px; border-bottom:1px solid rgba(11,27,38,.12); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none;">Home</a>
+      <a href="capsule-about.dc.html" style="padding:16px 24px; border-bottom:1px solid rgba(11,27,38,.12); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none;">About</a>
+      <a href="capsule-programs.dc.html" style="padding:16px 24px; border-bottom:1px solid rgba(11,27,38,.12); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none;">Programs</a>
+      <a href="capsule-blog.dc.html" style="padding:16px 24px; border-bottom:1px solid rgba(11,27,38,.12); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; text-decoration:none;">Blog</a>
+      <a href="capsule-joinus.dc.html" style="padding:16px 24px; border-bottom:1px solid rgba(11,27,38,.12); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none;">Join Us</a>
+      <a href="capsule-donate.dc.html" style="padding:16px 24px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; text-decoration:none;">Donate</a>
+    </div>
+    <div style="height:3px; background:rgba(11,27,38,.08); position:relative;"><div id="cl-prog" style="position:absolute; left:0; top:0; height:100%; width:0; background:#C84B32; transition:width .12s linear;"></div></div>
+  </header>
+
+  <!-- Hero -->
+  <section style="background:radial-gradient(ellipse 160% 230% at 75% -10%, #FAF0DC 0%, #F5EFE2 58%); border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden; padding:80px 0 64px;">
+    <div class="cl-bignum" style="position:absolute; left:-36px; bottom:-90px; font-family:'Fraunces',serif; font-size:360px; font-weight:700; color:#0B1B26; opacity:.04; line-height:1; pointer-events:none; user-select:none; letter-spacing:-.06em;">D</div>
+    <div class="cl-pad" style="max-width:1260px; margin:0 auto; padding:0 32px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #0B1B26; padding-bottom:16px; margin-bottom:48px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:9px;"><span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">PRX-DOSE · Research Blog</span></div>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">09 posts</span>
+      </div>
+      <div class="cl-2col cl-gap" style="display:grid; grid-template-columns:1fr 1.4fr; gap:80px; align-items:flex-end;">
+        <h1 class="cl-h1" style="font-family:'Fraunces',serif; font-size:80px; font-weight:500; line-height:.92; letter-spacing:-.03em; margin:0; color:#0B1B26;">Prescribed<br /><em style="color:#C84B32;">Dose.</em></h1>
+        <p style="font-family:'Source Serif 4',Georgia,serif; font-size:20px; line-height:1.55; color:#0B1B26; margin:0; text-wrap:pretty;">Research, written like advice from a friend. Short, structured pieces that translate one principle from the developmental literature into something a parent, teacher, or coach can use today — with the science behind why it works.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Posts -->
+  <section style="background:#F5EFE2; border-bottom:1.5px solid #0B1B26;">
+    <div class="cl-pad" style="max-width:1000px; margin:0 auto; padding:72px 32px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:24px;">All Articles · Tap a title to read</div>
+
+      {{ posts }}
+
+    </div>
+  </section>
+
+  <!-- Contribute CTA -->
+  <section style="background:#0B1B26; color:#F5EFE2; position:relative; overflow:hidden;">
+    <div style="position:absolute; right:-70px; bottom:40px; width:420px; height:180px; background:#C84B32; opacity:.09; border-radius:50%; transform:rotate(-22deg); pointer-events:none;"></div>
+    <div class="cl-pad" style="max-width:1000px; margin:0 auto; padding:72px 32px; position:relative;">
+      <div class="cl-2col cl-gap" style="display:grid; grid-template-columns:1.4fr 1fr; gap:56px; align-items:center;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; margin-bottom:16px;">Write with us</div>
+          <h2 style="font-family:'Fraunces',serif; font-size:clamp(30px,4vw,44px); font-weight:500; line-height:1.05; letter-spacing:-.02em; margin:0 0 14px; text-wrap:balance;">Are you a scientist interested in contributing to our blog?</h2>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.6; color:rgba(245,239,226,.8); margin:0; text-wrap:pretty;">We partner with researchers and clinicians to translate their work into clear, practical writing for the people raising the next generation.</p>
+        </div>
+        <div style="display:flex; justify-content:flex-start;">
+          <a href="capsule-joinus.dc.html#join-team" style="display:inline-flex; align-items:center; gap:10px; padding:16px 30px; background:#C84B32; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; text-decoration:none; transition:background .15s;" style-hover="background:#E05A3F;">Apply here →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:#E8E2D1; border-top:1.5px solid #0B1B26;">
+    <div class="cl-pad" style="max-width:1260px; margin:0 auto; padding:56px 32px 32px;">
+      <div class="cl-4col cl-gap" style="display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(11,27,38,.12);">
+        <div>
+          <img src="site/assets/capsule-logo.png" alt="CAPSuLe" style="height:48px; width:auto; display:block; margin-bottom:14px;" />
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; line-height:1.55; color:rgba(11,27,38,.6); margin:0; max-width:280px;">The Child and Adolescent Performance Science Laboratory — a 501(c)(3) nonprofit translating youth development research into real-world guidance.</p>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">01 — Explore</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="capsule-home.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Home</a>
+            <a href="capsule-about.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">About</a>
+            <a href="capsule-programs.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Programs</a>
+            <a href="capsule-blog.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Blog</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">02 — Involved</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="capsule-donate.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Donate</a>
+            <a href="capsule-joinus.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Join the team</a>
+            <a href="capsule-joinus.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Partner with us</a>
+            <a href="capsule-joinus.dc.html#newsletter" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Join the newsletter</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">03 — Connect</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="https://www.linkedin.com/company/the-capsl-" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">LinkedIn</a>
+            <a href="https://www.instagram.com/the.capsl/" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Instagram</a>
+            <a href="https://www.youtube.com/@Effective-Dose" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">YouTube</a>
+            <a href="mailto:contact@thecapsl.org" style="display:inline-flex; align-items:center; gap:8px; padding:9px 16px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; text-decoration:none; transition:background .15s;">Email →</a>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">CAPSuLe © 2026 · 501(c)(3) Nonprofit</span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">Cat. № 240-80-22</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  // The 9 Prescribed Dose posts migrated from thecapsl.org.
+  // `body` is an array of paragraphs; headings can be objects { h: 'Heading' }.
+  static _posts = [
+    { id: 'can-sound-rewire-a-childs-brain', n: '01', title: "Can Sound Rewire a Child's Brain?", body: [] },
+    { id: 'germs-more-harm-than-good', n: '02', title: 'Is Protecting Children From Every Germ Doing More Harm Than Good?', body: [] },
+    { id: 'moments-of-connection', n: '03', title: 'Can we turn simple moments of connection into the emotional building blocks our children need to thrive?', body: [] },
+    { id: 'resilience-biological-skill', n: '04', title: 'Can Resilience Be Taught as a Biological Skill?', body: [] },
+    { id: 'teach-resilience-home-field-classroom', n: '05', title: 'Can We Teach Resilience in the Home, on the Field, in the Classroom?', body: [] },
+    { id: 'food-for-thought', n: '06', title: 'Food for Thought: Preventing Picky and Disordered Eating', body: [] },
+    { id: 'brain-body-connection', n: '07', title: 'The Best of Both Worlds: Unpacking the Brain-Body Connection', body: [] },
+    { id: 'weighting-to-lift', n: '08', title: '(Weight)ing to Lift', body: [] },
+    { id: 'social-media-friend-or-foe', n: '09', title: 'Social Media: Friend or Foe to Youth Development?', body: [] },
+  ];
+
+  renderVals() {
+    const MK = 'JetBrains Mono, monospace';
+    const FR = 'Fraunces, serif';
+    const SS = "'Source Serif 4', Georgia, serif";
+
+    const posts = React.createElement('div', null,
+      ...Component._posts.map((p, i) => React.createElement('div', {
+        key: p.id, id: p.id,
+        style: { border: '1.5px solid #0B1B26', background: '#FBF6EA', marginBottom: 16, scrollMarginTop: 90 }
+      },
+        // Header (toggle)
+        React.createElement('button', {
+          onClick: (e) => {
+            const wrap = e.currentTarget.parentNode;
+            const body = wrap.querySelector('.cl-post-body');
+            const arrow = e.currentTarget.querySelector('.cl-post-arrow');
+            const open = body.style.display === 'block';
+            body.style.display = open ? 'none' : 'block';
+            arrow.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
+          },
+          style: { width: '100%', textAlign: 'left', background: 'transparent', border: 'none', cursor: 'pointer', padding: '26px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20 }
+        },
+          React.createElement('div', null,
+            React.createElement('div', { style: { fontFamily: MK, fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', color: '#C84B32', marginBottom: 8 } }, 'Prescribed Dose · No. ' + p.n),
+            React.createElement('div', { style: { fontFamily: FR, fontSize: 24, fontWeight: 500, lineHeight: 1.15, letterSpacing: '-.015em', color: '#0B1B26' } }, p.title)
+          ),
+          React.createElement('span', { className: 'cl-post-arrow', style: { flexShrink: 0, transition: 'transform .25s ease', color: '#C84B32', lineHeight: 0 } },
+            React.createElement('svg', { width: 22, height: 22, viewBox: '0 0 22 22', fill: 'none' },
+              React.createElement('path', { d: 'M5 8l6 6 6-6', stroke: '#C84B32', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' })
+            )
+          )
+        ),
+        // Body
+        React.createElement('div', { className: 'cl-post-body', style: { padding: '0 28px 30px' } },
+          React.createElement('div', { style: { borderTop: '1px solid rgba(11,27,38,.12)', paddingTop: 22 } },
+            (p.body && p.body.length)
+              ? p.body.map((para, j) => (para && para.h)
+                  ? React.createElement('div', { key: j, style: { fontFamily: FR, fontSize: 20, fontWeight: 500, letterSpacing: '-.01em', color: '#0B1B26', margin: '22px 0 10px' } }, para.h)
+                  : React.createElement('p', { key: j, style: { fontFamily: SS, fontSize: 17, lineHeight: 1.72, color: '#0B1B26', margin: '0 0 18px', textWrap: 'pretty' } }, para))
+              : React.createElement('p', { style: { fontFamily: SS, fontSize: 16, lineHeight: 1.7, color: 'rgba(11,27,38,.55)', margin: 0, fontStyle: 'italic' } }, 'Article text is being migrated from our previous site and will appear here shortly.')
+          )
+        )
+      ))
+    );
+    return { posts };
+  }
+
+  componentDidMount() {
+    // Mobile hamburger menu toggle
+    var _burger=document.querySelector('.cl-burger'), _mm=document.getElementById('cl-mobmenu');
+    if(_burger&&_mm){ _burger.addEventListener('click', function(){ _mm.style.display=(_mm.style.display==='flex'?'none':'flex'); }); }
+
+    this._sc = () => {
+      const s = window.pageYOffset, t = document.documentElement.scrollHeight - window.innerHeight;
+      const b = document.getElementById('cl-prog');
+      if (b) b.style.width = (t > 0 ? Math.min(100, s/t*100) : 0) + '%';
+    };
+    window.addEventListener('scroll', this._sc, { passive: true });
+    // Open a post automatically when linked by anchor (#post-id)
+    const openHash = () => {
+      const id = decodeURIComponent((location.hash || '').replace('#', ''));
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (!el) return;
+      const body = el.querySelector('.cl-post-body');
+      const arrow = el.querySelector('.cl-post-arrow');
+      if (body) { body.style.display = 'block'; if (arrow) arrow.style.transform = 'rotate(180deg)'; }
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    setTimeout(openHash, 60);
+    window.addEventListener('hashchange', openHash);
+    this._oh = openHash;
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._sc);
+    if (this._oh) window.removeEventListener('hashchange', this._oh);
+  }
+}
+
+</script>
+</body>
+</html>
