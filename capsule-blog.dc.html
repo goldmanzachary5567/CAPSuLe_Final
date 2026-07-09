@@ -154,20 +154,506 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 
+// ── Section builders ──────────────────────────────────────────────────────
+// p:   { t:'p', x } paragraph
+// h:   { t:'h', x } bold section heading (consistent across all posts)
+// sub: { t:'sub', x } bold audience/sub-heading
+// ul:  { t:'ul', items:[ str | {b,x} ] } bullet list, optional bold lead-in
+// emph:{ t:'emph', x } italic pull-line
+// note:{ t:'note', pre, linkText, href, post } italic line with inline link
+// dialog:{ t:'dialog', who, x } interview turn
+// refs:{ t:'refs', items:[str] } numbered reference list
+
 class Component extends DCLogic {
-  // The 9 Prescribed Dose posts migrated from thecapsl.org.
-  // `body` is an array of paragraphs; headings can be objects { h: 'Heading' }.
   static _posts = [
-    { id: 'can-sound-rewire-a-childs-brain', n: '01', title: "Can Sound Rewire a Child's Brain?", body: [] },
-    { id: 'germs-more-harm-than-good', n: '02', title: 'Is Protecting Children From Every Germ Doing More Harm Than Good?', body: [] },
-    { id: 'moments-of-connection', n: '03', title: 'Can we turn simple moments of connection into the emotional building blocks our children need to thrive?', body: [] },
-    { id: 'resilience-biological-skill', n: '04', title: 'Can Resilience Be Taught as a Biological Skill?', body: [] },
-    { id: 'teach-resilience-home-field-classroom', n: '05', title: 'Can We Teach Resilience in the Home, on the Field, in the Classroom?', body: [] },
-    { id: 'food-for-thought', n: '06', title: 'Food for Thought: Preventing Picky and Disordered Eating', body: [] },
-    { id: 'brain-body-connection', n: '07', title: 'The Best of Both Worlds: Unpacking the Brain-Body Connection', body: [] },
-    { id: 'weighting-to-lift', n: '08', title: '(Weight)ing to Lift', body: [] },
-    { id: 'social-media-friend-or-foe', n: '09', title: 'Social Media: Friend or Foe to Youth Development?', body: [] },
+    {
+      id: 'can-sound-rewire-a-childs-brain', n: '01',
+      title: "Can Sound Rewire a Child's Brain?",
+      writer: 'Zachary Goldman', date: 'May 25', readTime: '4 min read',
+      sections: [
+        { t:'p', x: `I've played piano since I was five years old and for a majority of the time, I only thought of it as a hobby and skill I valued deeply. It wasn't until I started studying neuroscience that I realized what was actually happening beneath my fingertips. Music was restructuring my brain, and science says the same can happen for any child, with no instrument required.` },
+        { t:'h', x: 'Your Prescription to Start Today' },
+        { t:'sub', x: 'For Parents' },
+        { t:'ul', items: [
+          `Play asymmetric clapping games with your child, where each hand is doing something different at the same time. Gradually increase pattern complexity and independence between the two hands.`,
+          `Sing call-and-response in the car where you sing a short phrase and they echo it back, then switch roles. Again, increasing complexity is encouraged with each pass.`,
+          `If your child shows any interest in an instrument (e.g. ukulele, a drum pad, anything) encourage them to play. Research suggests earlier is better, but any start beats none.`,
+        ]},
+        { t:'sub', x: 'For Teachers' },
+        { t:'ul', items: [
+          `Open class with 60 seconds of body percussion as a working memory warm-up. Tap a rhythm on desks, clap, stomp, then have students repeat it back.`,
+          `Use rhythmic call-and-response for attention transitions. Clap a pattern and have students complete it to capture attention.`,
+          `When music programming is threatened by budget cuts, advocate for it using neuroscience-backed language.`,
+        ]},
+        { t:'sub', x: 'For Athletic Coaches' },
+        { t:'ul', items: [
+          `Try metronome-paced drills. Set a beat and have athletes match their movement to it.`,
+          `After skill repetitions, ask athletes to describe out loud exactly what they felt their body do.`,
+          { b:'Build deliberate error cycles and reflection into practice', x:'Attempt → Identify what went wrong out loud → Adjust & retry.' },
+        ]},
+        { t:'sub', x: 'Summary (For All Who Work With Youth)' },
+        { t:'p', x: `You don't need a piano, you only need rhythm, live feedback, and repetition. The brain changes that music builds are available to every child if we're creative about how we deliver them.` },
+        { t:'h', x: 'The Mechanism: How Do We Know This Prescription Works?' },
+        { t:'p', x: `Music training is one of the few activities that forces multiple brain systems to work simultaneously. The motor cortex executes, while the auditory cortex monitors, and the brain's two hemispheres communicate at high speed. This last bit is the most critical.` },
+        { t:'p', x: `Our corpus callosum, the thick bundle of fibers connecting the left and right hemispheres, is measurably larger in musicians than non-musicians. Schlaug et al. (1995) found this difference was most pronounced in musicians who began training before age 7, with the corpus callosum up to 15% thicker than in non-musicians.¹ Critically, Hyde et al. (2009) demonstrated this isn't just predisposition, because children who received 15 months of piano lessons showed structural brain changes in motor and auditory regions compared to a matched control group that received no such training. This suggests the observed changes were at least partially driven by training.² Steele et al. (2013) further confirmed that an early onset of training (before age 7) produces the greatest white matter plasticity, suggesting a sensitive developmental window.³` },
+        { t:'p', x: `Researchers have also investigated whether these neural adaptations transfer to broader cognitive domains. Moreno et al. (2009) showed that just six months of music instruction improved reading skills and speech pitch discrimination in 8-year-old children with no prior musical background; the auditory-motor loop music trains is the same one underlying language processing.⁴ A comprehensive review by Miendlarzewska and Trost (2014) synthesized dozens of studies showing that musical training also improves verbal memory, reading ability, and executive function, benefits that carry children well into adulthood.⁵ Separately, a longitudinal study by Hennessy et al. (2019) found that children in music programs showed accelerated development of inhibitory control compared to both sports and no-program control groups beginning after three years of training.⁶ Musically trained children also show higher activation in working memory and cognitive control regions during attention tasks compared to untrained peers.⁷` },
+        { t:'p', x: `The prescriptions above engage these same circuits without an instrument. Asymmetric clapping builds interhemispheric connectivity; call-and-response singing strengthens the auditory-motor foundation that supports reading ability; rhythmic error cycles train the self-correction loop tied to focus, frustration tolerance, and academic resilience.` },
+        { t:'h', x: 'CAPSuLe for Global Change' },
+        { t:'p', x: `Music education budgets are among the first to be cut when schools face financial pressure, and this is a public health mistake disguised as a fiscal one; music education may deserve consideration not only as an artistic enrichment program, but also as part of broader cognitive development strategy in school. The research frames music as a structured neurological intervention with measurable effects on the brain regions that drive reading, language, and executive function. A child who never touches a piano can still access those benefits through body percussion programs, rhythmic movement curricula, and call-and-response instruction at near-zero cost.` },
+        { t:'h', x: 'References' },
+        { t:'refs', items: [
+          `Schlaug G, Jäncke L, Huang Y, Staiger JF, Steinmetz H. Increased corpus callosum size in musicians. Neuropsychologia. 1995;33(8):1047-1055. doi:10.1016/0028-3932(95)00045-5`,
+          `Hyde KL, Lerch J, Norton A, et al. Musical training shapes structural brain development. J Neurosci. 2009;29(10):3019-3025. doi:10.1523/JNEUROSCI.5118-08.2009`,
+          `Steele CJ, Bailey JA, Zatorre RJ, Penhune VB. Early Musical Training and White-Matter Plasticity in the Corpus Callosum: Evidence for a Sensitive Period. J Neurosci. 2013;33(3):1282–1290. doi:10.1523/JNEUROSCI.3578-12.2013`,
+          `Moreno S, Marques C, Santos A, Santos M, Castro SL, Besson M. Musical training influences linguistic abilities in 8-year-old children: more evidence for brain plasticity. Cereb Cortex. 2009;19(3):712-723. doi:10.1093/cercor/bhn120`,
+          `Miendlarzewska EA, Trost WJ. How musical training affects cognitive development: rhythm, reward and other modulating variables. Front Neurosci. 2014;7:279. doi:10.3389/fnins.2013.00279`,
+          `Hennessy SL, Sachs ME, Ilari B, Habibi A. Effects of Music Training on Inhibitory Control and Associated Neural Networks in School-Aged Children: A Longitudinal Study. Front Neurosci. 2019;13:1080. doi:10.3389/fnins.2019.01080`,
+          `Kausel L, Zamorano F, Billeke P, et al. Neural Dynamics of Improved Bimodal Attention and Working Memory in Musically Trained Children. Front Neurosci. 2020;14:554731. doi:10.3389/fnins.2020.554731`,
+        ]},
+      ],
+    },
+    {
+      id: 'germs-more-harm-than-good', n: '02',
+      title: 'Is Protecting Children From Every Germ Doing More Harm Than Good?',
+      writer: 'Lyra Tiffin', date: 'May 11', readTime: '4 min read',
+      sections: [
+        { t:'p', x: `For most adults, it is common sense to want to keep kids clean and protect them from getting sick. Good hygiene habits like washing hands and staying home when sick are important and help prevent harmful infections. At the same time, a child's immune system learns and develops through interaction with the world around them. Research suggests that normal exposure to things like dirt, grass, animals, and outdoor environments may help the immune system learn how to respond appropriately over time. This does not mean hygiene is bad or that children should be exposed to unsafe conditions, but it may mean that trying to keep everything perfectly clean all the time is not necessarily best for long-term health. Instead, there may be value in finding a balance between protection and allowing kids the freedom to explore, play outside, and get a little messy.` },
+        { t:'h', x: 'Your Prescription to Start Today' },
+        { t:'sub', x: 'For Parents' },
+        { t:'ul', items: [
+          `Let your child play in grass, dirt, sand, or mud without immediately wiping or sanitizing them`,
+          `Spend time in a variety of outdoor environments (parks, beaches, gardens, hiking trails)`,
+          `If possible, allow regular interaction with pets, like helping to feed them, petting them, and playing with them`,
+        ]},
+        { t:'sub', x: 'For Teachers' },
+        { t:'ul', items: [
+          `Incorporate outdoor lessons, gardening, or nature-based activities into the school day`,
+          `Normalize hands-on, sensory-rich activities instead of over-prioritizing "clean" play`,
+          `Open classroom windows when possible and prioritize outdoor recess over indoor screen-based downtime`,
+        ]},
+        { t:'sub', x: 'For Athletic Coaches' },
+        { t:'ul', items: [
+          `Hold practices outdoors on natural surfaces when possible`,
+          `Encourage team activities in varied outdoor settings rather than only indoor facilities`,
+          `Avoid overusing sanitization during normal play unless illness exposure is a concern`,
+        ]},
+        { t:'sub', x: 'Summary (For All Who Work With Youth)' },
+        { t:'p', x: `Children's immune systems are not strengthened through total avoidance of microbes, but through safe interaction with the environments around them. Early-life exposure helps the body learn what is harmful, what is harmless, and how to respond appropriately.` },
+        { t:'h', x: 'The Mechanism: How Do We Know This Prescription Works?' },
+        { t:'p', x: `The Prescription works because the immune system is not born "finished"; it is trained through exposure. During infancy and childhood, microbes from soil, plants, pets, food, and the environment interact with the body's developing immune system and microbiome. These exposures help teach immune cells how to distinguish between dangerous threats and harmless substances.¹` },
+        { t:'p', x: `The "hygiene hypothesis," first proposed by Strachan in 1989, suggested that reduced microbial exposure early in life may contribute to rising rates of allergic disease. More recent research has expanded this concept, demonstrating that microbial diversity influences the balance between inflammatory immune responses and regulatory pathways that maintain immune tolerance.² In other words, when children grow up in environments with too little microbial stimulation, the immune system may become more reactive, increasing risk for allergies, asthma, eczema, and other inflammatory conditions.` },
+        { t:'p', x: `Outdoor play, interaction with natural environments, and exposure to pets may support healthier microbial diversity. A large nationwide birth cohort study in Japan involving more than 97,000 mothers and children found that exposure to dogs or cats during fetal development and early infancy was associated with reduced risk of several childhood food allergies, including egg, milk, wheat, and nut allergies.³ Similarly, studies examining household environmental microbiota have shown that microbial diversity within home environments influences eczema development in early life.⁴` },
+        { t:'p', x: `These effects likely occur through interactions between environmental microbes and the gut and skin microbiomes, which play major roles in immune development and inflammatory regulation. Reviews on infant microbiota development consistently show that early-life microbial exposures shape immune maturation, metabolic programming, and long-term health outcomes.⁵ ⁶ Even fetal immune cells appear capable of responding to microbial signals before birth, suggesting that immune education may begin earlier than previously thought.⁷` },
+        { t:'p', x: `Proper handwashing, food safety, and infection prevention remain essential, but the evidence suggests that completely sterilized environments may not provide the varied microbial interactions the developing immune system evolved to expect.` },
+        { t:'h', x: 'CAPSuLe for Global Change' },
+        { t:'p', x: `Modern childhood has become increasingly indoor, sanitized, and disconnected from natural environments. While hygiene advancements have saved millions of lives, our growing tendency to eliminate nearly all microbial exposure may unintentionally disrupt the developmental experiences the immune system depends on. If we truly want to address the rising prevalence of allergies, autoimmune conditions, asthma, and inflammatory disease, we may need to rethink how we design childhood environments altogether.` },
+        { t:'p', x: `Imagine schools built around outdoor education, cities with more accessible green spaces, pediatric health campaigns that emphasize microbial diversity alongside hygiene, and youth programs that prioritize interaction with nature instead of constant indoor confinement. Public health frameworks could shift from promoting sterility toward promoting resilient immune development. Small environmental exposures in childhood could ultimately shape population-level health outcomes for generations to come.` },
+        { t:'h', x: 'References' },
+        { t:'refs', items: [
+          `Casterline BW, Paller AS. Early development of the skin microbiome: Therapeutic opportunities. Pediatr Res. 2021;90(4):731-737. doi:10.1038/s41390-020-01146-2`,
+          `Augustine T, Kumar M, Al Khodor S, van Panhuys N. Microbial dysbiosis tunes the immune response towards allergic disease outcomes. Clin Rev Allergy Immunol. 2023;65:43-71. doi:10.1007/s12016-022-08939-9`,
+          `Okabe H, Hashimoto K, Yamada M, et al. Associations between fetal or infancy pet exposure and food allergies: The Japan Environment and Children's Study. PLoS One. 2023;18(3):e0282725. doi:10.1371/journal.pone.0282725`,
+          `Ta LDH, Tay CJX, Lay C, et al. Household environmental microbiota influences early-life eczema development. Environ Microbiol. 2021;23(12):7710-7722. doi:10.1111/1462-2920.15684`,
+          `Gholamipour-Shirazi P, Gholamipour-Shirazi A. Infant gut microbiota and functional foods: Opportunities for early health intervention. Clin Nutr ESPEN. 2025;70:516-526. doi:10.1016/j.clnesp.2025.10.032`,
+          `Schoultz I, Claesson MJ, Dominguez-Bello MG, et al. Gut microbiota development across the lifespan: Disease links and health-promoting interventions. J Intern Med. 2025;297:560-583. doi:10.1111/joim.20089`,
+          `Mishra A, Lai GC, Yao LJ, et al. Microbial exposure during early human development primes fetal immune cells. Cell. 2021;184(13):3394-3409. doi:10.1016/j.cell.2021.04.039`,
+        ]},
+      ],
+    },
+    {
+      id: 'moments-of-connection', n: '03',
+      title: 'Can We Turn Simple Moments of Connection Into the Emotional Building Blocks Our Children Need to Thrive?',
+      writer: 'Dr. Emily Smith', date: 'Apr 26', readTime: '5 min read',
+      sections: [
+        { t:'p', x: `As we move through life, we often end up gathering hidden wounds that quietly shape how we see the world. While many of these early experiences stay with us forever, they do not have to define the limits of what we're capable of. In one of our latest podcast episodes, clinical psychologist Dr. Christy Wise explores how teaching socio-emotional skills early on can help foster the internal safety and self-worth children need to thrive in their relationships for a lifetime.` },
+        { t:'h', x: 'Your Prescription to Start Today' },
+        { t:'sub', x: 'For Parents' },
+        { t:'ul', items: [
+          { b:'High/Low/Medium', x:`At the end of the day, sit down with your child and ask them to identify one part of their day that was good ("high"), one part that was not so good ("low"), and one part that was just okay ("medium"). Take the time to explore each moment using open-ended questions like "How did that make you feel?" or "What would you have liked to happen instead?". This practice helps create a judgment-free space for honest reflection, fostering children's autonomy and ability to navigate life's many ups and downs.` },
+          { b:'Mission Control', x:`At the start of a new month, have your child choose a personal goal and something that will keep them motivated throughout! For example, dinner at their favorite restaurant if they reach their goal (reward) or no video games the next month if they do not (consequence). Letting your child lead the discussion builds competence and ensures you're working as a team rather than opponents, promoting future collaboration.` },
+        ]},
+        { t:'sub', x: 'For Teachers' },
+        { t:'ul', items: [
+          { b:'Object X', x:`Hold up a random object (like a stapler) and ask your students to suggest alternative uses for it. Encourage them to be as creative as possible and to build on each other's ideas! By making the intended purpose of the object (e.g., stapling papers) the only "incorrect" answer, you can help foster divergent thinking and collaborative play in a fun and safe way.` },
+          { b:'"I Wonder" Wall', x:`Create a dedicated space in the classroom for questions that don't have easy answers like "What does it feel like to be inside a cloud?" or "Can plants hear us when we talk to them?". Encourage your students to anonymously write their question down on a sticky note and add it to the wall (or write it down for them if they're still learning how to write). Once a week, pick a question to discuss as a class for 5–10 minutes. This activity allows students to take charge of their learning while fostering open-mindedness and peer-to-peer connection. Pro tip: you can model intellectual humility by adding your own "I wonders" to the wall too!` },
+        ]},
+        { t:'sub', x: 'For Athletic Coaches' },
+        { t:'ul', items: [
+          { b:'Post-Game Pulse', x:`At the end of a practice session, split the players up into small groups and have them brainstorm one thing the team did well and one thing that could be improved. Rather than singling out individuals, encourage the players to use "We" statements. After a few minutes, bring everyone back together again to discuss as a group. This type of collaborative decision-making safeguards individual self-esteem while fostering a sense of teamwork and shared responsibility.` },
+          { b:'Team Frequency', x:`Create a warmup and/or cool down playlist based on player's suggestions (sent ahead of time via e-mail, "suggestion box", etc.). To really highlight different perspectives, you can occasionally set a theme like "A song that reminds you of home" or "A song in a language other than English". This turns a routine practice session into a celebration of diversity, allowing players to share their unique backgrounds and experiences free of judgement. As an added benefit, the mere act of listening to music may help boost their motivation, physical performance, and psychological resilience!¹` },
+        ]},
+        { t:'sub', x: 'Summary (For All Who Work With Youth)' },
+        { t:'p', x: `As children grow up, they don't just listen to what adults say, they watch how we live. That's why it's important for us to model positive socio-emotional behaviors across all settings—whether at home, in the classroom, or on the field. By staying curious, celebrating diverse perspectives, and being brave enough to own our mistakes, we can teach the next generation that personal growth is a lifelong journey. When we lead with this kind of emotional intelligence as adults, we ultimately give children the blueprint they need to bridge differences, cultivate empathy, and build healthier relationships now and in the future.` },
+        { t:'h', x: 'The Mechanism: How Do We Know This Prescription Works?' },
+        { t:'p', x: `Self-Determination Theory (SDT) is an evidence-based framework used to understand human motivation and social development. SDT suggests that motivation stems from three universal psychological needs: autonomy, competence, and relatedness.²` },
+        { t:'p', x: `Autonomy is feeling like your choices and behaviors are driven by your personal values and interests rather than external factors. Moments of connection like Mission Control and Object X support children's autonomy by encouraging them to explore their own thoughts, feelings, and ideas in a safe, non-judgmental environment. Competence is about feeling like your actions are effective and lead to positive outcomes. Activities like High/Low/Medium and "I Wonder" Wall help build emotional and intellectual competence, respectively, encouraging children to take control of their choices, behaviors, and reactions and lean into their natural curiosity. Relatedness is the desire to feel connected to and understood by others. It acts as a foundation for empathy and perspective-taking, which ultimately contribute to prosocial behaviors. Team-based practices like Post-Game Pulse and Team Frequency help cultivate this sense of belonging by encouraging children to respect and value each other's ideas and contributions.` },
+        { t:'p', x: `Importantly, the academic literature supports the application of SDT across diverse contexts including parenting, education, physical education, workplaces, and even healthcare!³` },
+        { t:'h', x: 'CAPSuLe for Global Change' },
+        { t:'p', x: `Raising our children to be emotionally intelligent requires a commitment at all levels: personal, structural, and political. The Prescription presented in this blog post represents a roadmap for how we can begin to implement some of these changes in our own lives. However, socio-emotional skills are something that all children deserve to learn, regardless of their home environment and upbringing, which is why incorporating these (or similar) practices into school curricula will be an important step for ensuring widespread benefit.⁴,⁵ Moreover, including information about socio-emotional learning into training materials for teachers and coaches will ensure that they have the foundation needed to lead these types of activities effectively. At the policy level, an internal reporting or auditing system will be important to ensure consistent uptake across schools and to assess the ongoing effectiveness of the curriculum, with appropriate changes being made if necessary. Ensuring that experts like Dr. Christy Wise are involved at all steps of the curriculum development and implementation process will also ensure that any recommendations being made are evidence-based and consistent with the latest research. By fostering autonomy, competence, and relatedness in children, we are not only promoting their socio-emotional development, we are also setting them up for positive outcomes throughout life!` },
+        { t:'h', x: 'References' },
+        { t:'refs', items: [
+          `Becan S, Serkan Burgul N, Cenkova N, et al. The effects of listening to music in sports activities on psychological resilience, physical strength performance and motivation in terms of mental health. Front Psychol. 2025;16:1644517. doi:10.3389/fpsyg.2025.1644517`,
+          `Ryan, RM, & Deci, EL. Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being. Am Psychol, 2000;55(1):68–78`,
+          `Ryan, RM, Duineveld, JJ, Di Domenico, SI, Ryan, WS, Steward, BA, & Bradshaw, EL. We know this much is (meta-analytically) true: A meta-review of meta-analytic findings evaluating self-determination theory. Psychol Bull. 2022;148(11-12):813-842. doi:10.1037/bul0000385`,
+          `Durlak JA, Weissberg RP, Dymnicki AB, Taylor RD, Schellinger KB. The impact of enhancing students' social and emotional learning: a meta-analysis of school-based universal interventions. Child Dev. 2011;82(1):405-432. doi:10.1111/j.1467-8624.2010.01564.x`,
+          `Cipriano C, Strambler MJ, Naples LH, et al. The state of evidence for social and emotional learning: A contemporary meta-analysis of universal school-based SEL interventions. Child Dev. 2023;94(5):1181-1204. doi:10.1111/cdev.13968`,
+        ]},
+      ],
+    },
+    {
+      id: 'resilience-biological-skill', n: '04',
+      title: 'Can Resilience Be Taught as a Biological Skill?',
+      writer: 'Matt', date: 'Apr 13', readTime: '4 min read',
+      sections: [
+        { t:'p', x: `In our fast-paced world, stress often activates the sympathetic "fight-or-flight" branch of our nervous system, spiking heart rate and alertness. Its counterpart, known as the parasympathetic nervous system, acts as the calming "rest-and-digest" system, promoting recovery, clearer thinking, and true resilience. The simple micro-regulators below teach kids to deliberately activate this parasympathetic system through breath, vision, sound, and movement, turning emotional regulation into an accessible biological skill.` },
+        { t:'h', x: 'Your Prescription to Start Today' },
+        { t:'sub', x: 'For Parents' },
+        { t:'ul', items: [
+          { b:'The "Yawn Challenge"', x:'When a child is frustrated, have a "yawn-off." A fake yawn triggers a signal to the brain that the environment is safe, lowering the heart rate instantly!' },
+          { b:'The "Slow-Motion Race"', x:'Challenge them to walk across a room as slowly as possible. Deliberate slow movement requires the brain to turn off normal motor patterns, which engages pathways for better regulation!' },
+          { b:'The "Belly Balloon"', x:'Have them place their favorite toy (or iPad) on their stomach while laying down. Have them "give it a ride" by breathing deep into their belly, watching the object go up and down. Diaphragmatic breathing (the goal here) boosts the beneficial effects of the parasympathetic nervous system!' },
+        ]},
+        { t:'sub', x: 'For Teachers' },
+        { t:'ul', items: [
+          { b:'The "Horizon Scan"', x:'After a high-energy or stressful activity, have students look out a window and find three things far away. Moving from looking at a screen or paper to panoramic vision mechanically reduces sympathetic drive, leading to feelings of decreased stress!' },
+          { b:'The "Temperature Reset"', x:'Keep a small bowl of cold water or a cold pack. If a student is "overheating" emotionally, have them hold it to their cheeks for ten seconds to trigger the Mammalian Dive Reflex, which slows the heart!' },
+          { b:'The "Humming Choir"', x:'Transition between subjects with 15 seconds of low-frequency humming. The vibration of the vocal cords stimulates the vagus nerve, which is the on-switch for the parasympathetics!' },
+        ]},
+        { t:'sub', x: 'For Athletic Coaches' },
+        { t:'ul', items: [
+          { b:'The "Silent Huddle"', x:'Before a big play or drill, call a huddle where no one is allowed to speak or move for 10 seconds. This forces athletes to focus on their internal state amidst external chaos!' },
+          { b:'The "Exhale-First" Sprint', x:'Teach athletes to breathe out fully before the whistle blows. This clears carbon dioxide from the body and prevents panic during the big games!' },
+          { b:'The "Soft-Hands" Catch', x:'Whether using a ball or a beanbag, tell the athlete to catch it "silently." To catch something without noise, the muscles must remain fluid rather than rigid, preventing sympathetic overload!' },
+        ]},
+        { t:'sub', x: 'Summary (For All Who Work With Youth)' },
+        { t:'p', x: `True toughness isn't the absence of stress, but the ability to toggle the internal brake (the parasympathetic nervous system) while the gas pedal is floored. By teaching children to manipulate their physiology through sight, breath, and sound, we turn emotional regulation into a tangible skill rather than a neurobiology lecture.` },
+        { t:'h', x: 'The Mechanism: How Do We Know This Prescription Works?' },
+        { t:'p', x: `The Prescription works because it targets our nervous system through bottom-up signaling. Traditional psychology often relies on top-down methods, such as telling an anxious child to "calm down." However, when a child is in a state of high sympathetic overdrive, parts of the brain essentially go offline. You cannot reason with a brain that thinks it is being chased by a predator, which is essentially what is happening!` },
+        { t:'p', x: `The "Belly Balloon," physiological sighs (double quick inhale through the nose followed by a long exhale), and controlled breathing leverage breathing centers in our body and feedback systems within our nervous system. A study by Yackle et al. (2017) in Science identified a specific cluster of neurons in the brain that links breathing rhythms directly to neuroexcitement and panic states.¹ By slowing or extending the exhale, we send signals to the brain that the "threat" has passed, which in turn helps lower stress and supports calmer states!` },
+        { t:'p', x: `Furthermore, the "Horizon Scan" utilizes the mechanics of panoramic vision. Neurobiologist Andrew Huberman has explained that focal vision (staring at a phone or stressful task) is tightly linked to heightened alertness and increased stress. In contrast, shifting to panoramic vision relaxes the muscles of the eyes and promotes a parasympathetic shift, explaining why stepping back to look at the horizon feels instantly relaxing.²` },
+        { t:'p', x: `Finally, the use of humming or cold water targets the vagus nerve, which is the on-switch of your parasympathetic nervous system. A randomized controlled trial by Jungmann et al. (2018) demonstrated that cold stimulation to the face or neck can significantly increase heart rate variability, which is the primary marker of a resilient nervous system!³ Higher variability correlates with better function and emotional control in young athletes. Low-frequency humming similarly boosts heart rate variability and other beneficial processes, as shown in a Holter-monitor study by Trivedi et al. (2023).⁴` },
+        { t:'h', x: 'CAPSuLe for Global Change' },
+        { t:'p', x: `Imagine a public school system where "Autonomic Literacy" is a core curriculum requirement, as fundamental as literacy or mathematics. In this scenario, every classroom and athletic facility would be designed around what I've coined as the Neuro-Informed Environmental Design. This includes mandatory "Quiet-Eye" training in physical education and "Vagus Nerve" breaks between standardized testing!` },
+        { t:'p', x: `At the policy level, we should increase the presence of Biological Resilience Labs in community centers. These would be placed where children can use biofeedback technology to see their heart rate on a screen and learn how to control it. If we shift the focus of public health from managing symptoms to training their brains how to react, we would see a global decline in anxiety-related disorders and a surge in the collective cognitive awareness of the next generation. But, for now, these exercises will have to suffice!` },
+        { t:'emph', x: `We don't need tougher kids. We need more physiologically-regulated ones.` },
+        { t:'h', x: 'References' },
+        { t:'refs', items: [
+          `Yackle K, Schwarz LA, Kam K, et al. Breathing control center neurons that promote arousal in mice. Science. 2017;355(6332):1411-1415. doi:10.1126/science.aai7984`,
+          `Huberman A. Vision and breathing may be the secrets to surviving 2020. Interview by Ingraham C. Scientific American. November 16, 2020.`,
+          `Jungmann M, Vencatachellum S, Van Ryckeghem D, Vögele C. Effects of cold stimulation on cardiac-vagal activation in healthy participants: randomized controlled trial. JMIR Form Res. 2018;2(2):e10257. doi:10.2196/10257`,
+          `Trivedi GY, Sharma K, Saboo B, et al. Humming (simple Bhramari pranayama) as a stress buster: a Holter-based study to analyze heart rate variability (HRV) parameters during Bhramari, physical activity, emotional stress, and sleep. Cureus. 2023;15(4):e37527. doi:10.7759/cureus.37527`,
+        ]},
+      ],
+    },
+    {
+      id: 'teach-resilience-home-field-classroom', n: '05',
+      title: 'Can We Teach Resilience in the Home, on the Field, & in the Classroom?',
+      writer: 'Nate Roy', date: 'Mar 30', readTime: '3 min read',
+      sections: [
+        { t:'p', x: `We can. This blog post recaps an interview with a field expert in clinical psychology, Dr. Michele Borba, and consolidates research to guide your actions as you aim to equip the children and teens in your life to not just manage, but triumph against, life adversity.` },
+        { t:'h', x: 'Your Prescription to Start Today' },
+        { t:'sub', x: 'For Parents' },
+        { t:'ul', items: [
+          { b:'Implement the "morning failure routine"', x:'At the start of each day, speak with (or text!) your child(ren) and have everyone share one failure they’ll aspire for that day (i.e., a challenging task that will be welcomed, prompting struggle and learning).' },
+          { b:'Implement a weekly "stumbling block party"', x:'Before each new week encourage reflection regarding what your child(ren) is/are MOST worried about for the week ahead. Where is it that they doubt themself? Once identified, help them to create a strategic plan to receive as much practice as possible of that exact stumbling block but in lower pressure environments throughout the upcoming week. Create a maximally safe environment for this meeting by including some of your child(ren)’s favorite snacks and games in the weekly meeting.' },
+        ]},
+        { t:'sub', x: 'For Teachers & Coaches' },
+        { t:'ul', items: [
+          { b:'Model your own failure (and overcoming it!)', x:'When you make a mistake, no matter how small, state it out loud along with what you’ll do differently in the future to avoid the same outcome.' },
+          { b:'Create "no-rescue challenges"', x:'Have students work in groups on tasks that are creative and fun, yet slightly beyond their current ability level. They should not succeed easily! Leave things ambiguous intentionally, but state that "no-rescue" rules means they cannot ask you any questions throughout the task. This means that they are forced to figure it out themselves (which is what we want).' },
+        ]},
+        { t:'sub', x: 'Summary (For All Who Work With Youth)' },
+        { t:'p', x: `We should be intentional about encouraging young people to observe failure, practice failure, and identify reasons for (and solutions to) failure. We should be creative in how we implement these lessons, and we should embed them in environments that feel maximally safe. Make it fun, make it low stakes, and make sure that trust (in you as the deliverer) comes first!` },
+        { t:'h', x: 'The Mechanism: How Do We Know This Prescription Works?' },
+        { t:'p', x: `The brain is wired to adapt and change when there is a mismatch between expectation and outcome (1). This effect is more pronounced when the mismatch occurs in a context of high meaning (2) and when there is no mechanism of escape from the task (e.g., a parent or teacher stepping in) (3). A failed task, or challenge, is an example of a high meaning mismatch between expectation and outcome.` },
+        { t:'p', x: `Adaptation and learning are amplified by observation of others (4). The human brain has evolutionarily coded machinery to observe others around us and to reorient acute activity to mimic the observed agent (5). Social learning mechanisms are most active when the observed agent is both impressionable and accessible (6,7), meaning they are a role model who shows their imperfections and errors authentically.` },
+        { t:'p', x: `The Prescription above encompasses these scientific principles, outlining an approach we'll call "adaptive failure modeling".` },
+        { t:'h', x: 'CAPSuLe for Global Change' },
+        { t:'p', x: `Much of this piece can be summarized by the need to normalize failure's role in the learning process. Resilient people, or "thrivers", as Dr. Borba terms them, will be developed when failure is made safe, such that escape is unnecessary.` },
+        { t:'p', x: `At the level of public policy, pre-existing curricula structures can mandate the inclusion and reporting of lessons and activities such as those described above. At the school and organizational level, actionable guides for resilience can be written into educator onboarding processes. At the individual level and in the home, we can sprinkle in the simple steps we described—like failure modeling—right away. We can learn more through sources from developmental psychologists like Thrivers by Dr. Michele Borba.` },
+        { t:'h', x: 'References' },
+        { t:'refs', items: [
+          `Wise RA. Dopamine, learning and motivation. Nat Rev Neurosci. 2004;5(6):483-494. doi:10.1038/nrn1406`,
+          `Dhawale AK, Smith MA, Ölveczky BP. The Role of Variability in Motor Learning. Annu Rev Neurosci. 2017;40(Volume 40, 2017):479-498. doi:10.1146/annurev-neuro-072116-031548`,
+          `Shors TJ. Stressful Experience and Learning Across the Lifespan. Annu Rev Psychol. 2006;57:55-85. doi:10.1146/annurev.psych.57.102904.190205`,
+          `Bandura A. Social Learning Theory. Accessed March 21, 2026.`,
+          `The mirror neuron system: New frontiers. Social Neuroscience. Vol 3, No 3-4. Accessed March 21, 2026.`,
+          `Lockwood P, Kunda Z. Superstars and me: Predicting the impact of role models on the self. J Pers Soc Psychol. 1997;73(1):91-103. doi:10.1037/0022-3514.73.1.91`,
+          `Markus H, Nurius P. Possible selves. Am Psychol. 1986;41(9):954-969. doi:10.1037/0003-066X.41.9.954`,
+        ]},
+      ],
+    },
+    {
+      id: 'food-for-thought', n: '06',
+      title: 'Food for Thought: Preventing Picky and Disordered Eating',
+      writer: 'Lyra Tiffin', date: 'Mar 9', readTime: '8 min read', updated: 'Mar 10',
+      sections: [
+        { t:'p', x: `Food advice has never been easier to access. A quick search or scroll reveals endless messages about "clean eating," superfoods, and foods to avoid. Yet despite the constant attention on nutrition, children today are growing up in an increasingly confusing food environment. Ultra-processed food intake continues to rise, while picky eating remains common and is associated with lower fruit and vegetable intake and a higher risk of being underweight (1).` },
+        { t:'p', x: `At the same time, children are forming ideas about body shape, food rules, and health earlier than ever. Research shows that both sociocultural pressures and screen exposure can influence eating attitudes and body image during childhood (2,3). Add in rushed schedules, distracted meals, and conflicting advice about what foods are "good" or "bad," and it becomes clear why many families feel uncertain about how to guide their children's eating habits.` },
+        { t:'p', x: `Faced with these concerns, many caregivers respond with control: restricting sweets, pressuring children to "finish their plate," or using food either as a reward or to soothe emotions. These responses are understandable. However, research suggests they can unintentionally disrupt the self-regulation skills that are so important for children to develop. Rather than imposing restriction, research points toward structured and responsive feeding practices, meaning the ways caregivers provide, structure, and guide children's eating environments, which build independence, emotional regulation, and long-term competence with food.` },
+        { t:'sub', x: 'For Parents, Educators, and Caregivers' },
+        { t:'p', x: `If the goal is raising a competent eater, then the evidence supports a few core principles:` },
+        { t:'ul', items: [
+          `Avoid overt restriction and pressure, as both are associated with dysregulated eating (4) (5).`,
+          `Model calm, balanced eating behaviors (13) (14).`,
+          `Help the child develop ways to manage emotions like stress (8).`,
+          `Invite participation in meal preparation to reduce pickiness (17) (18).`,
+          `Create predictable meal structures while allowing children autonomy in how much they eat.`,
+        ]},
+        { t:'p', x: `The framework most aligned with this evidence is the Division of Responsibility model from the Ellyn Satter Institute: Parents decide what, when, and where food is offered, while children decide whether and how much to eat. This structure supports regulation without restriction. (20)` },
+        { t:'sub', x: 'Try This' },
+        { t:'ul', items: [
+          `Involve children in washing, chopping (age-appropriate), or plating vegetables.`,
+          `Replace "eat three more bites" with "listen to your tummy."`,
+          `Remove moral language like "good" or "bad" foods.`,
+          `Schedule device-free family meals.`,
+          `Ask reflective questions like "What did you notice about that flavor?", "How does that food feel in your mouth?" or "How full do you feel?"`,
+        ]},
+        { t:'p', x: `Research suggests that tactile and actively involved learning programs, such as cooking and interactive nutrition education, are more effective than spoken instruction alone (17). The eating environment also matters: settings that reduce distraction and promote mindful engagement support healthier dietary patterns (2).` },
+        { t:'p', x: `Beyond immediate intake, fostering emotional regulation and autonomy may buffer against long-term risk of obesity and disordered eating (6) (7) (10).` },
+        { t:'p', x: `It would be easier if feeding children were simply a matter of feeding smaller versions of adults, but in reality, caregivers are shaping children's regulatory systems just as much as their dietary habits.` },
+        { t:'h', x: 'The Science: Is There a Good Balance Between Structure and Autonomy?' },
+        { t:'p', x: `On one hand, parents worry that without control, children will overconsume highly palatable foods. Research does show that food responsiveness and emotional overeating are early predictors of weight concerns (4). Understanding what contributes to those behaviors, however, is where prevention of future disordered eating can really be achieved.` },
+        { t:'p', x: `A meta-analysis found that restrictive feeding practices were associated with higher food responsiveness, emotional overeating, and food fussiness (5). Similarly, pressuring children to eat was associated with poorer satiety responsiveness (4). These findings suggest that excessive control interferes with children's ability to recognize and respond to their internal hunger and fullness cues.` },
+        { t:'sub', x: 'Why Might This Happen?' },
+        { t:'p', x: `Emerging neurobiological research offers insight. One study showed that environmental harshness and unpredictability were linked to altered amygdala connectivity, a brain region involved in emotional processing and behavioral responses (6).` },
+        { t:'p', x: `Additionally, child self-regulation was shown to mediate the link between parent-child relationship quality and adolescent BMI (7). It is evident, then, that eating is not just about nutrients, it is also tied to emotional regulation and stress systems.` },
+        { t:'p', x: `Using food to regulate emotions is risky: emotional feeding practices are associated with higher emotional overeating, particularly when parents themselves experience emotional dysregulation (8). In the same way, using sweets as a reward has been shown to strengthen their value. In other words, it places certain foods on a pedestal, making them more desirable—not because of genuine preference, but because they are perceived as "restricted." This is a lot different than a child having a favorite meal to eat because of how much they love the taste, or the positive memories they associate it with. Psychological distress in adolescents has also been linked to food addiction symptoms (10). Taken together, these findings highlight the importance of supporting a child's internal regulation when it comes to building their relationship to food.` },
+        { t:'sub', x: 'Modeling and Mindful Feeding Practices: What Actually Builds Regulation' },
+        { t:'p', x: `If restriction undermines regulation, what strengthens it?` },
+        { t:'p', x: `Mindful feeding practices (engaged, nonjudgemental, and distraction free) have been shown to help mediate the effects of overall psychological distress on food addiction (10), and also mediate the relationship between parenting style and problematic eating behaviors. Authoritative parenting styles were associated with more mindful feeding practices, while authoritarian and permissive styles were associated with lower levels (11).` },
+        { t:'p', x: `Parental stress has been linked to greater obesogenic eating in children—but mindful feeding again buffered this relationship (12). Similarly, parental mindful eating was associated with lower emotional eating in children (13), and maternal mindful eating proficiency correlated with child eating behaviors more strongly than nutrition literacy alone (14). Importantly, this is not just correlational theory. An intervention designed to improve mindful eating in children increased awareness scores and improved dietary adequacy (15). The findings are consistent: children learn how to relate to food by watching how adults relate to food.` },
+        { t:'sub', x: 'The Food Environment' },
+        { t:'p', x: `A key component of mindful eating and feeding practices is creating a distraction-free environment. Eating while preoccupied with phones or other screens is strongly associated with higher ultra-processed food consumption and lower adherence to a healthful diet (2).` },
+        { t:'p', x: `In terms of external pressures on food intake, family influence remains stronger than peer influence when it comes to healthy preferences, but both sociocultural pressures and screen exposure are still associated with elevated disordered eating risk (3) (16).` },
+        { t:'sub', x: 'Participation Over Pressure: Why Involvement Reduces Pickiness' },
+        { t:'p', x: `Another consistent finding is that child involvement in the food preparation process changes outcomes.` },
+        { t:'p', x: `In one study, children who prepared vegetables themselves were more likely to prefer and choose those vegetables later (17). In another, a hands-on cooking intervention reduced food neophobia, the fear of trying new foods, and improved vegetable intake more effectively than traditional classroom instruction (18). Both mothers' and fathers' involvement in meal preparation are shown to be associated with lower child nutrition risk (19).` },
+        { t:'p', x: `These findings suggest that exposure combined with autonomy reduces pickiness and increases food acceptance.` },
+        { t:'h', x: "CAPSuLe's Formula for Widespread Change" },
+        { t:'p', x: `Supporting healthy development requires environments that teach children not only what to eat, but how to approach food with curiosity and competence.` },
+        { t:'p', x: `In healthcare, pediatric training could emphasize discussing how well a child is growing when speaking with the child, while helping parents interpret growth percentiles in context. When concerns about nutritional status arise, clear referral pathways to Registered Dietitian Nutritionists (RDNs) would ensure families receive individualized, evidence-based guidance without reinforcing anxiety around food.` },
+        { t:'p', x: `Educators, particularly in elementary school, could receive training on developmentally appropriate language that avoids labeling foods as "good" or "bad." Funding could also support positive nutrition messaging throughout school environments, including cafeteria signage that highlights the benefits of different foods. For example, explaining how colorful fruits and vegetables support different body functions or labeling foods with simple messages such as "a great source of iron that helps your body carry oxygen." Early childhood classrooms could also incorporate child-accessible food preparation spaces with appropriately sized tools and guided activities that allow students to safely wash produce, assemble simple foods, and explore ingredients, helping build familiarity and curiosity around food from an early age.` },
+        { t:'p', x: `Health and physical education practices could move away from assignments requiring detailed calorie or micronutrient tracking, which may unintentionally encourage fixation on numbers. Instead, curricula could focus on the functional benefits of foods, recognizing nutrients of concern such as sodium or saturated fat, and reflecting on practical ways to add nourishing foods or make balanced substitutions. If growth data are collected in schools, measurements could be taken privately through school health offices rather than public class settings, while physical education itself emphasizes lifelong movement, enjoyment, and personal progress.` },
+        { t:'p', x: `Communities can reinforce these efforts through family-centered teaching kitchens hosted in community centers, schools, or public health facilities, where parents and children can learn practical cooking skills together under the guidance of dietitians or trained educators.` },
+        { t:'p', x: `Together, these initiatives could shift childhood nutrition environments away from fear, restriction, and misinformation, helping to prevent picky eating and disordered relationships with food. By encouraging curiosity and understanding around eating, we can equip the next generation with habits that support resilient, informed relationships with food and lifelong health.` },
+        { t:'h', x: 'References' },
+        { t:'refs', items: [
+          `Ama Jani, R., Irwin, C., Rigby, R., Byrne, R., Love, P., Khan, F., Larach, C., Yang, W. Y., Mandalika, S., Knight-Agarwal, C. R., Naumovski, N., & Mallan, K. (2024). Association between picky eating, weight status, vegetable, and fruit intake in children and adolescents: Systematic review and meta-analysis. Childhood Obesity, 20(8), 553–571. doi:10.1089/chi.2023.0196`,
+          `López-Gil, J. F., et al. (2025). Eating distractions as predictors of ultra-processed food consumption and Mediterranean diet adherence in adolescents. Scientific Reports, 15(1), 7579. doi:10.1038/s41598-025-91754-x`,
+          `Keski-Rahkonen, A. (2024). Eating disorders: Etiology, risk factors, and suggestions for prevention. Current Opinion in Psychiatry, 37(6), 381–387. doi:10.1097/YCO.0000000000000965`,
+          `Carnell, S., Benson, L., Driggin, E., & Kolbe, L. (2014). Parent feeding behavior and child appetite: Associations depend on feeding style. The International Journal of Eating Disorders, 47(7), 705–709. doi:10.1002/eat.22324`,
+          `Say, A., de la Piedad Garcia, X., & Mallan, K. M. (2023). The correlation between different operationalisations of parental restrictive feeding practices and children's eating behaviours: Systematic review and meta-analyses. Appetite, 180, 106320. doi:10.1016/j.appet.2022.106320`,
+          `Luo, Y., Chen, X., Zeng, W., Xiao, M., Liu, Y., Gao, X., & Chen, H. (2023). Associations of harsh, unpredictable environment, amygdala connectivity and overeating for children. Progress in Neuro-Psychopharmacology & Biological Psychiatry, 120, 110644. doi:10.1016/j.pnpbp.2022.110644`,
+          `Kim, J. H., & Bost, K. K. (2023). Self-regulation linking the quality of early parent-child relationship to adolescents' obesity risk and food consumption. Pediatric Obesity, 18(3), e12993. doi:10.1111/ijpo.12993`,
+          `Vang, M., Sherrard, A., & Tan, C. C. (2023). Parents' emotion dysregulation and children's emotional overeating: The role of emotion regulation feeding. Eating Behaviors, 50, 101795. doi:10.1016/j.eatbeh.2023.101795`,
+          `Bauer, J. M., Schröder, M., Vecchi, M., Bake, T., Dickson, S. L., & Belot, M. (2021). Rewarding behavior with a sweet food strengthens its valuation. PLoS One, 16(4), e0242461. doi:10.1371/journal.pone.0242461`,
+          `İçen, S., Karaca Cengiz, Ş. N., & Cengiz, M. (2026). Mindful eating may help explain the association between psychological difficulties and food addiction in adolescents with obesity. Scientific Reports, 16(1), 5967. doi:10.1038/s41598-026-36967-4`,
+          `Goodman, L. C., Roberts, L. T., & Musher-Eizenman, D. R. (2020). Mindful feeding: A pathway between parenting style and child eating behaviors. Eating Behaviors, 36, 101335. doi:10.1016/j.eatbeh.2019.101335`,
+          `Varghese, M., Sherrard, A., Vang, M., & Tan, C. C. (2023). Mindful feeding: Associations with COVID-19 related parent stress and child eating behavior. Appetite, 180, 106363. doi:10.1016/j.appet.2022.106363`,
+          `Brantley, C., Knol, L. L., & Douglas, J. W. (2023). Parental mindful eating practices and mindful eating interventions are associated with child emotional eating. Nutrition Research, 111, 34–43. doi:10.1016/j.nutres.2022.11.001`,
+          `Nakamura, T., Akamatsu, R., & Yoshiike, N. (2021). Mindful eating proficiency and healthy eating literacy among Japanese mothers. Nutrients, 13(12), 4439. doi:10.3390/nu13124439`,
+          `Kocaadam-Bozkurt, B., & Koksal, E. (2025). Do mindful eating intervention programs improve mindful eating and nutritional status in children? Italian Journal of Pediatrics, 51(1), 274. doi:10.1186/s13052-025-02047-y`,
+          `Corazza, I., Pennucci, F., & De Rosis, S. (2021). Promoting healthy eating habits among youth according to their preferences. Health Policy, 125(7), 947–955. doi:10.1016/j.healthpol.2021.03.014`,
+          `Crary, I. L., Ardoin, N. M., & Gardner, C. (2022). Impact of child interaction with food preparation on vegetable preferences. Journal of Nutrition Education and Behavior, 54(1), 46–55. doi:10.1016/j.jneb.2021.08.009`,
+          `Maiz, E., Urkia-Susin, I., Urdaneta, E., & Allirot, X. (2021). Child involvement in choosing a recipe, purchasing ingredients, and cooking at school increases willingness to try new foods and reduces food neophobia. Journal of Nutrition Education and Behavior, 53(4), 279–289. doi:10.1016/j.jneb.2020.12.015`,
+          `Watterworth, J. C., et al. (2017). Food parenting practices and their association with child nutrition risk status: Comparing mothers and fathers. Applied Physiology, Nutrition, and Metabolism, 42(6), 667–671. doi:10.1139/apnm-2016-0572`,
+          `Ellyn Satter Institute. (n.d.). The Satter Feeding Dynamics Model.`,
+        ]},
+      ],
+    },
+    {
+      id: 'brain-body-connection', n: '07',
+      title: 'The Best of Both Worlds: Unpacking the Brain–Body Connection',
+      writer: 'Nate Roy', date: 'Feb 23', readTime: '10 min read',
+      subtitle: 'A conversation with Dr. Emily Smith, PhD',
+      sections: [
+        { t:'note', pre: '[This blog post is an excerpt from a podcast episode. You can watch the full episode ', linkText: 'here', href: 'https://www.youtube.com/@Effective-Dose', post: '!]' },
+        { t:'sub', x: 'For Those Short on Time' },
+        { t:'p', x: `Here's how you can use the insights from this interview right away:` },
+        { t:'sub', x: '01 — Help Change the Conversation' },
+        { t:'ul', items: [
+          `Model person-first language (e.g., "they have anxiety" not "they're anxious").`,
+          `Avoid framing health struggles (both physical and mental) as laziness or lack of effort.`,
+          `Reinforce the idea that health challenges and diagnoses do not define a person.`,
+        ]},
+        { t:'sub', x: '02 — Normalize Having Conversations Early' },
+        { t:'ul', items: [
+          `Talk about mental health the same way you would physical health.`,
+          `Create and cultivate spaces (e.g., at home, in classrooms) where youth feel safe speaking up without judgment.`,
+          `Identify resources, including potential supports within your community, that you can share with those who want to learn more.`,
+        ]},
+        { t:'sub', x: '03 — Support Healthy Lifestyle Habits Without Shame' },
+        { t:'ul', items: [
+          `Encourage sleep, balanced nutrition, and physical activity as a way to improve your overall health, not just fitness or appearance.`,
+          `Avoid fear-based messaging! Instead, focus on long-term wellbeing and daily functioning.`,
+          `Pay attention to changes in motivation, sleep, mood, or social withdrawal that could indicate potential worsening health.`,
+        ]},
+        { t:'h', x: 'The Conversation' },
+        { t:'p', x: `For those interested, let's dive into the conversation a little deeper…` },
+        { t:'dialog', who:'NATE', x:`Prior to getting into the facts, because I want to know a lot more about this, I'd love to first go into some myths here because metabolic health, we talk a lot about this. I think most people think, you know, obesity and things like that. And then of course, mental health is among the general public, it's like a separate area of research and medicine, but you work at the intersection of these. What are some things that most of us just don't understand or that we maybe do understand but in the wrong way?` },
+        { t:'dialog', who:'EMILY', x:`Yeah, I think that's a really important question. I think one of the main things that I want to address right off the bat is that people are not their illness, and it's important to talk about illnesses in the way that someone has an illness. They are not, you know, 'schizophrenic'. They're not 'psychotic'. They have psychosis or they have schizophrenia. And that's a really important distinction to make because it colors how we approach these conversations within the community and it really does impact how patients view themselves, and that can impact the trajectory of their treatment and their illness course.\n\nAnd I want to really dispel the myth that people with severe mental illness, so that encompasses schizophrenia spectrum disorders, major depressive disorder, and bipolar disorder, that they're lazy or that they aren't doing what they should to take care of themselves. I want to emphasize that often the medications that they're on, they will develop metabolic problems that then impact their ability to carry out day-to-day functioning. So what a lot of people don't know is that metabolic illnesses such as obesity and insulin resistance can actually affect cognition. They can affect your ability to engage normally within the community. And so that's something that isn't always really realized or talked about: that these metabolic impacts can directly impact the ability of your brain to function. So that's something that I really want to get out there and make sure people know that these are truly connected.\n\nAnd then one other thing I want to dispel is that people think that if you're on a psychiatric medication that oh, your symptoms are magically taken care of. You should be fine, you should be able to function, and if you don't, then that's on you. That's your fault. You need to try harder. Actually, in the specific case of schizophrenia spectrum disorders, the medications we have are pretty good at treating psychosis and 'positive symptoms', which are things like hallucinations and delusions, but they actually don't really have much of an effect on what we call 'negative symptoms', which are things related to motivation, pleasure, low mood, fatigue. So it can be very difficult for individuals even if their psychosis is treated to again function normally day-to-day. So that's something else I want to dispel as a myth that medication solves all—it doesn't.` },
+        { t:'dialog', who:'NATE', x:`So much to unpack there and I think you hit the nail on the head in regards to the view of the public on these things. These are things that people don't necessarily remain aware of whenever they might be passively or actively judging someone and their surroundings. And forgive me if I'm asking a question that has no answer, I have to ask it because I know that anyone listening has this question with what you've described about some of these medications having their own effects. So, you know, we have the symptoms from the disorder itself and then we might have secondary symptoms from the medication. Is there a solution for this? You know what I mean? If someone is in a position where they might need or greatly benefit from a medication yet it's going to have these downstream metabolic effects that might decrease their quality of life. What are we typically telling these people in clinical environments?` },
+        { t:'dialog', who:'EMILY', x:`Well, as you said, there might not be a one-size fits all. There might not be a true answer for this, but it is typically quite a risk–benefit trade-off that happens. So, one thing that we've noticed in the field is that some of the most efficacious antipsychotics, and I'll focus on antipsychotics because that is my area of expertise, but some of the most efficacious ones also tend to have the highest risk for metabolic side effects. There is potentially something underlying in terms of mechanisms that these medications are affecting both of these pathways, and it's hard to tease those out. So, when it comes to choosing a medication to put a person on initially, it's really important to have a discussion with them about the risks and benefits of the different kinds of medications that we have. It's still not perfect, but the field is trying to move towards engaging patients actively in their antipsychotic choice, but in general there's no real way of getting away from these metabolic side effects because antipsychotics do remain the gold standard treatment for these conditions. So, we're still relying on these really tough medications for patients to take. And I think ultimately, it comes down to having that discussion with them right off the bat and kind of putting in place precautions in terms of lifestyle as well as adjunctive medication. So, it's now common practice to co-prescribe metformin, which is an anti-diabetic medication to individuals either when they start antipsychotics or early on in their journey with antipsychotics to try to help mitigate those metabolic risks. There is no pure solution yet. I think we need a better mechanistic understanding to get there, but we're working on it. That's what we're trying to do.` },
+        { t:'dialog', who:'NATE', x:`And that's what I was going to say. You're out there finding it for us and I think that's amazing. But I'd love to zoom back out I guess for the next few questions, you know what does this mean big picture for society? As a first, I'd love to know, you spent five plus years in a lab studying this and you plan to continue to do so which I really admire, if there was one thing that you wish that everybody in the world could know and really take to heart that you have learned in that five plus years, what would you isolate? And I know that's a difficult question.` },
+        { t:'dialog', who:'EMILY', x:`It is a difficult question. I think I'm even going to zoom out farther than my research question if that's okay because ultimately one of the biggest lessons that I've learned during my research is kind of what I mentioned before that there's this stigma in our society that people with mental illness are scary or they're different from us. But truly, mental illness is just a condition that people have, similar to how you might have a physical illness. It does manifest in different ways, and it can be a little more complex to understand because it is more personal, but ultimately people are not their illness and it's important to recognize that and treat them as such. People with mental illness, they're just people. They want human connection. They want to be part of the community. They want to be able to live a good life. I don't think it's fair to them as a society for us to alienate them and treat them like these 'others'. I think that's something that we really need to work on as a society. And it's getting better for sure, but there's still a lot of boundaries and barriers, and there's still a lot of misconception. Particularly the media will often misrepresent people with mental illness, and it's often thought that people with these conditions are violent and dangerous, but actually, the statistics show that people with severe mental illness are more likely to be the victim of violence rather than to perpetrate violence. So, it's just something that I really want people to take away from this conversation if that's the only thing they take away that, you know, people are people and let's treat them like that.\n\nThe one thing I will say that is more related to my research is that the brain–body connection, it exists. There's evidence to support that your mental health can affect your physical health and vice versa. And I think I want people to understand that if people are struggling with either aspect, you can't expect them to be able to function optimally. So I think that's something, again, that we need to just kind of consider as a society and realize that this is something that we need to try to tackle together and make sure that people are supported in their journey.` },
+        { t:'dialog', who:'NATE', x:`I have to ask you yet another very difficult question to bridge from there because at the capsule, one of our big focuses is how we can bring research into the development space like the school system to enhance outcomes. And I think both points you made, we can make a case that it's most important that education on these things take place in our youth so that we don't carry this stigma into adulthood. And then secondly, in caring for our own wellness and that of those around us, we are aware of the brain–body connection and how our habits might moderate this. So here's the tall task for you, the difficult question. If you had unlimited funding, unlimited public support, and you had the opportunity to reform something about the education system or even within communities to emphasize these two points and to raise awareness for these things at a young age, what are some important implementations that you would make based on what you know as a researcher?` },
+        { t:'dialog', who:'EMILY', x:`Yeah, that's a great question. I mean, as a researcher, I would love to see some kind of curriculum change to really emphasize this [brain–body] connection more because right now, at least when I was in high school, for example, we took one health class and we talked about nutrition a little bit, but it was more about, you know, just eat your fruits and vegetables, get your X servings of carbohydrates, X servings of protein, things like that. But it didn't really go into why this is important and how it can impact your life down the road. Because something I do want to emphasize is that these metabolic problems can accumulate over time, and there's a cumulative effect of poor lifestyle and poor dietary habits that can really impact you later in life. So yeah, when you're young, sure, you maybe have the metabolism to eat more fatty foods, eat more processed foods, but there's something happening more at the cellular, mechanistic level that you might not be aware of and that's not manifesting yet, but it could later down the road. And so I'd just love to see something more in curriculums even if it's not a full course, just taking more time to acknowledge this connection, which I think scientists, we can also do better at trying to do outreach to schools and incorporate it that way, but I'd love to see that kind of integrated so that every student is getting exposed to this information or getting the opportunity to learn about it. Because, as you mentioned, it can impact everyone in the general population as well, and it's something that people don't often think about. Typically, if you're not overtly sick or you're not diagnosed with something specific, they might not necessarily think to take care of themselves in this way and make that connection, but I think it's important for everyone that they do.\n\nAnd then also in terms of curriculum, I would love to see mental health talked about more. From what I recall, honestly, I only really learned about mental health and mental illnesses in undergrad, and that's because I had a specific course related to psychology and the brain. So, I think it's just something that would again be helpful to help reduce the stigma and make it an easier conversation for people to have within the community if we start early. I think in high school, at least in the upper years, people are mature enough to handle conversations like this. And actually, children and youth are some of the most affected individuals with mental illness. A lot of illnesses start early on, and those times are the crucial moments when you want to diagnose and start treating because again, there are consequences of letting these symptoms continue untreated for a long time. We do see that in the population that our lab works with: that a longer duration of untreated psychosis, for example, can actually make it harder to improve outcomes later down the road. It's really important, I think, to start these conversations early and make sure that people are getting the support that they need in these areas and that they feel comfortable talking about it. Because I think that's something that our society also struggles a lot with: people still aren't feeling comfortable expressing their needs in this way because there is still so much stigma and so much that's not known.` },
+        { t:'dialog', who:'NATE', x:`I love each piece of that. I'm a big believer in the idea that perception plays a major role in recovery and you talked a lot about basically how we view these conditions, either if we ourselves are suffering from them or perhaps we know someone. And I think ultimately that might be the biggest rock, if you will, of early intervention, is kind of shifting this perception. And I think you've given very tangible ways of doing this because this is kind of a buzzword topic where it's like, you know, we need to increase mental health support. We need to increase mental health awareness. Well, there's the blueprint. So, thank you so much for not only the information on the scientific side, but on the call to action really, because I think a lot of people out there really need to hear this.` },
+      ],
+    },
+    {
+      id: 'weighting-to-lift', n: '08',
+      title: '(Weight)ing to Lift',
+      writer: 'Ryan Radmard', date: 'Feb 11', readTime: '6 min read',
+      subtitle: 'Why strength training is safe and smart for youth',
+      sections: [
+        { t:'p', x: `Although the health benefits of exercise are widely known and going to the gym has become mainstream in North America, a recent large-scale analysis from 2020 showed that, on a global scale, the majority of children and adolescents are not currently engaging in enough daily physical activity (1). This begs the question: what can be done to encourage this age group to engage in more physical exercise? But perhaps a better way to address this issue is understanding what may be preventing youth from exercising. Common statements I (and likely many others) have heard while growing up are "lifting weights is bad at a young age" or "don't lift weights, it will stunt your growth!". Research, however, gives a more nuanced perspective where improper training may have adverse effects, but weight training, if done while following the proper guidelines, can have amazing benefits (2). Rather than discourage weightlifting altogether due to the exaggerated negative outcomes of improper training, it is important to teach youth how to train safely and with intention. This can allow for acquiring the immense benefits associated with weightlifting at a young age and fostering a lifestyle that emphasizes taking care of physical and mental health.` },
+        { t:'h', x: 'The Science' },
+        { t:'p', x: `On one hand, improper resistance training can lead to various injuries to the muscle, ligaments, and tendons, as well as damage to the epiphyseal growth plates (3). At the same time, a large body of research has demonstrated that well-designed, age-appropriate resistance training regimens are safe for children and adolescents to engage in (4). For example, an older but highly impactful review from 2006 found no evidence supporting the common misconception that weightlifting has adverse effects on development, including ideas about growth, delay of puberty, and damage to bones in instances when programs are properly designed (5).` },
+        { t:'p', x: `Moreover, major institutions have echoed these findings. The American College of Sports Medicine publicly dispels this common myth and encourages youth to engage in resistance training programs (6). Similarly, the Mayo Clinic encourages strength training for children, pointing out the various physiological and psychological benefits strength training can have (7). A notable point of interaction in these articles is the emphasis on following proper guidelines and training in a safe manner. A common concern regarding weightlifting at a young age is the risk for potential injury to the growth plates, which can then lead to stunted growth. While growth plate injuries can occur, they are relatively uncommon in supervised strength training and are far more frequently observed in sports-related injuries (8). Current evidence indicates that resistance training performed with proper technique does not place unique or excessive stress on developing bones, but rather helps it (9).` },
+        { t:'h', x: 'For Parents' },
+        { t:'p', x: `For parents, it is important to understand the principles behind strength training before introducing it to your children. Proper training includes applying mechanical stress to the body in a predictable and manageable way to positively stimulate musculoskeletal adaption and growth (10). This necessitates guidance and supervision, especially in the beginning of this journey where children and adolescents are developing physically and neurologically. Placing an emphasis on technique and consistency is far more important than focusing on the amount of weight lifted, as trying to blindly "max out" the weight being lifted (although admittedly exhilarating) is not as beneficial as gradual and progressive overload (11). In practice, this looks like beginning with bodyweight exercises or light weights, ensuring correct form, and then moving onto slightly increased loads once comfortable (12).` },
+        { t:'p', x: `But what does the basic science behind it look like? By using low- or no-weight exercises, this allows for the acquisition of neuromuscular coordination, that "mind–muscle" connection you often hear about in popular media (13). Once this has been developed, increases in weight can be introduced as long as technique is not compromised. But we really need to emphasize that it all begins with the development of neuromuscular coordination before hypertrophy, as these early physiological adaptations to lifting weights are more neuronally-dependent than muscle-dependent. This early stage means that later on the nervous system is better equipped for recruiting muscle fibers, building a strong foundation for gradually building strength. Not only does building this connection reduce injury risk, it also allows for consistent improvement, something that research shows recreational athletes see the best results from.` },
+        { t:'p', x: `The current literature strongly supports designing training programs to fit your child's specific needs, so there really is no "one size fits all" training program that can be recommended. Instead, parents are encouraged to have both an understanding of the science behind resistance training and to take into consideration various aspects of their child, such as their age, weight, body composition, and strength, in order to see the best and safest results (14).` },
+        { t:'sub', x: 'Try This' },
+        { t:'ul', items: [
+          { b:'Promote reflection', x:'Ask questions like: "Which parts do you enjoy the most?", "How do you feel during and after?"' },
+          { b:'Prioritize technique', x:'Teach form first, then increase weight gradually.' },
+          { b:'Pair training with recovery', x:'Ensure rest between sessions, balanced nutrition, and adequate sleep.' },
+          { b:'Model healthy behaviour', x:'Demonstrate balanced attitudes toward exercise, effort, and recovery.' },
+        ]},
+        { t:'h', x: 'For Coaches' },
+        { t:'p', x: `Research has shown that professionally led training programs positively impact youth development through improving resilience and reinforcing goal oriented behavior (15). A key aspect for coaches to keep in mind however, is that context matters. From a broader lens, different age groups benefit from different types of exercises and movements (15). On an individual level, some children may benefit from group-based training while others may be best suited for one-on-one training.` },
+        { t:'p', x: `Moreover, resistance training outside of scheduled practice time has been associated with improvement in sports (16). Beyond this, it also has the added benefit of teaching children the value of consistency and working towards a long-term goal, skills that have lifelong impacts that extend far beyond childhood athletics (17).` },
+        { t:'h', x: "CAPSuLe's Formula for Widespread Change" },
+        { t:'p', x: `Although misconceptions about youth weightlifting remain common in the public sphere, they are rooted upon outdated assumptions rather than truth. At CAPSuLe, we believe that false, fear-based narratives should be approached by promoting research-based evidence that aims to dispel these myths. We also believe that adults have a crucial role in facilitating the learning of the younger generation and supporting their development. By basing our approach towards leaning on scientific evidence and gearing our platform towards both adults and youth, we can empower the next generation and reduce the limits that are created by misinformation.` },
+        { t:'h', x: 'References' },
+        { t:'refs', items: [
+          `Guthold R, Stevens GA, Riley LM, Bull FC. Global trends in insufficient physical activity among adolescents: a pooled analysis of 298 population-based surveys with 1.6 million participants. The Lancet Child & Adolescent Health. 2020;4(1):23–35.`,
+          `Faigenbaum AD, Kraemer WJ, Blimkie CJR, et al. Youth Resistance Training: Updated Position Statement Paper From the National Strength and Conditioning Association. J Strength Cond Res. 2009;23(Suppl 5):S60–79.`,
+          `Kawa O, Zywiec W, Czyzewski B, et al. Most Common Injuries in Resistance Training: Mechanisms, Therapeutic Interventions, and Preventive Strategies. Cureus. 2025.`,
+          `Milone MT, Bernstein J, Freedman KB, Tjoumakaris F. There is No Need to Avoid Resistance Training (Weight Lifting) until Physeal Closure. Phys Sportsmed. 2013;41(4):101–5.`,
+          `Malina RM. Weight Training in Youth-Growth, Maturation, and Safety: An Evidence-Based Review. Clin J Sport Med. 2006;16(6):478–87.`,
+          `Goin A. Mythbusting | Youth Resistance Training. ACSM. 2020.`,
+          `Mayo Clinic. Strength training for kids.`,
+          `Faigenbaum AD, Myer GD. Resistance training among young athletes: safety, efficacy and injury prevention effects. Br J Sports Med. 2010;44(1):56–63.`,
+          `Dahab KS, McCambridge TM. Strength Training in Children and Adolescents: Raising the Bar for Young Athletes? Sports Health. 2009;1(3):223–6.`,
+          `Vincent HK, Brownstein M, Vincent KR. Injury Prevention, Safe Training Techniques, Rehabilitation, and Return to Sport in Trail Runners. Arthrosc Sports Med Rehabil. 2022;4(1):e151–62.`,
+          `Healthline. Progressive Overload: What It Is, Examples, and Tips. 2020.`,
+          `Myers AM, Beam NW, Fakhoury JD. Resistance training for children and adolescents. Transl Pediatr. 2017;6(3):137–143.`,
+          `Aslam S, Habyarimana JDD, Bin SY. Neuromuscular adaptations to resistance training in elite versus recreational athletes. Front Physiol. 2025;16:1598149.`,
+          `Pierce KC, Hornsby WG, Stone MH. Weightlifting for Children and Adolescents: A Narrative Review. Sports Health. 2022;14(1):45–56.`,
+          `Godor BP. Cultivating Resilience in Youth: Assessing the Psychological Benefits of Sport-Based Development Programs. 2025;13(1).`,
+          `Zwolski C, Quatman-Yates C, Paterno MV. Resistance Training in Youth: Laying the Foundation for Injury Prevention and Physical Literacy. Sports Health. 2017;9(5):436–43.`,
+          `León-Reyes BB, Galeano-Rojas D, Gámez-Vílchez M, et al. Strength Training in Children: A Systematic Review Study. Children. 2025;12(5):623.`,
+        ]},
+      ],
+    },
+    {
+      id: 'social-media-friend-or-foe', n: '09',
+      title: 'Social Media: Friend or Foe to Youth Development?',
+      writer: 'Dr. Emily Smith', date: 'Jan 27', readTime: '5 min read', updated: 'Feb 11',
+      sections: [
+        { t:'p', x: `According to a recent review, between 90–98% of youth in the Global North (Canada, USA, UK, Australia) have at least one social media account (1). However, while social media is often blamed for declining mental health, particularly among our still-developing and vulnerable youth, research tells a more nuanced story.` },
+        { t:'p', x: `For today's youth, social media is about more than just entertainment, it's a place for connection, identity formation, and support. Moreover, while some studies report a relationship between increased time spent on social media and worse mental health, it may only account for about 6% of problematic social media use (2). This suggests that the quality rather than the quantity of social media use is what really matters (3).` },
+        { t:'h', x: 'The Science' },
+        { t:'p', x: `On one hand, social media use has repeatedly been linked to increased rates of depression, anxiety, body image issues, disordered eating, self-harm, and suicidal ideation in youth (1,3). Algorithm-driven "recommender systems", which provide a constant stream of tailored content to maximize users' time on the application, may be uniquely harmful, contributing to decreased attention, low mood, poor sleep, and compulsive behaviours (3,4). Social media also increases the likelihood that youth will encounter misinformation and/or disinformation, cyberbullying, hate speech, extremist views, and explicit content (3,4).` },
+        { t:'p', x: `At the same time, young people themselves report that social media helps them build relationships and find community (1,3). For many, online spaces represent supportive environments where they can share their ideas and opinions with others, fostering information exchange, creative expression, and identity formation (3,5). Social media can also help normalize conversation about difficult topics like mental health, inequity, or discrimination and connect those struggling with these issues to the resources they need (5).` },
+        { t:'p', x: `One form of social media that has gained particular attention among researchers are short form videos, which represent highly stimulating, fast-paced content (6). It is thought that repeated engagement with short form content like TikTok videos, Instagram reels, or YouTube shorts can cause users to become desensitized to activities requiring high cognitive effort, such as reading or problem solving, while increasing impulsivity and preference for immediate gratification. Over time, this may weaken the brain's ability to focus, resulting in a loss of mental stamina (6,7).` },
+        { t:'h', x: 'For Parents' },
+        { t:'p', x: `It is important for parents to understand that most youth are not intentionally reliant on social media—their brains are literally being re-wired by these platforms! Many aspects of social media activate the brain's natural reward system, which is regulated by the neurotransmitter dopamine. Biologically, dopamine release into certain brain regions is associated with motivation and feelings of pleasure, creating a feedback loop that encourages repeated behaviour (in this case, repeated checking and scrolling) (7). Because this circuitry is still developing in youth, support, not just restriction, is key (8).` },
+        { t:'p', x: `Research suggests that teaching youth how to mindfully and intentionally use social media is more effective than focusing only on its risks or enforcing strict limits (8,9). Open-minded conversations that come from a place of curiosity rather than authority or regulation are especially powerful.` },
+        { t:'sub', x: 'Try This' },
+        { t:'ul', items: [
+          { b:'Stay curious', x:'"What do you enjoy about social media?", "When does it feel helpful, and when doesn’t it?".' },
+          { b:'Co-create boundaries', x:'Set guidelines about how and when to use social media together. This fosters a sense of autonomy and responsibility.' },
+          { b:'Pair limits with alternatives', x:'If aiming to reduce screen time, make sure to provide access to engaging offline activities like sports, art, hobbies, and in-person social time.' },
+          { b:'Model balance', x:'Make sure that you are also engaging with social media in a healthy and sustainable way—youth notice more about your behaviour than you think!' },
+        ]},
+        { t:'h', x: 'For Educators and Coaches' },
+        { t:'p', x: `Research suggests that therapeutic approaches like cognitive behavioural therapy (CBT) and mindfulness-based interventions may help youth engage with social media more intentionally, strengthen skills like critical thinking, goal setting, emotional regulation, and self-compassion (8).` },
+        { t:'p', x: `Peer involvement can also be beneficial; however, keep in mind that context matters. For example, youth often prefer privacy for sensitive topics like mental health, allowing for more personalized and independent learning and self-reflection and less fear of judgement or comparison. On the other hand, including peers may enhance general skill-building by boosting creativity, motivation, and accountability (8,10).` },
+        { t:'sub', x: 'Try This' },
+        { t:'ul', items: [
+          { b:'Integrate reflection', x:'Ask students to reflect on how certain social media content affects their mood, focus, and confidence.' },
+          { b:'Teach media literacy', x:'Guide discussions about how social media algorithms decide on what content we see and why. Teach your students about how misinformation/disinformation is spread and how to fact check using reputable sources.' },
+          { b:'Offer choice', x:'Provide both individual and group-based support when possible.' },
+          { b:'Normalize asking for help', x:'Share information about counseling or mental health resources early and often. Understand the limits of your role and know how and when to refer your students to others.' },
+          { b:'Push for change', x:'Advocate for changes to school curricula that will help students acquire important skills early on like how to build a positive online presence and how to stay safe while building global social and professional networks.' },
+        ]},
+        { t:'h', x: "CAPSuLe's Formula for Widespread Change" },
+        { t:'p', x: `Although several countries have put policies in place to regulate social media use, they lack any real specificity and cannot keep up with the rapid development of social media platforms (1). Here at CAPSuLe, we believe that there are a few things we can all start doing today that will have a positive impact on youth for years to come:` },
+        { t:'ul', items: [
+          `Advocate for more transparency and stricter rules from companies regarding how they use personal data, maintain privacy, and keep their users safe.`,
+          `Acknowledge that there is no one-size-fits-all solution: the most effective support system for each person will depend on their age, culture, and living situation. (This is where working directly with youth to create a plan for healthy social media use comes in handy!)`,
+          `Stay informed about how and why social media is being used by youth (including its impacts—both positive and negative!) and update your strategies for curbing problematic social media use accordingly.`,
+        ]},
+        { t:'p', x: `At CAPSuLe, we believe that when adults commit to learning alongside young people, we can move beyond fear-based responses and toward meaningful, evidence-informed change. By equipping youth with the skills and guidance they need to navigate social media thoughtfully, we can help ensure that the online spaces shaping their lives support rather than undermine their wellbeing.` },
+        { t:'h', x: 'References' },
+        { t:'refs', items: [
+          `Chhabra J, Pilkington V, Benakovic R, Wilson MJ, La Sala L, Seidler Z. Social Media and Youth Mental Health: Scoping Review of Platform and Policy Recommendations. J Med Internet Res. 2025;27:e72061. doi:10.2196/72061`,
+          `Valkenburg PM, Meier A, Beyens I. Social media use and its impact on adolescent mental health: An umbrella review of the evidence. Curr Opin Psychol. 2022;44:58-68. doi:10.1016/j.copsyc.2021.08.017`,
+          `Agyapong-Opoku N, Agyapong-Opoku F, Greenshaw AJ. Effects of Social Media Use on Youth and Adolescent Mental Health: A Scoping Review of Reviews. Behav Sci. 2025;15(5):574. doi:10.3390/bs15050574`,
+          `Metzler H, Garcia D. Social Drivers and Algorithmic Mechanisms on Digital Media. Perspect Psychol Sci. 2024;19(5):735-748. doi:10.1177/17456916231185057`,
+          `Popat A, Tarrant C. Exploring adolescents' perspectives on social media and mental health and well-being. Clin Child Psychol Psychiatry. 2023;28(1):323-337. doi:10.1177/13591045221092884`,
+          `Nguyen L, Walters J, Paul S, et al. Feeds, feelings, and focus: A systematic review and meta-analysis examining the cognitive and mental health correlates of short-form video use. Psychol Bull. 2025;151(9):1125-1146. doi:10.1037/bul0000498`,
+          `Masri-Zada T, Martirosyan S, Abdou A, et al. The Impact of Social Media & Technology on Child and Adolescent Mental Health. J Psychiatry Psychiatr Disord. 2025;9(2):111-130.`,
+          `Nagata JM, Hur JO, Talebloo J, et al. Problematic Social Media Use Interventions for Mental Health Outcomes in Adolescents. Curr Psychiatry Rep. 2025;27(9):491-499. doi:10.1007/s11920-025-01619-3`,
+          `Plackett R, Blyth A, Schartau P. The Impact of Social Media Use Interventions on Mental Well-Being: Systematic Review. J Med Internet Res. 2023;25:e44922. doi:10.2196/44922`,
+          `Mahon C, Hevey D. Pilot trial of a self-compassion intervention to address adolescents' social media-related body image concerns. Clin Child Psychol Psychiatry. 2023;28(1):307-322. doi:10.1177/13591045221099215`,
+        ]},
+      ],
+    },
   ];
+
+  static _renderSection(sec, idx) {
+    const MK = 'JetBrains Mono, monospace';
+    const FR = 'Fraunces, serif';
+    const SS = "'Source Serif 4', Georgia, serif";
+    if (sec.t === 'p') {
+      return React.createElement('p', { key: idx, style: { fontFamily: SS, fontSize: 17, lineHeight: 1.72, color: '#0B1B26', margin: '0 0 18px', textWrap: 'pretty', whiteSpace: 'pre-line' } }, sec.x);
+    }
+    if (sec.t === 'h') {
+      return React.createElement('div', { key: idx, style: { fontFamily: FR, fontSize: 'clamp(21px,2.6vw,27px)', fontWeight: 600, letterSpacing: '-.012em', color: '#0B1B26', margin: '38px 0 16px', paddingTop: 26, borderTop: '1px solid rgba(11,27,38,.15)' } }, sec.x);
+    }
+    if (sec.t === 'sub') {
+      return React.createElement('div', { key: idx, style: { fontFamily: MK, fontSize: 11, letterSpacing: '.16em', textTransform: 'uppercase', fontWeight: 600, color: '#C84B32', margin: '22px 0 10px' } }, sec.x);
+    }
+    if (sec.t === 'ul') {
+      return React.createElement('div', { key: idx, style: { margin: '0 0 18px' } },
+        ...sec.items.map((it, j) => React.createElement('div', { key: j, style: { display: 'flex', gap: 10, alignItems: 'flex-start', marginBottom: 12 } },
+          React.createElement('span', { style: { width: 5, height: 5, borderRadius: 5, background: '#C84B32', flexShrink: 0, marginTop: 9 } }),
+          React.createElement('p', { style: { fontFamily: SS, fontSize: 16, lineHeight: 1.65, color: '#0B1B26', margin: 0 } },
+            (it && it.b) ? React.createElement(React.Fragment, null, React.createElement('strong', { style: { color: '#0B1B26' } }, it.b + ': '), it.x) : it
+          )
+        ))
+      );
+    }
+    if (sec.t === 'emph') {
+      return React.createElement('p', { key: idx, style: { fontFamily: FR, fontStyle: 'italic', fontSize: 21, fontWeight: 500, color: '#C84B32', margin: '24px 0', lineHeight: 1.3 } }, sec.x);
+    }
+    if (sec.t === 'note') {
+      return React.createElement('p', { key: idx, style: { fontFamily: SS, fontStyle: 'italic', fontSize: 15, lineHeight: 1.6, color: 'rgba(11,27,38,.6)', margin: '0 0 22px' } },
+        sec.pre, React.createElement('a', { href: sec.href, target: '_blank', rel: 'noopener', style: { color: '#C84B32' } }, sec.linkText), sec.post
+      );
+    }
+    if (sec.t === 'dialog') {
+      return React.createElement('div', { key: idx, style: { borderLeft: '2px solid rgba(11,27,38,.15)', paddingLeft: 16, margin: '0 0 20px' } },
+        React.createElement('div', { style: { fontFamily: MK, fontSize: 10, letterSpacing: '.16em', textTransform: 'uppercase', color: sec.who === 'NATE' ? '#1B4066' : '#C84B32', marginBottom: 6, fontWeight: 600 } }, sec.who),
+        React.createElement('p', { style: { fontFamily: SS, fontSize: 16, lineHeight: 1.7, color: '#0B1B26', margin: 0, textWrap: 'pretty', whiteSpace: 'pre-line' } }, sec.x)
+      );
+    }
+    if (sec.t === 'refs') {
+      return React.createElement('ol', { key: idx, style: { margin: '0 0 8px', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 } },
+        ...sec.items.map((it, j) => React.createElement('li', { key: j, style: { display: 'flex', gap: 10, alignItems: 'flex-start' } },
+          React.createElement('span', { style: { fontFamily: MK, fontSize: 11, color: '#C84B32', flexShrink: 0, marginTop: 1 } }, (j + 1) + '.'),
+          React.createElement('span', { style: { fontFamily: SS, fontSize: 13, lineHeight: 1.55, color: 'rgba(11,27,38,.6)' } }, it)
+        ))
+      );
+    }
+    return null;
+  }
 
   renderVals() {
     const MK = 'JetBrains Mono, monospace';
@@ -175,43 +661,44 @@ class Component extends DCLogic {
     const SS = "'Source Serif 4', Georgia, serif";
 
     const posts = React.createElement('div', null,
-      ...Component._posts.map((p, i) => React.createElement('div', {
-        key: p.id, id: p.id,
-        style: { border: '1.5px solid #0B1B26', background: '#FBF6EA', marginBottom: 16, scrollMarginTop: 90 }
-      },
-        // Header (toggle)
-        React.createElement('button', {
-          onClick: (e) => {
-            const wrap = e.currentTarget.parentNode;
-            const body = wrap.querySelector('.cl-post-body');
-            const arrow = e.currentTarget.querySelector('.cl-post-arrow');
-            const open = body.style.display === 'block';
-            body.style.display = open ? 'none' : 'block';
-            arrow.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
-          },
-          style: { width: '100%', textAlign: 'left', background: 'transparent', border: 'none', cursor: 'pointer', padding: '26px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20 }
+      ...Component._posts.map((p, i) => {
+        const byline = 'By ' + p.writer + ' · ' + p.date + (p.updated ? ' (Updated ' + p.updated + ')' : '') + ' · ' + p.readTime;
+        return React.createElement('div', {
+          key: p.id, id: p.id,
+          style: { border: '1.5px solid #0B1B26', background: '#FBF6EA', marginBottom: 16, scrollMarginTop: 90 }
         },
-          React.createElement('div', null,
-            React.createElement('div', { style: { fontFamily: MK, fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', color: '#C84B32', marginBottom: 8 } }, 'Prescribed Dose · No. ' + p.n),
-            React.createElement('div', { style: { fontFamily: FR, fontSize: 24, fontWeight: 500, lineHeight: 1.15, letterSpacing: '-.015em', color: '#0B1B26' } }, p.title)
+          // Header (toggle)
+          React.createElement('button', {
+            onClick: (e) => {
+              const wrap = e.currentTarget.parentNode;
+              const body = wrap.querySelector('.cl-post-body');
+              const arrow = e.currentTarget.querySelector('.cl-post-arrow');
+              const open = body.style.display === 'block';
+              body.style.display = open ? 'none' : 'block';
+              arrow.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
+            },
+            style: { width: '100%', textAlign: 'left', background: 'transparent', border: 'none', cursor: 'pointer', padding: '28px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20 }
+          },
+            React.createElement('div', null,
+              React.createElement('div', { style: { fontFamily: MK, fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', color: '#C84B32', marginBottom: 10 } }, 'Prescribed Dose · No. ' + p.n),
+              React.createElement('div', { style: { fontFamily: FR, fontSize: 'clamp(24px,3.4vw,34px)', fontWeight: 600, lineHeight: 1.12, letterSpacing: '-.018em', color: '#0B1B26', marginBottom: 10 } }, p.title),
+              p.subtitle ? React.createElement('div', { style: { fontFamily: SS, fontStyle: 'italic', fontSize: 15, color: '#C84B32', marginBottom: 8 } }, p.subtitle) : null,
+              React.createElement('div', { style: { fontFamily: MK, fontSize: 10, letterSpacing: '.1em', color: 'rgba(11,27,38,.5)' } }, byline)
+            ),
+            React.createElement('span', { className: 'cl-post-arrow', style: { flexShrink: 0, transition: 'transform .25s ease', color: '#C84B32', lineHeight: 0 } },
+              React.createElement('svg', { width: 22, height: 22, viewBox: '0 0 22 22', fill: 'none' },
+                React.createElement('path', { d: 'M5 8l6 6 6-6', stroke: '#C84B32', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' })
+              )
+            )
           ),
-          React.createElement('span', { className: 'cl-post-arrow', style: { flexShrink: 0, transition: 'transform .25s ease', color: '#C84B32', lineHeight: 0 } },
-            React.createElement('svg', { width: 22, height: 22, viewBox: '0 0 22 22', fill: 'none' },
-              React.createElement('path', { d: 'M5 8l6 6 6-6', stroke: '#C84B32', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' })
+          // Body
+          React.createElement('div', { className: 'cl-post-body', style: { padding: '0 28px 34px' } },
+            React.createElement('div', { style: { borderTop: '1px solid rgba(11,27,38,.12)', paddingTop: 24 } },
+              ...p.sections.map((sec, j) => Component._renderSection(sec, j))
             )
           )
-        ),
-        // Body
-        React.createElement('div', { className: 'cl-post-body', style: { padding: '0 28px 30px' } },
-          React.createElement('div', { style: { borderTop: '1px solid rgba(11,27,38,.12)', paddingTop: 22 } },
-            (p.body && p.body.length)
-              ? p.body.map((para, j) => (para && para.h)
-                  ? React.createElement('div', { key: j, style: { fontFamily: FR, fontSize: 20, fontWeight: 500, letterSpacing: '-.01em', color: '#0B1B26', margin: '22px 0 10px' } }, para.h)
-                  : React.createElement('p', { key: j, style: { fontFamily: SS, fontSize: 17, lineHeight: 1.72, color: '#0B1B26', margin: '0 0 18px', textWrap: 'pretty' } }, para))
-              : React.createElement('p', { style: { fontFamily: SS, fontSize: 16, lineHeight: 1.7, color: 'rgba(11,27,38,.55)', margin: 0, fontStyle: 'italic' } }, 'Article text is being migrated from our previous site and will appear here shortly.')
-          )
-        )
-      ))
+        );
+      })
     );
     return { posts };
   }
