@@ -413,16 +413,19 @@ function _capIconFigure(s) {
     +'</g>';
 }
 
-// ── Hero capsule — static SVG scene (choreographed by GSAP timeline) ─────────
+// ── Hero capsule — logo-accurate SVG scene (choreographed by GSAP timeline) ──
+// Square viewBox (1000x1000) matches the logo PNG's object-fit:contain box, so
+// the finished frame overlays the real logo 1:1 for a seamless cross-fade.
 
+var HERO_MOUTH = { x: 300, y: 500 };
 var HERO_ICONS = [
-  { fn:_capIconDumbbell, x:330, y:436, s:1.20 },
-  { fn:_capIconApple,    x:432, y:286, s:1.28 },
-  { fn:_capIconBooks,    x:518, y:302, s:1.22 },
-  { fn:_capIconSun,      x:602, y:266, s:1.12 },
-  { fn:_capIconPalette,  x:548, y:392, s:1.18 },
-  { fn:_capIconHeart,    x:676, y:346, s:1.24 },
-  { fn:_capIconFigure,   x:772, y:236, s:1.30 }
+  { fn:_capIconDumbbell, x:300, y:470, s:1.15 },
+  { fn:_capIconApple,    x:352, y:408, s:1.45 },
+  { fn:_capIconBooks,    x:424, y:408, s:1.48 },
+  { fn:_capIconSun,      x:494, y:394, s:1.32 },
+  { fn:_capIconPalette,  x:552, y:440, s:1.42 },
+  { fn:_capIconHeart,    x:650, y:418, s:1.52 },
+  { fn:_capIconFigure,   x:744, y:354, s:1.72 }
 ];
 
 function buildHeroSVG() {
@@ -430,44 +433,41 @@ function buildHeroSVG() {
   for (var i=0;i<HERO_ICONS.length;i++){
     var ic=HERO_ICONS[i];
     icons += '<g class="hg-icon-pos" transform="translate('+ic.x+','+ic.y+')">'
-           +   '<g class="hg-icon" data-i="'+i+'">'
-           +     '<g class="hg-icon-bob">'
-           +       '<g transform="scale('+ic.s+')">'+ic.fn(1)+'</g>'
-           +     '</g>'
-           +   '</g>'
+           +   '<g class="hg-icon" data-i="'+i+'"><g class="hg-icon-bob"><g transform="scale('+ic.s+')">'+ic.fn(1)+'</g></g></g>'
            + '</g>';
   }
   return ''
-  + '<svg width="100%" height="100%" viewBox="0 0 960 660" preserveAspectRatio="xMidYMid meet" style="display:block; overflow:visible;">'
+  + '<svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" style="display:block; overflow:visible;">'
   +   '<defs>'
-  +     '<linearGradient id="hg-blue" x1="6%" y1="0%" x2="78%" y2="100%"><stop offset="0%" stop-color="#223A8E"/><stop offset="55%" stop-color="#1466B4"/><stop offset="100%" stop-color="#0C9BD6"/></linearGradient>'
-  +     '<linearGradient id="hg-pink" x1="10%" y1="0%" x2="82%" y2="100%"><stop offset="0%" stop-color="#D6166A"/><stop offset="52%" stop-color="#F0455A"/><stop offset="100%" stop-color="#FC5C33"/></linearGradient>'
-  +     '<radialGradient id="hg-mouth" cx="50%" cy="34%" r="72%"><stop offset="0%" stop-color="#B01050"/><stop offset="100%" stop-color="#7E0C3E"/></radialGradient>'
-  +     '<radialGradient id="hg-ao" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(11,11,20,0.34)"/><stop offset="100%" stop-color="rgba(11,11,20,0)"/></radialGradient>'
-  +     '<radialGradient id="hg-contact" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(18,18,34,0.24)"/><stop offset="66%" stop-color="rgba(18,18,34,0.09)"/><stop offset="100%" stop-color="rgba(18,18,34,0)"/></radialGradient>'
-  +     '<linearGradient id="hg-teal" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#C7FBEF"/><stop offset="45%" stop-color="#5AF0D0"/><stop offset="100%" stop-color="#2BB6C7"/></linearGradient>'
-  +     '<linearGradient id="hg-glint" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="rgba(255,255,255,0.92)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></linearGradient>'
-  +     '<filter id="hg-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4.5"/></filter>'
-  +     '<filter id="hg-soft2" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="11"/></filter>'
+  +     '<linearGradient id="hg-blue" x1="10%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#223A8E"/><stop offset="55%" stop-color="#1466B4"/><stop offset="100%" stop-color="#0C9BD6"/></linearGradient>'
+  +     '<linearGradient id="hg-pink" x1="12%" y1="0%" x2="84%" y2="100%"><stop offset="0%" stop-color="#D6166A"/><stop offset="52%" stop-color="#F0455A"/><stop offset="100%" stop-color="#FC5C33"/></linearGradient>'
+  +     '<radialGradient id="hg-mouth" cx="50%" cy="36%" r="72%"><stop offset="0%" stop-color="#B01050"/><stop offset="100%" stop-color="#7E0C3E"/></radialGradient>'
+  +     '<radialGradient id="hg-ao" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(11,11,20,0.32)"/><stop offset="100%" stop-color="rgba(11,11,20,0)"/></radialGradient>'
+  +     '<radialGradient id="hg-contact" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(18,18,34,0.22)"/><stop offset="66%" stop-color="rgba(18,18,34,0.08)"/><stop offset="100%" stop-color="rgba(18,18,34,0)"/></radialGradient>'
+  +     '<linearGradient id="hg-teal" gradientUnits="userSpaceOnUse" x1="290" y1="0" x2="805" y2="0"><stop offset="0%" stop-color="#33CFB8"/><stop offset="38%" stop-color="#7FE3CB"/><stop offset="74%" stop-color="#E6B0CD"/><stop offset="100%" stop-color="#ECCBE6"/></linearGradient>'
+  +     '<linearGradient id="hg-glint" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="rgba(255,255,255,0.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></linearGradient>'
+  +     '<filter id="hg-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>'
+  +     '<filter id="hg-soft2" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="10"/></filter>'
   +   '</defs>'
-  +   '<ellipse id="hg-shadow" cx="290" cy="527" rx="108" ry="22" fill="url(#hg-contact)" filter="url(#hg-soft2)"/>'
-  +   '<g id="hg-body">'
-  +     '<path d="M204,330 L204,399 A86,86 0 0 0 376,399 L376,330 Z" fill="url(#hg-pink)"/>'
-  +     '<path d="M212,346 Q206,404 240,432" fill="none" stroke="url(#hg-glint)" stroke-width="10" stroke-linecap="round" opacity="0.42" filter="url(#hg-soft)"/>'
-  +     '<path d="M204,330 L204,399 A86,86 0 0 0 376,399 L376,330 Z" fill="none" stroke="#FFB59C" stroke-width="2.4" opacity="0.5"/>'
-  +   '</g>'
-  +   '<ellipse id="hg-mouth-rim" cx="290" cy="330" rx="82" ry="17" fill="url(#hg-mouth)" opacity="0"/>'
-  +   '<ellipse id="hg-seam" cx="290" cy="330" rx="88" ry="13" fill="url(#hg-ao)" opacity="0"/>'
-  +   '<g id="hg-cap">'
-  +     '<path d="M204,330 L204,261 A86,86 0 0 1 376,261 L376,330 Z" fill="url(#hg-blue)"/>'
-  +     '<path d="M216,318 Q210,252 252,224 Q288,204 326,214" fill="none" stroke="url(#hg-glint)" stroke-width="13" stroke-linecap="round" opacity="0.5" filter="url(#hg-soft)"/>'
-  +     '<path d="M204,330 L204,261 A86,86 0 0 1 376,261 L376,330 Z" fill="none" stroke="#7FD8F7" stroke-width="2.4" opacity="0.5"/>'
-  +     '<ellipse id="hg-glint-dot" cx="258" cy="250" rx="17" ry="7.5" fill="rgba(255,255,255,0.82)" filter="url(#hg-soft)" transform="rotate(-34 258 250)"/>'
-  +   '</g>'
-  +   '<g id="hg-lines">'
-  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M300,330 C420,300 540,278 792,286" fill="none" stroke="url(#hg-teal)" stroke-width="4.6" stroke-linecap="round"/>'
-  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M298,340 C430,332 560,326 806,320" fill="none" stroke="url(#hg-teal)" stroke-width="3.6" stroke-linecap="round" opacity="0.9"/>'
-  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M300,320 C410,270 536,236 792,236" fill="none" stroke="url(#hg-teal)" stroke-width="3.1" stroke-linecap="round" opacity="0.8"/>'
+  +   '<ellipse id="hg-shadow" cx="282" cy="632" rx="86" ry="18" fill="url(#hg-contact)" filter="url(#hg-soft2)"/>'
+  +   '<g class="hg-body-pos" transform="translate(246,548)"><g id="hg-body">'
+  +     '<path d="M-60,-46 L-60,44 A60,66 0 0 0 60,44 L60,-46 Z" fill="url(#hg-pink)"/>'
+  +     '<ellipse id="hg-mouth" cx="0" cy="-46" rx="60" ry="16" fill="url(#hg-mouth)" opacity="0"/>'
+  +     '<path d="M-48,-30 Q-56,30 -22,60" fill="none" stroke="url(#hg-glint)" stroke-width="9" stroke-linecap="round" opacity="0.4" filter="url(#hg-soft)"/>'
+  +     '<path d="M-60,-46 L-60,44 A60,66 0 0 0 60,44 L60,-46" fill="none" stroke="#FFB59C" stroke-width="2.2" opacity="0.5"/>'
+  +   '</g></g>'
+  +   '<ellipse id="hg-seam" cx="285" cy="494" rx="66" ry="12" fill="url(#hg-ao)" opacity="0"/>'
+  +   '<g class="hg-cap-pos" transform="translate(202,428)"><g id="hg-cap">'
+  +     '<path d="M-58,-70 A58,58 0 0 1 58,-70 L58,58 A58,58 0 0 1 -58,58 Z" fill="url(#hg-blue)"/>'
+  +     '<path d="M-44,40 Q-58,-30 -18,-60 Q6,-78 34,-70" fill="none" stroke="url(#hg-glint)" stroke-width="12" stroke-linecap="round" opacity="0.5" filter="url(#hg-soft)"/>'
+  +     '<path d="M-58,-70 A58,58 0 0 1 58,-70 L58,58 A58,58 0 0 1 -58,58 Z" fill="none" stroke="#7FD8F7" stroke-width="2.2" opacity="0.5"/>'
+  +   '</g></g>'
+  +   '<g id="hg-lines" fill="none" stroke="url(#hg-teal)" stroke-linecap="round">'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="4.4" d="M300,500 C405,468 548,442 802,392"/>'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="3.6" d="M298,506 C416,496 562,468 810,418"/>'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="3.2" d="M300,494 C406,450 548,408 804,360"/>'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="2.9" d="M300,510 C436,514 572,498 814,442"/>'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="2.7" d="M301,489 C412,430 552,382 802,340"/>'
   +   '</g>'
   +   '<g id="hg-icons">'+icons+'</g>'
   +   '</svg>';
@@ -555,7 +555,6 @@ class Component extends DCLogic {
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var hasGSAP = !!(window.gsap && window.ScrollTrigger);
     if (reduce || !hasGSAP) {
-      // Static fallback: no motion, no pin — just the finished logo.
       root.style.display = 'none';
       if (logo) logo.style.opacity = '1';
       if (hint) hint.style.opacity = '0';
@@ -567,18 +566,19 @@ class Component extends DCLogic {
     var isMobile = window.matchMedia('(max-width: 820px)').matches;
 
     var q = function(sel){ return root.querySelector(sel); };
-    var cap = q('#hg-cap'), mouth = q('#hg-mouth-rim'), seam = q('#hg-seam'),
-        shadow = q('#hg-shadow'), glint = q('#hg-glint-dot');
+    var cap = q('#hg-cap'), body = q('#hg-body'), mouth = q('#hg-mouth'),
+        seam = q('#hg-seam'), shadow = q('#hg-shadow');
     var lines = root.querySelectorAll('.hg-line');
     var icons = root.querySelectorAll('.hg-icon');
-    var bobs  = root.querySelectorAll('.hg-icon-bob');
 
-    var mouthX = 298, mouthY = 330;
-    gsap.set(lines, { strokeDasharray: 1, strokeDashoffset: 1 });
+    // Closed / hidden starting states
+    gsap.set(cap,    { x: 78, y: 54, rotation: 18, transformOrigin: '50% 50%' });
+    gsap.set(body,   { rotation: -8, transformOrigin: '50% 62%' });
     gsap.set(shadow, { transformOrigin: '50% 50%' });
+    gsap.set(lines,  { strokeDasharray: 1, strokeDashoffset: 1 });
     icons.forEach(function(g){
       var ic = HERO_ICONS[+g.getAttribute('data-i')];
-      gsap.set(g, { x: mouthX - ic.x, y: mouthY - ic.y, scale: 0.25, autoAlpha: 0, transformOrigin: '50% 50%' });
+      gsap.set(g, { x: HERO_MOUTH.x - ic.x, y: HERO_MOUTH.y - ic.y, scale: 0.18, autoAlpha: 0, transformOrigin: '50% 50%' });
     });
 
     var tl = gsap.timeline({
@@ -586,7 +586,7 @@ class Component extends DCLogic {
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
-        end: '+=' + (isMobile ? 150 : 190) + '%',
+        end: '+=' + (isMobile ? 150 : 200) + '%',
         pin: true,
         scrub: 0.6,
         anticipatePin: 1,
@@ -596,29 +596,23 @@ class Component extends DCLogic {
     });
     self._heroST = tl.scrollTrigger;
 
-    // Unhinge — blue cap swings open from the seam (weighted, no bounce)
-    tl.to(cap,    { rotation: -46, svgOrigin: '214 330', y: -4, ease: 'power4.out', duration: 0.28 }, 0.06);
-    tl.to(seam,   { opacity: 1, ease: 'power1.in',  duration: 0.07 }, 0.06);   // anticipation
-    tl.to(seam,   { opacity: 0, ease: 'power1.out', duration: 0.18 }, 0.14);
-    tl.to(mouth,  { opacity: 1, ease: 'power2.out', duration: 0.16 }, 0.14);
-    tl.to(shadow, { scaleX: 1.18, opacity: 0.85, ease: 'power2.out', duration: 0.28 }, 0.06);
-    // Teal lines draw themselves, staggered
-    tl.to(lines,  { strokeDashoffset: 0, ease: 'power2.out', duration: 0.24, stagger: 0.05 }, 0.28);
-    // Icons pour out of the mouth with a touch of overshoot
-    tl.to(icons,  { x: 0, y: 0, scale: 1, autoAlpha: 1, ease: 'back.out(1.6)', duration: 0.26, stagger: 0.035 }, 0.42);
-    // Cross-fade the SVG into the real logo (blur + scale)
-    tl.to(root,   { filter: 'blur(5px)', scale: 1.06, autoAlpha: 0, transformOrigin: '50% 50%', ease: 'power2.inOut', duration: 0.26 }, 0.60);
-    tl.fromTo(logo, { filter: 'blur(6px)', scale: 1.05, autoAlpha: 0 }, { filter: 'blur(0px)', scale: 1, autoAlpha: 1, transformOrigin: '50% 50%', ease: 'power2.inOut', duration: 0.26 }, 0.62);
-    // Hold on the finished logo
-    tl.to({}, { duration: 0.12 }, 0.88);
-
-    // Independent "life" loops (skipped on mobile for fewer simultaneous anims)
-    if (!isMobile) {
-      self._heroTweens.push(gsap.to(glint, { x: 34, y: -5, opacity: 0.4, duration: 2.6, ease: 'sine.inOut', repeat: -1, yoyo: true }));
-      bobs.forEach(function(el, i){
-        self._heroTweens.push(gsap.to(el, { y: (i % 2 ? -6 : -9), duration: 1.7 + i * 0.12, ease: 'sine.inOut', repeat: -1, yoyo: true, delay: i * 0.14 }));
-      });
-    }
+    // Cap unhinges and detaches to its logo position; body settles
+    tl.to(cap,    { x: 0, y: 0, rotation: -32, ease: 'power4.out', duration: 0.30 }, 0.06);
+    tl.to(body,   { rotation: -16, ease: 'power3.out', duration: 0.28 }, 0.06);
+    tl.to(seam,   { opacity: 1, ease: 'power1.in',  duration: 0.06 }, 0.06);
+    tl.to(seam,   { opacity: 0, ease: 'power1.out', duration: 0.16 }, 0.13);
+    tl.to(mouth,  { opacity: 1, ease: 'power2.out', duration: 0.16 }, 0.12);
+    tl.to(shadow, { scaleX: 0.66, y: -8, opacity: 0.28, ease: 'power2.out', duration: 0.30 }, 0.06);
+    // Teal lines grow out from the mouth, staggered
+    tl.to(lines,  { strokeDashoffset: 0, ease: 'power2.out', duration: 0.30, stagger: 0.045 }, 0.24);
+    // Icons emerge from the mouth, in pour order, into the exact logo layout
+    tl.to(icons,  { x: 0, y: 0, scale: 1, autoAlpha: 1, ease: 'back.out(1.5)', duration: 0.30, stagger: 0.035 }, 0.40);
+    // Brief hold so the SVG rests exactly as the logo before the fade
+    tl.to({}, { duration: 0.06 }, 0.70);
+    // Seamless matched cross-fade to the real logo (positions already align)
+    tl.to(root,   { autoAlpha: 0, ease: 'power1.inOut', duration: 0.15 }, 0.77);
+    tl.fromTo(logo, { autoAlpha: 0 }, { autoAlpha: 1, ease: 'power1.inOut', duration: 0.15 }, 0.77);
+    tl.to({}, { duration: 0.08 }, 0.92);
 
     if (logo && !logo.complete) logo.addEventListener('load', function(){ ScrollTrigger.refresh(); });
     setTimeout(function(){ ScrollTrigger.refresh(); }, 80);
