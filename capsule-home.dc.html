@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="site/assets/gsap.min.js"></script>
+<script src="site/assets/ScrollTrigger.min.js"></script>
 </head>
 <body>
 <x-dc>
@@ -86,11 +88,10 @@
     </div>
   </header>
 
-  <!-- ── Scroll-video hero wrapper (280vh = scroll zone) ── -->
-  <div id="cl-vidwrap" style="position:relative; height:280vh; padding-top:75px;">
-    <div style="position:sticky; top:75px; height:calc(100vh - 75px); overflow:hidden; background:radial-gradient(ellipse 160% 230% at 80% -10%, #FAF0DC 0%, #F5EFE2 58%);">
+  <!-- ── Scroll-scrubbed hero — pinned by ScrollTrigger over ~180vh ── -->
+  <section id="cl-hero" style="position:relative; height:100vh; overflow:hidden; display:flex; flex-direction:column; background:radial-gradient(ellipse 150% 220% at 78% -8%, #FFFDF8 0%, #F7F0E1 62%);">
       <!-- file header strip -->
-      <div style="max-width:1260px; margin:0 auto; padding:0 32px;">
+      <div class="cl-pad" style="max-width:1260px; margin:72px auto 0; width:100%; padding:0 32px;">
         <div style="display:flex; justify-content:space-between; align-items:baseline; padding:18px 0 14px; border-bottom:1px solid rgba(11,27,38,.12); flex-wrap:wrap; gap:8px;">
           <div style="display:flex; align-items:center; gap:9px;">
             <span style="width:7px; height:7px; background:#C84B32; display:inline-block;"></span>
@@ -100,7 +101,7 @@
         </div>
       </div>
       <!-- hero grid -->
-      <div style="max-width:1260px; margin:0 auto; padding:0 32px; display:grid; grid-template-columns:1fr 1.15fr; gap:40px; align-items:center; height:calc(100% - 56px);">
+      <div class="cl-2col cl-gap" style="flex:1; max-width:1260px; margin:0 auto; width:100%; padding:0 32px; display:grid; grid-template-columns:1fr 1.15fr; gap:40px; align-items:center;">
         <div>
           <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; margin-bottom:20px;">§ 01 — Premise</div>
           <h1 style="font-family:'Fraunces',serif; font-size:clamp(52px,6vw,96px); font-weight:500; line-height:.92; letter-spacing:-.035em; margin:0; color:#0B1B26;">From the lab<br />to the <span style="position:relative; display:inline-block;"><span class="cl-w1" style="font-family:'Fraunces',serif; font-size:clamp(52px,6vw,96px); font-weight:500; line-height:.92; letter-spacing:-.035em; white-space:nowrap;">living</span><span class="cl-w2" style="font-family:'Fraunces',serif; font-size:clamp(52px,6vw,96px); font-weight:500; line-height:.92; letter-spacing:-.035em; white-space:nowrap;">training</span><span class="cl-w3" style="font-family:'Fraunces',serif; font-size:clamp(52px,6vw,96px); font-weight:500; line-height:.92; letter-spacing:-.035em; white-space:nowrap;">class</span><span style="visibility:hidden; font-family:'Fraunces',serif; font-size:clamp(52px,6vw,96px); font-weight:500; line-height:.92; letter-spacing:-.035em;">training</span></span><br />room.</h1>
@@ -115,15 +116,14 @@
             </div>
           </div>
         </div>
-        <!-- animated logo column -->
-        <div id="cl-anim-col" style="position:relative; height:100%; max-height:720px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-          <div id="cl-anim-root" style="width:100%; height:100%; mix-blend-mode:multiply;"></div>
-          <img id="cl-logo-static" src="site/assets/Capsule logo for profile's.png" alt="CAPSuLe" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; transition:opacity 0.8s ease; pointer-events:none; mix-blend-mode:multiply;" />
-          <div id="cl-vid-hint" style="position:absolute; bottom:16px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:rgba(11,27,38,.35); white-space:nowrap; transition:opacity .4s; display:flex; flex-direction:column; align-items:center; gap:4px;">Scroll<svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:block;"><path d="M8 3v10M4 9l4 4 4-4" stroke="rgba(11,27,38,.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <!-- animated capsule column (SVG scrubbed by GSAP → cross-fades to real logo) -->
+        <div id="cl-anim-col" style="position:relative; height:100%; max-height:640px; min-height:340px; display:flex; align-items:center; justify-content:center; overflow:visible; will-change:transform, filter;">
+          <div id="cl-anim-root" style="width:100%; height:100%;"></div>
+          <img id="cl-logo-static" src="site/assets/Capsule logo for profile's.png" alt="CAPSuLe — Child and Adolescent Performance Science Laboratory" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; pointer-events:none; mix-blend-mode:multiply; will-change:opacity, filter, transform;" />
+          <div id="cl-vid-hint" style="position:absolute; bottom:8px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:rgba(11,27,38,.35); white-space:nowrap; transition:opacity .4s; display:flex; flex-direction:column; align-items:center; gap:4px;">Scroll<svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:block;"><path d="M8 3v10M4 9l4 4 4-4" stroke="rgba(11,27,38,.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
       </div>
-    </div>
-  </div>
+  </section>
 
   <!-- ── §03 Mission — warm parchment ── -->
   <section style="background:linear-gradient(150deg,#E6DDC9 0%,#E1D7C4 100%); border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden;">
@@ -413,114 +413,64 @@ function _capIconFigure(s) {
     +'</g>';
 }
 
-// ── Capsule logo animation — SVG scene builder ───────────────────────────────
+// ── Hero capsule — static SVG scene (choreographed by GSAP timeline) ─────────
 
-function buildCapsuleScene(t) {
-  var W=1280, H=720, CW=100, CH2=90, CR=50;
-  var CORAL1='#d61669', CORAL2='#fc5c33', BLUE1='#21367f', BLUE2='#0298ca', TEAL1='#5af0d0', TEAL2='#2bb6c7';
-  var lr=function(a,b,u){return a+(b-a)*u;};
-  var cl=function(u){return Math.max(0,Math.min(1,u));};
-  var eob=function(u){var c1=1.70158,c3=c1+1;return 1+c3*Math.pow(u-1,3)+c1*Math.pow(u-1,2);};
-  var eio=function(u){return u<0.5?4*u*u*u:(u-1)*(2*u-2)*(2*u-2)+1;};
-  var eos=function(u){return Math.sin((u*Math.PI)/2);};
-  var ez=function(raw,fn){return (fn||eio)(cl(raw));};
-  var n=function(v,d){return +(v.toFixed(d||2));};
+var HERO_ICONS = [
+  { fn:_capIconDumbbell, x:330, y:436, s:1.20 },
+  { fn:_capIconApple,    x:432, y:286, s:1.28 },
+  { fn:_capIconBooks,    x:518, y:302, s:1.22 },
+  { fn:_capIconSun,      x:602, y:266, s:1.12 },
+  { fn:_capIconPalette,  x:548, y:392, s:1.18 },
+  { fn:_capIconHeart,    x:676, y:346, s:1.24 },
+  { fn:_capIconFigure,   x:772, y:236, s:1.30 }
+];
 
-  var capScale=ez(t/0.7,eob);
-  var CX_A=W/2, CY_A=H/2-10, finalCX=172, finalCY=330;
-  var opening=ez((t-0.7)/1.3,eio), closing=ez((t-4.8)/1.2,eio);
-  var openFrac=Math.max(0,opening-closing);
-  var topDX=-28*openFrac, topDY=-112*openFrac, botDY=68*openFrac, topRot=-22*openFrac;
-  var settling=ez((t-5)/2.0,eio);
-  var capCX=lr(CX_A,finalCX,settling), capCY=lr(CY_A,finalCY,settling);
-  var TX=capCX+topDX, TY=capCY+topDY, BX=capCX, BY=capCY+botDY;
-  var arcP=ez((t-2.0)/1.6,eio);
-  var asx=capCX+8, asy=capCY-30;
-  var amx=lr(W*0.52,W*0.46,settling), amy=lr(H*0.18,H*0.16,settling);
-  var aex=W*0.85, aey=lr(H*0.40,H*0.34,settling);
-
-  var bquad=function(prog,sx,sy,mx,my,ex,ey){
-    var steps=80; var pts=[];
-    for(var i=0;i<=Math.round(steps*prog);i++){
-      var tp=i/steps;
-      var x=(1-tp)*(1-tp)*sx+2*(1-tp)*tp*mx+tp*tp*ex;
-      var y=(1-tp)*(1-tp)*sy+2*(1-tp)*tp*my+tp*tp*ey;
-      pts.push((i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1));
-    }
-    return pts.join(' ');
-  };
-  var qpt=function(tp,sx,sy,mx,my,ex,ey){return {
-    x:(1-tp)*(1-tp)*sx+2*(1-tp)*tp*mx+tp*tp*ex,
-    y:(1-tp)*(1-tp)*sy+2*(1-tp)*tp*my+tp*tp*ey
-  };};
-
-  var a1=bquad(arcP,asx,asy,amx,amy,aex,aey-18);
-  var a2=bquad(arcP,asx,asy+18,amx-2,amy+24,aex,aey+12);
-  var a3=bquad(arcP,asx,asy+34,amx+6,amy+46,aex,aey+32);
-
-  var ICONS=[
-    {fn:_capIconApple,   tp:0.10,t0:2.8},
-    {fn:_capIconBooks,   tp:0.24,t0:3.15},
-    {fn:_capIconSun,     tp:0.38,t0:3.45},
-    {fn:_capIconPalette, tp:0.52,t0:3.75},
-    {fn:_capIconHeart,   tp:0.65,t0:4.05},
-    {fn:_capIconDumbbell,tp:0.78,t0:4.35},
-    {fn:_capIconFigure,  tp:0.94,t0:4.65}
-  ];
-  var iconsSVG='';
-  ICONS.forEach(function(ic){
-    var s=ez((t-ic.t0)/0.45,eob);
-    if(s<=0) return;
-    var pt=qpt(ic.tp,asx,asy+12,amx-4,amy+18,aex,aey+6);
-    iconsSVG+='<g transform="translate('+pt.x.toFixed(1)+','+pt.y.toFixed(1)+')">'+ic.fn(+(s*1.05).toFixed(3))+'</g>';
-  });
-
-  var textP=ez((t-6.5)/1.2,eos), subtextP=ez((t-8.0)/1.0,eos);
-  var wX=600, wY=468;
-
-  var html='<svg width="100%" height="100%" viewBox="0 0 '+W+' '+H+'" style="display:block">';
-  html+='<defs>'
-    +'<linearGradient id="cl-gCoral" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="'+CORAL1+'"/><stop offset="100%" stop-color="'+CORAL2+'"/></linearGradient>'
-    +'<linearGradient id="cl-gBlue" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="'+BLUE1+'"/><stop offset="100%" stop-color="'+BLUE2+'"/></linearGradient>'
-    +'<linearGradient id="cl-gTeal" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="'+TEAL1+'"/><stop offset="100%" stop-color="'+TEAL2+'"/></linearGradient>'
-    +'<linearGradient id="cl-gTop" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="'+BLUE1+'"/><stop offset="100%" stop-color="'+BLUE2+'"/></linearGradient>'
-    +'<linearGradient id="cl-gBot" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="'+CORAL1+'"/><stop offset="100%" stop-color="'+CORAL2+'"/></linearGradient>'
-    +'<radialGradient id="cl-bgGlow" cx="50%" cy="45%" r="60%"><stop offset="0%" stop-color="#eef7ff"/><stop offset="100%" stop-color="#ffffff"/></radialGradient>'
-    +'<filter id="cl-shadow"><feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#00000028"/></filter>'
-    +'</defs>';
-  html+='<rect width="'+W+'" height="'+H+'" fill="#fff"/>';
-  html+='<rect width="'+W+'" height="'+H+'" fill="url(#cl-bgGlow)"/>';
-  if(arcP>0.01){
-    html+='<g opacity="0.9">'
-      +'<path d="'+a1+'" fill="none" stroke="url(#cl-gTeal)" stroke-width="7" stroke-linecap="round"/>'
-      +'<path d="'+a2+'" fill="none" stroke="url(#cl-gTeal)" stroke-width="5" stroke-linecap="round" opacity="0.75"/>'
-      +'<path d="'+a3+'" fill="none" stroke="url(#cl-gTeal)" stroke-width="3.5" stroke-linecap="round" opacity="0.55"/>'
-      +'</g>';
+function buildHeroSVG() {
+  var icons='';
+  for (var i=0;i<HERO_ICONS.length;i++){
+    var ic=HERO_ICONS[i];
+    icons += '<g class="hg-icon-pos" transform="translate('+ic.x+','+ic.y+')">'
+           +   '<g class="hg-icon" data-i="'+i+'">'
+           +     '<g class="hg-icon-bob">'
+           +       '<g transform="scale('+ic.s+')">'+ic.fn(1)+'</g>'
+           +     '</g>'
+           +   '</g>'
+           + '</g>';
   }
-  html+='<g>'+iconsSVG+'</g>';
-  html+='<g transform="translate('+n(capCX)+','+n(capCY)+') scale('+n(capScale,4)+') translate('+n(-capCX)+','+n(-capCY)+')" filter="url(#cl-shadow)">';
-  html+='<g transform="translate('+n(TX)+','+n(TY)+') rotate('+n(topRot,3)+',0,0)">'
-    +'<rect x="'+(-CR)+'" y="'+(-CH2)+'" width="'+CW+'" height="'+CH2+'" fill="url(#cl-gTop)"/>'
-    +'<ellipse cx="0" cy="'+(-CH2)+'" rx="'+CR+'" ry="'+n(CR*0.52)+'" fill="url(#cl-gTop)"/>'
-    +'<ellipse cx="'+n(-CR*0.3)+'" cy="'+n(-CH2+CR*0.22)+'" rx="'+n(CR*0.25)+'" ry="'+n(CR*0.13)+'" fill="rgba(255,255,255,0.5)" transform="rotate(-15,'+n(-CR*0.3)+','+n(-CH2+CR*0.22)+')"/>'
-    +'</g>';
-  html+='<g transform="translate('+n(BX)+','+n(BY)+')">'
-    +'<rect x="'+(-CR)+'" y="0" width="'+CW+'" height="'+CH2+'" fill="url(#cl-gBot)"/>'
-    +'<ellipse cx="0" cy="'+CH2+'" rx="'+CR+'" ry="'+n(CR*0.52)+'" fill="url(#cl-gBot)"/>'
-    +'<ellipse cx="'+n(-CR*0.3)+'" cy="'+n(CR*0.2)+'" rx="'+n(CR*0.25)+'" ry="'+n(CR*0.13)+'" fill="rgba(255,255,255,0.4)" transform="rotate(-15,'+n(-CR*0.3)+','+n(CR*0.2)+')"/>'
-    +'</g>';
-  html+='</g>';
-  if(textP>0){
-    var sc=n(0.72+0.28*textP,4);
-    html+='<g opacity="'+n(textP,4)+'" transform="translate('+wX+','+wY+') scale('+sc+') translate('+(-wX)+','+(-wY)+')">'
-      +'<text x="'+wX+'" y="'+wY+'" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="900" font-size="108" letter-spacing="5" fill="url(#cl-gCoral)">CAPS<tspan font-size="80" dy="10">u</tspan><tspan font-size="108" dy="-10">Le</tspan></text>'
-      +'</g>';
-  }
-  if(subtextP>0){
-    html+='<text x="'+wX+'" y="'+(wY+52)+'" text-anchor="middle" opacity="'+n(subtextP,4)+'" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="400" font-size="21" letter-spacing="3" fill="url(#cl-gBlue)">Child and Adolescent Performance Science Laboratory</text>';
-  }
-  html+='</svg>';
-  return html;
+  return ''
+  + '<svg width="100%" height="100%" viewBox="0 0 960 660" preserveAspectRatio="xMidYMid meet" style="display:block; overflow:visible;">'
+  +   '<defs>'
+  +     '<linearGradient id="hg-blue" x1="6%" y1="0%" x2="78%" y2="100%"><stop offset="0%" stop-color="#223A8E"/><stop offset="55%" stop-color="#1466B4"/><stop offset="100%" stop-color="#0C9BD6"/></linearGradient>'
+  +     '<linearGradient id="hg-pink" x1="10%" y1="0%" x2="82%" y2="100%"><stop offset="0%" stop-color="#D6166A"/><stop offset="52%" stop-color="#F0455A"/><stop offset="100%" stop-color="#FC5C33"/></linearGradient>'
+  +     '<radialGradient id="hg-mouth" cx="50%" cy="34%" r="72%"><stop offset="0%" stop-color="#B01050"/><stop offset="100%" stop-color="#7E0C3E"/></radialGradient>'
+  +     '<radialGradient id="hg-ao" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(11,11,20,0.34)"/><stop offset="100%" stop-color="rgba(11,11,20,0)"/></radialGradient>'
+  +     '<radialGradient id="hg-contact" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(18,18,34,0.24)"/><stop offset="66%" stop-color="rgba(18,18,34,0.09)"/><stop offset="100%" stop-color="rgba(18,18,34,0)"/></radialGradient>'
+  +     '<linearGradient id="hg-teal" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#C7FBEF"/><stop offset="45%" stop-color="#5AF0D0"/><stop offset="100%" stop-color="#2BB6C7"/></linearGradient>'
+  +     '<linearGradient id="hg-glint" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="rgba(255,255,255,0.92)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></linearGradient>'
+  +     '<filter id="hg-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4.5"/></filter>'
+  +     '<filter id="hg-soft2" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="11"/></filter>'
+  +   '</defs>'
+  +   '<ellipse id="hg-shadow" cx="290" cy="527" rx="108" ry="22" fill="url(#hg-contact)" filter="url(#hg-soft2)"/>'
+  +   '<g id="hg-body">'
+  +     '<path d="M204,330 L204,399 A86,86 0 0 0 376,399 L376,330 Z" fill="url(#hg-pink)"/>'
+  +     '<path d="M212,346 Q206,404 240,432" fill="none" stroke="url(#hg-glint)" stroke-width="10" stroke-linecap="round" opacity="0.42" filter="url(#hg-soft)"/>'
+  +     '<path d="M204,330 L204,399 A86,86 0 0 0 376,399 L376,330 Z" fill="none" stroke="#FFB59C" stroke-width="2.4" opacity="0.5"/>'
+  +   '</g>'
+  +   '<ellipse id="hg-mouth-rim" cx="290" cy="330" rx="82" ry="17" fill="url(#hg-mouth)" opacity="0"/>'
+  +   '<ellipse id="hg-seam" cx="290" cy="330" rx="88" ry="13" fill="url(#hg-ao)" opacity="0"/>'
+  +   '<g id="hg-cap">'
+  +     '<path d="M204,330 L204,261 A86,86 0 0 1 376,261 L376,330 Z" fill="url(#hg-blue)"/>'
+  +     '<path d="M216,318 Q210,252 252,224 Q288,204 326,214" fill="none" stroke="url(#hg-glint)" stroke-width="13" stroke-linecap="round" opacity="0.5" filter="url(#hg-soft)"/>'
+  +     '<path d="M204,330 L204,261 A86,86 0 0 1 376,261 L376,330 Z" fill="none" stroke="#7FD8F7" stroke-width="2.4" opacity="0.5"/>'
+  +     '<ellipse id="hg-glint-dot" cx="258" cy="250" rx="17" ry="7.5" fill="rgba(255,255,255,0.82)" filter="url(#hg-soft)" transform="rotate(-34 258 250)"/>'
+  +   '</g>'
+  +   '<g id="hg-lines">'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M300,330 C420,300 540,278 792,286" fill="none" stroke="url(#hg-teal)" stroke-width="4.6" stroke-linecap="round"/>'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M298,340 C430,332 560,326 806,320" fill="none" stroke="url(#hg-teal)" stroke-width="3.6" stroke-linecap="round" opacity="0.9"/>'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M300,320 C410,270 536,236 792,236" fill="none" stroke="url(#hg-teal)" stroke-width="3.1" stroke-linecap="round" opacity="0.8"/>'
+  +   '</g>'
+  +   '<g id="hg-icons">'+icons+'</g>'
+  +   '</svg>';
 }
 
 class Component extends DCLogic {
@@ -572,35 +522,8 @@ class Component extends DCLogic {
       modalBg.addEventListener('click', (e) => { if (e.target === modalBg) closeModal(); });
     }
 
-    // Animated logo — scroll-scrubbed (0→10 s over the full scroll zone)
-    const animRoot = document.getElementById('cl-anim-root');
-    const logoStatic = document.getElementById('cl-logo-static');
-    const wrap = document.getElementById('cl-vidwrap');
-    const hint = document.getElementById('cl-vid-hint');
-    const hintVisible = this.props.showScrollHint !== false;
-    if (hint && !hintVisible) hint.style.opacity = '0';
-
-    if (animRoot && wrap) {
-      // Start at t=0.7 so the pill is already fully formed on first paint
-      animRoot.innerHTML = buildCapsuleScene(0.7);
-
-      this._vu = () => {
-        const r = wrap.getBoundingClientRect();
-        const h = wrap.offsetHeight - window.innerHeight;
-        if (h <= 0) return;
-        const p = Math.max(0, Math.min(1, -r.top / h));
-        // Animation completes at 82 % scroll, holds complete from 82–92 %, then fades 92–100 %
-        const animT = Math.min(10, 0.7 + (p / 0.82) * 9.3);
-        const fp = Math.max(0, Math.min(1, (p - 0.92) / 0.08));
-        if (fp < 1) {
-          animRoot.innerHTML = buildCapsuleScene(animT);
-        }
-        animRoot.style.opacity = (1 - fp).toFixed(3);
-        if (logoStatic) logoStatic.style.opacity = fp.toFixed(3);
-        if (hint && hintVisible) hint.style.opacity = p > 0.05 ? '0' : '1';
-      };
-      window.addEventListener('scroll', this._vu, { passive: true });
-    }
+    // Capsule hero — GSAP scroll-scrubbed timeline
+    this._initHeroAnim();
 
     // IntersectionObserver scroll reveals
     this._obs = new IntersectionObserver(entries => {
@@ -617,9 +540,94 @@ class Component extends DCLogic {
     document.querySelectorAll('.cl-rv').forEach(el => this._obs.observe(el));
   }
 
+  _initHeroAnim() {
+    var root = document.getElementById('cl-anim-root');
+    var logo = document.getElementById('cl-logo-static');
+    var hero = document.getElementById('cl-hero');
+    var hint = document.getElementById('cl-vid-hint');
+    if (!root || !hero) return;
+    root.innerHTML = buildHeroSVG();
+    this._heroTweens = [];
+
+    var hintVisible = this.props.showScrollHint !== false;
+    if (hint && !hintVisible) hint.style.opacity = '0';
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hasGSAP = !!(window.gsap && window.ScrollTrigger);
+    if (reduce || !hasGSAP) {
+      // Static fallback: no motion, no pin — just the finished logo.
+      root.style.display = 'none';
+      if (logo) logo.style.opacity = '1';
+      if (hint) hint.style.opacity = '0';
+      return;
+    }
+
+    var self = this;
+    gsap.registerPlugin(ScrollTrigger);
+    var isMobile = window.matchMedia('(max-width: 820px)').matches;
+
+    var q = function(sel){ return root.querySelector(sel); };
+    var cap = q('#hg-cap'), mouth = q('#hg-mouth-rim'), seam = q('#hg-seam'),
+        shadow = q('#hg-shadow'), glint = q('#hg-glint-dot');
+    var lines = root.querySelectorAll('.hg-line');
+    var icons = root.querySelectorAll('.hg-icon');
+    var bobs  = root.querySelectorAll('.hg-icon-bob');
+
+    var mouthX = 298, mouthY = 330;
+    gsap.set(lines, { strokeDasharray: 1, strokeDashoffset: 1 });
+    gsap.set(shadow, { transformOrigin: '50% 50%' });
+    icons.forEach(function(g){
+      var ic = HERO_ICONS[+g.getAttribute('data-i')];
+      gsap.set(g, { x: mouthX - ic.x, y: mouthY - ic.y, scale: 0.25, autoAlpha: 0, transformOrigin: '50% 50%' });
+    });
+
+    var tl = gsap.timeline({
+      defaults: { ease: 'none' },
+      scrollTrigger: {
+        trigger: hero,
+        start: 'top top',
+        end: '+=' + (isMobile ? 150 : 190) + '%',
+        pin: true,
+        scrub: 0.6,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: function(st){ if (hint && hintVisible) hint.style.opacity = st.progress > 0.04 ? '0' : '1'; }
+      }
+    });
+    self._heroST = tl.scrollTrigger;
+
+    // Unhinge — blue cap swings open from the seam (weighted, no bounce)
+    tl.to(cap,    { rotation: -46, svgOrigin: '214 330', y: -4, ease: 'power4.out', duration: 0.28 }, 0.06);
+    tl.to(seam,   { opacity: 1, ease: 'power1.in',  duration: 0.07 }, 0.06);   // anticipation
+    tl.to(seam,   { opacity: 0, ease: 'power1.out', duration: 0.18 }, 0.14);
+    tl.to(mouth,  { opacity: 1, ease: 'power2.out', duration: 0.16 }, 0.14);
+    tl.to(shadow, { scaleX: 1.18, opacity: 0.85, ease: 'power2.out', duration: 0.28 }, 0.06);
+    // Teal lines draw themselves, staggered
+    tl.to(lines,  { strokeDashoffset: 0, ease: 'power2.out', duration: 0.24, stagger: 0.05 }, 0.28);
+    // Icons pour out of the mouth with a touch of overshoot
+    tl.to(icons,  { x: 0, y: 0, scale: 1, autoAlpha: 1, ease: 'back.out(1.6)', duration: 0.26, stagger: 0.035 }, 0.42);
+    // Cross-fade the SVG into the real logo (blur + scale)
+    tl.to(root,   { filter: 'blur(5px)', scale: 1.06, autoAlpha: 0, transformOrigin: '50% 50%', ease: 'power2.inOut', duration: 0.26 }, 0.60);
+    tl.fromTo(logo, { filter: 'blur(6px)', scale: 1.05, autoAlpha: 0 }, { filter: 'blur(0px)', scale: 1, autoAlpha: 1, transformOrigin: '50% 50%', ease: 'power2.inOut', duration: 0.26 }, 0.62);
+    // Hold on the finished logo
+    tl.to({}, { duration: 0.12 }, 0.88);
+
+    // Independent "life" loops (skipped on mobile for fewer simultaneous anims)
+    if (!isMobile) {
+      self._heroTweens.push(gsap.to(glint, { x: 34, y: -5, opacity: 0.4, duration: 2.6, ease: 'sine.inOut', repeat: -1, yoyo: true }));
+      bobs.forEach(function(el, i){
+        self._heroTweens.push(gsap.to(el, { y: (i % 2 ? -6 : -9), duration: 1.7 + i * 0.12, ease: 'sine.inOut', repeat: -1, yoyo: true, delay: i * 0.14 }));
+      });
+    }
+
+    if (logo && !logo.complete) logo.addEventListener('load', function(){ ScrollTrigger.refresh(); });
+    setTimeout(function(){ ScrollTrigger.refresh(); }, 80);
+  }
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this._sc);
-    if (this._vu) window.removeEventListener('scroll', this._vu);
+    if (this._heroST) this._heroST.kill();
+    if (this._heroTweens) this._heroTweens.forEach(function(t){ if (t) t.kill(); });
     if (this._obs) this._obs.disconnect();
   }
 }
