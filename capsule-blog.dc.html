@@ -70,7 +70,7 @@
     <div class="cl-pad" style="max-width:1260px; margin:0 auto; padding:0 32px; position:relative;">
       <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #0B1B26; padding-bottom:16px; margin-bottom:48px; flex-wrap:wrap; gap:8px;">
         <div style="display:flex; align-items:center; gap:9px;"><span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">PRX-DOSE · Research Blog</span></div>
-        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">09 posts</span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">10 posts</span>
       </div>
       <div class="cl-2col cl-gap" style="display:grid; grid-template-columns:1fr 1.4fr; gap:80px; align-items:flex-end;">
         <h1 class="cl-h1" style="font-family:'Fraunces',serif; font-size:80px; font-weight:500; line-height:.92; letter-spacing:-.03em; margin:0; color:#0B1B26;">Prescribed<br /><em style="color:#C84B32;">Dose.</em></h1>
@@ -156,6 +156,7 @@
 
 // ── Section builders ──────────────────────────────────────────────────────
 // p:   { t:'p', x } paragraph
+// strongp: { t:'strongp', x } bold paragraph (e.g. myth-busting lines)
 // h:   { t:'h', x } bold section heading (consistent across all posts)
 // sub: { t:'sub', x } bold audience/sub-heading
 // ul:  { t:'ul', items:[ str | {b,x} ] } bullet list, optional bold lead-in
@@ -167,7 +168,55 @@
 class Component extends DCLogic {
   static _posts = [
     {
-      id: 'can-sound-rewire-a-childs-brain', n: '01',
+      id: 'morning-routine-healthier-or-stressed', n: '01',
+      title: 'Is Your Morning Routine Making You Healthier or Just More Stressed?',
+      subtitle: 'Competitive Health and the Importance of Consistency Rather Than Perfection',
+      writer: 'Miller Kiser', date: 'Jul 10', readTime: '4 min read',
+      sections: [
+        { t:'p', x: `There is an abundance of social media content showing "perfect" mornings: waking up at 4:30AM, cold plunges, elaborate skincare, supplements, journaling, and productivity before sunrise. While these routines can be entertaining, they often create the impression that health is something earned through constant optimization. For many young people, this turns wellness into just another competition instead of something that should support daily life.` },
+        { t:'sub', x: 'Myth Busting' },
+        { t:'strongp', x: 'Myth: The healthiest people optimize every minute of every morning.' },
+        { t:'strongp', x: 'Bust: The healthiest morning routine is built on consistency, rather than perfection.' },
+        { t:'p', x: `Research shows that social media influencers have become one of the largest sources of health information for adolescents (Engel et al., 2024). This is problematic not because most influencers are encouraging necessarily unhealthy habits, but rather because algorithms reward the most extreme and attention-grabbing routines rather than the most evidence-based ones. This creates a very unrealistic expectation of a "healthy morning routine" in the minds of young people. It promotes competitive health and the idea that "missing one day" will prove disastrous to one's personal health. Comparatively, there is a plethora of research that shows that healthy habits are built through repetition and consistency, as opposed to perfect optimization. In 2010, a researcher, Phillippa Lally, and colleagues found that repeating a simple behavior in the same context gradually increased its automaticity, and missing a single day did not meaningfully interfere with the habit-forming process (Lally et al., 2010). With that in mind, a sustainable routine that you genuinely enjoy is far more likely to improve long-term health than an impossible checklist followed for only a few days.` },
+        { t:'h', x: 'Your Prescription to Start Today' },
+        { t:'p', x: `Whether you're a parent, teacher, coach, or some combination of those, a healthy morning routine is applicable to all. However, teachers and coaches, specifically, can use their unique relation to adolescents to encourage healthy morning and recovery habits, mitigating the effects of competitive health culture on young people.` },
+        { t:'sub', x: 'For Parents / Anyone' },
+        { t:'ul', items: [
+          `Attempt to fall asleep at roughly the same time every night. Furthermore, focus on a consistent wake-up time rather than an earlier one.`,
+          `Keep phones away during the first few minutes of the morning.`,
+          `Don't feel pressured to have an entire gym session before breakfast. Just move your body and get some sun. Make morning movement enjoyable, even if it's only a short walk outside. What you do at the start of your day impacts your health and energy the entire day ahead, as well as the rest you achieved the night prior (National Sleep Foundation, 2025).`,
+        ]},
+        { t:'sub', x: 'For Teachers' },
+        { t:'ul', items: [
+          `Speak with your students. Reinforce to them that sleep and consistency matter more than hustle culture.`,
+          `Encourage students to get outside before or during school when possible. Allow breaks to stretch and move their bodies.`,
+        ]},
+        { t:'sub', x: 'For Coaches' },
+        { t:'ul', items: [
+          `Prioritize hydration and recovery. While discipline and high work-ethics are both valuable traits, remind players to take it easy and allow themselves rest days so as to not over-exert or injure themselves.`,
+          `Promote routines that athletes can realistically maintain year-round.`,
+        ]},
+        { t:'sub', x: 'Summary (For All Who Work With Youth)' },
+        { t:'p', x: `A healthy morning can be surprisingly simple: wake up consistently, drink water, get daylight, move your body, and avoid immediately diving into social media.` },
+        { t:'h', x: 'The Mechanism: How Do We Know This Prescription Works?' },
+        { t:'p', x: `Morning sunlight activates specialized retinal cells that communicate with the brain's suprachiasmatic nucleus, helping regulate circadian rhythms, reduce melatonin, and increase daytime alertness (National Sleep Foundation, 2025). Even brief morning movement has been shown to improve mood, attention, and overall brain health through a variety of physiological mechanisms (Centers for Disease Control and Prevention, 2025). Delaying social media also reduces immediate exposure to comparison-driven content and gives the brain an opportunity to transition naturally into the day (Engel et al., 2024). Together, these evidence-based habits create a routine that is both realistic and biologically meaningful.` },
+        { t:'h', x: 'CAPSuLe for Global Change' },
+        { t:'p', x: `As wellness content becomes increasingly commercialized, it is important to teach young people that health should not be performed for an audience. Parents, teachers, coaches, and healthcare professionals can help shift the conversation away from optimization and toward sustainability. If we normalize simple, evidence-based habits instead of perfection, healthy routines become accessible to far more people.` },
+        { t:'h', x: 'References' },
+        { t:'refs', items: [
+          `Centers for Disease Control and Prevention. (2025, August 13). Physical activity boosts brain health. https://www.cdc.gov/physical-activity/features/boost-brain-health.html`,
+          `de Menezes-Júnior, L. A. A., et al. (2025). The role of sunlight in sleep regulation: Analysis of morning sunlight exposure and sleep quality. Sleep Science. https://pubmed.ncbi.nlm.nih.gov/41053799/`,
+          `Engel, E., Gell, S., Heiss, R., & Karsay, K. (2024). Social media influencers and adolescents' health: A scoping review of the research field. Social Science & Medicine, 340, 116387. https://doi.org/10.1016/j.socscimed.2023.116387`,
+          `Lally, P., van Jaarsveld, C. H. M., Potts, H. W. W., & Wardle, J. (2010). How are habits formed: Modelling habit formation in the real world. European Journal of Social Psychology, 40(6), 998–1009. https://doi.org/10.1002/ejsp.674`,
+          `National Institute for Occupational Safety and Health. (n.d.). Module 2: Effects of light on circadian rhythms. Centers for Disease Control and Prevention. https://www.cdc.gov/niosh/work-hour-training-for-nurses/longhours/mod2/19.html`,
+          `Sleep Foundation. (2025, July 7). Mastering sleep hygiene: Your path to quality sleep. https://www.sleepfoundation.org/sleep-hygiene`,
+          `Sletten, T. L., et al. (2023). The importance of sleep regularity: A consensus statement of the National Sleep Foundation sleep timing and variability panel. Sleep Health. https://www.sleephealthjournal.org/article/S2352-7218(23)00166-3/fulltext`,
+          `National Sleep Foundation. (2025, March 21). A healthy night's sleep starts the moment you wake up. https://www.thensf.org/a-healthy-nights-sleep-starts-the-moment-you-wake-up/`,
+        ]},
+      ],
+    },
+    {
+      id: 'can-sound-rewire-a-childs-brain', n: '02',
       title: "Can Sound Rewire a Child's Brain?",
       writer: 'Zachary Goldman', date: 'May 25', readTime: '4 min read',
       sections: [
@@ -213,7 +262,7 @@ class Component extends DCLogic {
       ],
     },
     {
-      id: 'germs-more-harm-than-good', n: '02',
+      id: 'germs-more-harm-than-good', n: '03',
       title: 'Is Protecting Children From Every Germ Doing More Harm Than Good?',
       writer: 'Lyra Tiffin', date: 'May 11', readTime: '4 min read',
       sections: [
@@ -261,7 +310,7 @@ class Component extends DCLogic {
       ],
     },
     {
-      id: 'moments-of-connection', n: '03',
+      id: 'moments-of-connection', n: '04',
       title: 'Can We Turn Simple Moments of Connection Into the Emotional Building Blocks Our Children Need to Thrive?',
       writer: 'Dr. Emily Smith', date: 'Apr 26', readTime: '5 min read',
       sections: [
@@ -301,7 +350,7 @@ class Component extends DCLogic {
       ],
     },
     {
-      id: 'resilience-biological-skill', n: '04',
+      id: 'resilience-biological-skill', n: '05',
       title: 'Can Resilience Be Taught as a Biological Skill?',
       writer: 'Matt', date: 'Apr 13', readTime: '4 min read',
       sections: [
@@ -346,7 +395,7 @@ class Component extends DCLogic {
       ],
     },
     {
-      id: 'teach-resilience-home-field-classroom', n: '05',
+      id: 'teach-resilience-home-field-classroom', n: '06',
       title: 'Can We Teach Resilience in the Home, on the Field, & in the Classroom?',
       writer: 'Nate Roy', date: 'Mar 30', readTime: '3 min read',
       sections: [
@@ -384,7 +433,7 @@ class Component extends DCLogic {
       ],
     },
     {
-      id: 'food-for-thought', n: '06',
+      id: 'food-for-thought', n: '07',
       title: 'Food for Thought: Preventing Picky and Disordered Eating',
       writer: 'Lyra Tiffin', date: 'Mar 9', readTime: '8 min read', updated: 'Mar 10',
       sections: [
@@ -463,7 +512,7 @@ class Component extends DCLogic {
       ],
     },
     {
-      id: 'brain-body-connection', n: '07',
+      id: 'brain-body-connection', n: '08',
       title: 'The Best of Both Worlds: Unpacking the Brain–Body Connection',
       writer: 'Nate Roy', date: 'Feb 23', readTime: '10 min read',
       subtitle: 'A conversation with Dr. Emily Smith, PhD',
@@ -503,7 +552,7 @@ class Component extends DCLogic {
       ],
     },
     {
-      id: 'weighting-to-lift', n: '08',
+      id: 'weighting-to-lift', n: '09',
       title: '(Weight)ing to Lift',
       writer: 'Ryan Radmard', date: 'Feb 11', readTime: '6 min read',
       subtitle: 'Why strength training is safe and smart for youth',
@@ -551,7 +600,7 @@ class Component extends DCLogic {
       ],
     },
     {
-      id: 'social-media-friend-or-foe', n: '09',
+      id: 'social-media-friend-or-foe', n: '10',
       title: 'Social Media: Friend or Foe to Youth Development?',
       writer: 'Dr. Emily Smith', date: 'Jan 27', readTime: '5 min read', updated: 'Feb 11',
       sections: [
@@ -613,6 +662,9 @@ class Component extends DCLogic {
     const SS = "'Source Serif 4', Georgia, serif";
     if (sec.t === 'p') {
       return React.createElement('p', { key: idx, style: { fontFamily: SS, fontSize: 17, lineHeight: 1.72, color: '#0B1B26', margin: '0 0 18px', textWrap: 'pretty', whiteSpace: 'pre-line' } }, sec.x);
+    }
+    if (sec.t === 'strongp') {
+      return React.createElement('p', { key: idx, style: { fontFamily: SS, fontSize: 17, lineHeight: 1.72, fontWeight: 700, color: '#0B1B26', margin: '0 0 12px', textWrap: 'pretty', whiteSpace: 'pre-line' } }, sec.x);
     }
     if (sec.t === 'h') {
       return React.createElement('div', { key: idx, style: { fontFamily: FR, fontSize: 'clamp(21px,2.6vw,27px)', fontWeight: 600, letterSpacing: '-.012em', color: '#0B1B26', margin: '38px 0 16px', paddingTop: 26, borderTop: '1px solid rgba(11,27,38,.15)' } }, sec.x);
