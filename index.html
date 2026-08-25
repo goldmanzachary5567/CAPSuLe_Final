@@ -1,11 +1,672 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=capsule-home.dc.html">
-  <title>CAPSuLe</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="site/assets/gsap.min.js"></script>
+<script src="site/assets/ScrollTrigger.min.js"></script>
 </head>
 <body>
-  <a href="capsule-home.dc.html">Click here if not redirected</a>
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after{box-sizing:border-box} html,body{margin:0;-webkit-font-smoothing:antialiased}
+    @keyframes cl-w1{0%,28%{opacity:1;transform:translateY(0)}36%,100%{opacity:0;transform:translateY(-24px)}}
+    @keyframes cl-w2{0%,28%{opacity:0;transform:translateY(24px)}36%,62%{opacity:1;transform:translateY(0)}70%,100%{opacity:0;transform:translateY(-24px)}}
+    @keyframes cl-w3{0%,62%{opacity:0;transform:translateY(24px)}70%,96%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-24px)}}
+    .cl-w1{position:absolute;top:0;left:0;animation:cl-w1 5.4s ease-in-out infinite;color:#C84B32;font-style:italic}
+    .cl-w2{position:absolute;top:0;left:0;animation:cl-w2 5.4s ease-in-out infinite;color:#C84B32;font-style:italic}
+    .cl-w3{position:absolute;top:0;left:0;animation:cl-w3 5.4s ease-in-out infinite;color:#C84B32;font-style:italic}
+    @keyframes cl-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .cl-logos-track{display:flex;gap:64px;align-items:center;animation:cl-scroll 28s linear infinite;width:max-content}
+    .cl-logos-track:hover{animation-play-state:paused}
+  
+    html{overflow-x:hidden;}
+    .cl-burger{display:none;}
+    .cl-mobmenu{display:none;}
+    @media (max-width:820px){
+      .cl-navlinks{display:none !important;}
+      .cl-navdonate{display:none !important;}
+      .cl-burger{display:flex !important;}
+      .cl-2col,.cl-3col,.cl-4col,.cl-5col{grid-template-columns:1fr !important;}
+      .cl-pad{padding-left:22px !important;padding-right:22px !important;}
+      .cl-gap{gap:32px !important;}
+      [style*="grid-template-columns: 1.2fr 1fr"],
+      [style*="grid-template-columns: 1fr 1.15fr"],
+      [style*="grid-template-columns: 1fr 1.3fr"],
+      [style*="grid-template-columns: 1fr 1.4fr"],
+      [style*="grid-template-columns: 1fr 1.6fr"],
+      [style*="grid-template-columns: 1fr 1.7fr"],
+      [style*="grid-template-columns: 1fr 1fr"],
+      [style*="grid-template-columns: repeat(3, 1fr)"],
+      [style*="grid-template-columns: repeat(4, 1fr)"],
+      [style*="grid-template-columns: repeat(5, 1fr)"],
+      [style*="grid-template-columns: 160px 1fr 1fr"],
+      [style*="grid-template-columns: 300px 1fr"],
+      [style*="grid-template-columns: 1.4fr 1fr 1fr 1fr"]{grid-template-columns:1fr !important;}
+      [style*="padding: 80px 32px"]{padding:52px 22px !important;}
+      [style*="padding: 0px 32px"]{padding-left:22px !important;padding-right:22px !important;}
+      [style*="font-size: 360px"]{font-size:120px !important;}
+      [style*="font-size: 88px"],[style*="font-size: 80px"],[style*="font-size: 72px"]{font-size:40px !important;}
+      [style*="font-size: 60px"],[style*="font-size: 56px"],[style*="font-size: 54px"],[style*="font-size: 52px"]{font-size:32px !important;}
+      [style*="font-size: 48px"]{font-size:29px !important;}
+      [style*="gap: 80px"]{gap:32px !important;}
+      [style*="gap: 64px"]{gap:28px !important;}
+      [style*="gap: 56px"]{gap:28px !important;}
+
+      /* Hero — compact the stacked layout so the pill animation fully fits in the 100vh pin */
+      #cl-hero-filestrip{display:none !important;}
+      #cl-hero-grid{padding-top:84px !important; gap:14px !important; align-content:start !important;}
+      #cl-hero-h1,#cl-hero-h1 .cl-w1,#cl-hero-h1 .cl-w2,#cl-hero-h1 .cl-w3,#cl-hero-h1 .cl-w-sizer{font-size:34px !important; line-height:1.1 !important;}
+      #cl-hero-mission{margin-top:14px !important;}
+      #cl-hero-mission > p{font-size:15px !important; line-height:1.45 !important;}
+      #cl-hero-mission > div:last-child{margin-top:14px !important;}
+      #cl-anim-col{height:220px !important; min-height:220px !important; max-height:220px !important;}
+    }
+  </style>
+</helmet>
+
+<div style="background:#F5EFE2; color:#0B1B26; font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;">
+
+  <!-- ── Sticky nav (hides on scroll-down, reappears on scroll-up) ── -->
+  <header id="cl-nav" style="position:fixed; top:0; left:0; right:0; z-index:50; background:#E8E2D1; border-bottom:1.5px solid #0B1B26; transition:transform .3s ease;">
+    <div style="max-width:1260px; margin:0 auto; padding:0 32px; height:72px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="index.html" style="display:flex; align-items:center; flex-shrink:0; text-decoration:none;">
+        <img src="site/assets/capsule-logo-nav.png" alt="CAPSuLe" style="height:46px; width:auto; display:block;" />
+      </a>
+      <nav class="cl-navlinks" style="display:flex; gap:28px; flex:1; justify-content:center;">
+        <a href="index.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; text-decoration:none;">Home</a>
+        <a href="capsule-about.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">About</a>
+        <a href="capsule-programs.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Programs</a>
+        <a href="capsule-blog.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Blog</a>
+        <a href="capsule-joinus.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Join Us</a>
+      </nav>
+      <a href="capsule-donate.dc.html" class="cl-navdonate" style="display:inline-flex; align-items:center; gap:8px; padding:10px 16px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; flex-shrink:0; transition:background .15s;" style-hover="background:#C84B32;">
+        <span style="width:5px; height:5px; border-radius:50%; background:#C84B32; display:inline-block;"></span>Donate
+      </a>
+    <button class="cl-burger" aria-label="Open menu" style="align-items:center; justify-content:center; width:44px; height:44px; background:transparent; border:1.5px solid #0B1B26; cursor:pointer; flex-shrink:0; padding:0;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 5h16M2 10h16M2 15h16" stroke="#0B1B26" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
+    <div id="cl-mobmenu" class="cl-mobmenu" style="flex-direction:column; border-top:1.5px solid #0B1B26; background:#E8E2D1;"><a href="index.html" style="padding:15px 24px; border-bottom:1px solid rgba(11,27,38,.12); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; text-decoration:none;">Home</a><a href="capsule-about.dc.html" style="padding:15px 24px; border-bottom:1px solid rgba(11,27,38,.12); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none;">About</a><a href="capsule-programs.dc.html" style="padding:15px 24px; border-bottom:1px solid rgba(11,27,38,.12); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none;">Programs</a><a href="capsule-blog.dc.html" style="padding:15px 24px; border-bottom:1px solid rgba(11,27,38,.12); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none;">Blog</a><a href="capsule-joinus.dc.html" style="padding:15px 24px; border-bottom:1px solid rgba(11,27,38,.12); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none;">Join Us</a><a href="capsule-donate.dc.html" style="padding:15px 24px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; text-decoration:none;">Donate</a></div>
+    
+    <div style="height:3px; background:rgba(11,27,38,.08); position:relative;">
+      <div id="cl-prog" style="position:absolute; left:0; top:0; height:100%; width:0; background:#C84B32; transition:width .12s linear;"></div>
+    </div>
+  </header>
+
+  <!-- ── Scroll-scrubbed hero — pinned by ScrollTrigger over ~180vh ── -->
+  <section id="cl-hero" style="position:relative; height:100vh; overflow:hidden; display:flex; flex-direction:column; background:radial-gradient(ellipse 150% 220% at 78% -8%, #FFFDF8 0%, #F7F0E1 62%);">
+      <!-- file header strip -->
+      <div id="cl-hero-filestrip" class="cl-pad" style="max-width:1260px; margin:72px auto 0; width:100%; padding:0 32px;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; padding:18px 0 14px; border-bottom:1px solid rgba(11,27,38,.12); flex-wrap:wrap; gap:8px;">
+          <div style="display:flex; align-items:center; gap:9px;">
+            <span style="width:7px; height:7px; background:#C84B32; display:inline-block;"></span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(11,27,38,.55);">No. 001 · The Child and Adolescent Performance Science Laboratory</span>
+          </div>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(11,27,38,.55);">File · CAPSL/2026/03 · Spring 2026</span>
+        </div>
+      </div>
+      <!-- hero grid -->
+      <div id="cl-hero-grid" class="cl-2col cl-gap" style="flex:1; max-width:1260px; margin:0 auto; width:100%; padding:0 32px; display:grid; grid-template-columns:1fr 1.15fr; gap:40px; align-items:center;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; margin-bottom:20px;">§ 01 — Premise</div>
+          <h1 id="cl-hero-h1" style="font-family:'Fraunces',serif; font-size:clamp(52px,6vw,96px); font-weight:500; line-height:.92; letter-spacing:-.035em; margin:0; color:#0B1B26;">From the lab<br />to the <span style="position:relative; display:inline-block;"><span class="cl-w1" style="font-family:'Fraunces',serif; font-size:clamp(52px,6vw,96px); font-weight:500; line-height:.92; letter-spacing:-.035em; white-space:nowrap;">living</span><span class="cl-w2" style="font-family:'Fraunces',serif; font-size:clamp(52px,6vw,96px); font-weight:500; line-height:.92; letter-spacing:-.035em; white-space:nowrap;">training</span><span class="cl-w3" style="font-family:'Fraunces',serif; font-size:clamp(52px,6vw,96px); font-weight:500; line-height:.92; letter-spacing:-.035em; white-space:nowrap;">class</span><span class="cl-w-sizer" style="visibility:hidden; font-family:'Fraunces',serif; font-size:clamp(52px,6vw,96px); font-weight:500; line-height:.92; letter-spacing:-.035em;">training</span></span><br />room.</h1>
+          <div id="cl-hero-mission" style="margin-top:32px; max-width:500px;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55); margin-bottom:12px;">§ 02 — Mission</div>
+            <p style="font-family:'Source Serif 4',Georgia,serif; font-size:18px; line-height:1.55; color:#0B1B26; margin:0; text-wrap:pretty;">CAPSuLe is a 501(c)(3) nonprofit that turns youth development research into real-world guidance for parents, educators, coaches, and anyone committed to helping young people thrive.</p>
+            <div style="display:flex; gap:12px; margin-top:28px; flex-wrap:wrap;">
+              <a href="capsule-programs.dc.html" style="display:inline-flex; align-items:center; gap:10px; padding:14px 22px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; transition:background .15s;" style-hover="background:#C84B32;">
+                <span style="width:6px; height:6px; border-radius:50%; background:#C84B32; display:inline-block;"></span>Our Programs
+              </a>
+              <a href="capsule-donate.dc.html" style="display:inline-flex; align-items:center; padding:13px 20px; border:1.5px solid #0B1B26; color:#0B1B26; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; transition:border-color .15s, color .15s;" style-hover="border-color:#C84B32; color:#C84B32;">Donate →</a>
+            </div>
+          </div>
+        </div>
+        <!-- animated capsule column (SVG scrubbed by GSAP → cross-fades to real logo) -->
+        <div id="cl-anim-col" style="position:relative; height:100%; max-height:640px; min-height:340px; display:flex; align-items:center; justify-content:center; overflow:visible; will-change:transform, filter;">
+          <div id="cl-anim-root" style="width:100%; height:100%;"></div>
+          <img id="cl-logo-static" src="site/assets/Capsule logo for profile's.png" alt="CAPSuLe — Child and Adolescent Performance Science Laboratory" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; pointer-events:none; mix-blend-mode:multiply; will-change:opacity, filter, transform;" />
+          <div id="cl-vid-hint" style="position:absolute; bottom:8px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:rgba(11,27,38,.35); white-space:nowrap; transition:opacity .4s; display:flex; flex-direction:column; align-items:center; gap:4px;">Scroll<svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:block;"><path d="M8 3v10M4 9l4 4 4-4" stroke="rgba(11,27,38,.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+  </section>
+
+  <!-- ── §03 Mission — warm parchment ── -->
+  <section style="background:linear-gradient(150deg,#E6DDC9 0%,#E1D7C4 100%); border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden;">
+    <div style="position:absolute; left:-36px; bottom:-80px; font-family:'Fraunces',serif; font-size:360px; font-weight:700; color:#0B1B26; opacity:.04; line-height:1; pointer-events:none; user-select:none; letter-spacing:-.06em;">03</div>
+    <div style="max-width:1260px; margin:0 auto; padding:80px 32px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid rgba(11,27,38,.3); padding-bottom:16px; margin-bottom:48px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:9px;">
+          <span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">§ 03 — Our Mission</span>
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">501(c)(3) Nonprofit · Est. 2024</span>
+      </div>
+      <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; margin-bottom:44px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:14px;">Mission Statement</div>
+        <p style="font-family:'Fraunces',serif; font-size:clamp(36px,4vw,54px); font-weight:500; line-height:1.06; letter-spacing:-.026em; color:#0B1B26; margin:0; text-wrap:pretty; max-width:900px;">To equip those who shape adolescent development with <em style="color:#C84B32;">actionable insights</em> grounded in science.</p>
+      </div>
+      <div class="cl-rv" data-d="120" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1fr 1.3fr; gap:64px; align-items:start;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">§ 02 — Founding</div>
+          <p style="font-family:'Fraunces',serif; font-size:26px; font-weight:500; line-height:1.2; letter-spacing:-.015em; color:#0B1B26; font-style:italic; margin:0 0 16px;">"Youth developmental trajectories are drowning in information, and starving for understanding."</p>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; color:rgba(11,27,38,.5);">— Nate Roy, Founder & Vision Director</div>
+        </div>
+        <div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:18px; line-height:1.65; color:#0B1B26; margin:0 0 20px; text-wrap:pretty;">We bring together researchers, clinicians, and community leaders to bridge disciplines and translate developmental research into meaningful practice. Together, we form a working alliance committed to advancing child and adolescent well-being.</p>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:16px; line-height:1.6; color:rgba(11,27,38,.65); margin:0 0 28px; text-wrap:pretty;">Our work spans documentary film, podcast, micro-courses, and a weekly research blog. Every format serves one goal: get the science to the people who can use it.</p>
+          <a href="capsule-about.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:#0B1B26; text-decoration:none; border-bottom:1px solid #0B1B26; padding-bottom:3px; transition:color .15s, border-color .15s;" style-hover="color:#C84B32; border-color:#C84B32;">Learn more about us →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Partner institutions auto-scroll ── -->
+  <section style="background:#F5EFE2; border-bottom:1.5px solid #0B1B26; padding:32px 0; overflow:hidden;">
+    <div style="max-width:1260px; margin:0 auto; padding:0 32px 18px;">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(11,27,38,.4);">Partner Institutions</span>
+    </div>
+    <div style="overflow:hidden; position:relative;">
+      <div class="cl-logos-track">
+        <img src="site/assets/harvard.png" alt="Harvard" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/cornell.png" alt="Cornell" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/columbia.webp" alt="Columbia" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/johns.png" alt="Johns Hopkins" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/penn.png" alt="UPenn" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/mcgill.png" alt="McGill" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/lecom.png" alt="LECOM" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/upmc.png" alt="UPMC" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/missisipi state.png" alt="Mississippi State" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <!-- duplicate for seamless loop -->
+        <img src="site/assets/harvard.png" alt="Harvard" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/cornell.png" alt="Cornell" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/columbia.webp" alt="Columbia" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/johns.png" alt="Johns Hopkins" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/penn.png" alt="UPenn" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/mcgill.png" alt="McGill" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/lecom.png" alt="LECOM" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/upmc.png" alt="UPMC" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+        <img src="site/assets/missisipi state.png" alt="Mississippi State" style="height:36px; width:auto; opacity:.55; filter:grayscale(1);" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TEDxRiverfield credibility band — dark ink ── -->
+  <section style="background:#0B1B26; color:#F5EFE2; border-bottom:1.5px solid rgba(245,239,226,.3); position:relative; overflow:hidden;">
+    <div style="position:absolute; right:-80px; bottom:-40px; width:420px; height:180px; background:#C84B32; opacity:.09; border-radius:50%; transform:rotate(-22deg); pointer-events:none;"></div>
+    <div style="max-width:1260px; margin:0 auto; padding:72px 32px; position:relative;">
+      <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1fr 1.3fr; gap:64px; align-items:center;">
+        <div>
+          <div style="display:flex; align-items:center; gap:9px; margin-bottom:16px;"><span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">Taking the Stage</span></div>
+          <h2 style="font-family:'Fraunces',serif; font-size:clamp(32px,3.5vw,48px); font-weight:500; line-height:1.05; letter-spacing:-.025em; margin:0; text-wrap:pretty;">We're presenting at <em style="color:#C84B32;">TEDxRiverfield.</em></h2>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.6; color:rgba(245,239,226,.85); margin:0; text-wrap:pretty;">CAPSuLe is bringing our SEED Framework — and its classroom curriculum, Fieldwork — to the TEDx stage. Founders Nate and Keton Roy present <strong>September 18, 2026</strong>, at Riverfield Country Day School in Tulsa, OK.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a href="https://www.riverfield.org/tedx" target="_blank" rel="noopener" style="padding:12px 20px; background:#C84B32; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; text-decoration:none; transition:background .15s;" style-hover="background:#E05A3F;">TEDxRiverfield →</a>
+            <a href="https://www.instagram.com/p/DcPEeBRJ97l/" target="_blank" rel="noopener" style="padding:12px 20px; border:1px solid rgba(245,239,226,.4); color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; text-decoration:none; transition:border-color .15s;" style-hover="border-color:#C84B32;">See the announcement →</a>
+            <a href="capsule-programs.dc.html#fieldwork" style="padding:12px 20px; border:1px solid rgba(245,239,226,.4); color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; text-decoration:none; transition:border-color .15s;" style-hover="border-color:#C84B32;">About Fieldwork →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── §04 Programs preview — cool slate ── -->
+  <section style="background:linear-gradient(to bottom,#EBF2FA,#E7EFF8); border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden;">
+    <div style="position:absolute; right:-48px; top:-56px; font-family:'Fraunces',serif; font-size:360px; font-weight:700; color:#0B1B26; opacity:.045; line-height:1; pointer-events:none; user-select:none; letter-spacing:-.06em;">04</div>
+    <div style="max-width:1260px; margin:0 auto; padding:80px 32px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #0B1B26; padding-bottom:16px; margin-bottom:48px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:9px;">
+          <span style="width:7px; height:7px; background:#1B4066; display:inline-block; flex-shrink:0;"></span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">§ 04 — What We Build</span>
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">06 programs · One mission</span>
+      </div>
+      <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1fr 1.4fr; gap:64px; margin-bottom:48px; align-items:end;">
+        <h2 style="font-family:'Fraunces',serif; font-size:60px; font-weight:500; line-height:.95; letter-spacing:-.025em; margin:0; color:#0B1B26; text-wrap:balance;">One mission,<br /><em style="color:#C84B32;">six programs.</em></h2>
+        <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.55; color:#0B1B26; margin:0; text-wrap:pretty;">CAPSuLe ships documentaries, courses, essays, and a podcast — every program designed to take the best science, dose it, and deliver it where it can do real work.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <!-- Fieldwork -->
+        <a href="capsule-programs.dc.html#fieldwork" style="text-decoration:none; opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease, border-color .2s; border:1.5px solid #0B1B26; padding:24px 20px; background:#F5EFE2; display:flex; flex-direction:column; cursor:pointer;" class="cl-rv" data-d="0" style-hover="border-color:#1B4066;">
+          <div style="width:72px; height:72px; border-radius:3px; overflow:hidden; margin-bottom:14px; flex-shrink:0; border:1px solid rgba(11,27,38,.1); background:#1B4066; display:flex; align-items:center; justify-content:center;"><span style="font-family:'Fraunces',serif; font-size:26px; font-weight:500; color:#F5EFE2;">FW</span></div>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:6px;">Classroom Curriculum</span>
+          <div style="font-family:'Fraunces',serif; font-size:20px; font-weight:500; line-height:1.05; letter-spacing:-.015em; color:#0B1B26; margin-bottom:6px;">Fieldwork</div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:13px; line-height:1.45; color:rgba(11,27,38,.55); margin:0; flex:1;">The SEED Framework — teaching resilience through the hobby each student loves.</p>
+          <div style="margin-top:16px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#1B4066;">→</div>
+        </a>
+        <!-- RAP -->
+        <a href="capsule-programs.dc.html#rap" style="text-decoration:none; opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease, border-color .2s; border:1.5px solid #0B1B26; padding:24px 20px; background:#F5EFE2; display:flex; flex-direction:column; cursor:pointer;" class="cl-rv" data-d="50" style-hover="border-color:#C84B32;">
+          <div style="width:72px; height:72px; border-radius:3px; overflow:hidden; margin-bottom:14px; flex-shrink:0; border:1px solid rgba(11,27,38,.1); background:#0B1B26; display:flex; align-items:center; justify-content:center;"><span style="font-family:'Fraunces',serif; font-size:24px; font-weight:500; color:#F5EFE2;">RAP</span></div>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:6px;">Bridge Program</span>
+          <div style="font-family:'Fraunces',serif; font-size:20px; font-weight:500; line-height:1.05; letter-spacing:-.015em; color:#0B1B26; margin-bottom:6px;">RAP</div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:13px; line-height:1.45; color:rgba(11,27,38,.55); margin:0; flex:1;">Resilience Advocate Program, with Cortex Flex.</p>
+          <div style="margin-top:16px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#C84B32;">→</div>
+        </a>
+        <!-- WordRx -->
+        <a href="capsule-programs.dc.html#wordrx" style="text-decoration:none; opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease, border-color .2s; border:1.5px solid #0B1B26; padding:24px 20px; background:#F5EFE2; display:flex; flex-direction:column; cursor:pointer;" class="cl-rv" data-d="100" style-hover="border-color:#8B2FC9;">
+          <div style="width:72px; height:72px; border-radius:3px; overflow:hidden; margin-bottom:14px; flex-shrink:0; border:1px solid rgba(11,27,38,.1);"><img src="site/assets/WordRX_logio.jpg" alt="WordRx" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:6px;">Documentary</span>
+          <div style="font-family:'Fraunces',serif; font-size:20px; font-weight:500; line-height:1.05; letter-spacing:-.015em; color:#0B1B26; margin-bottom:6px;">WordRx</div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:13px; line-height:1.45; color:rgba(11,27,38,.55); margin:0; flex:1;">Our flagship documentary — in production for Amazon Prime Video.</p>
+          <div style="margin-top:16px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#8B2FC9;">→</div>
+        </a>
+        <!-- Effective Dose -->
+        <a href="capsule-programs.dc.html#effective-dose" style="text-decoration:none; opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease, border-color .2s; border:1.5px solid #0B1B26; padding:24px 20px; background:#F5EFE2; display:flex; flex-direction:column; cursor:pointer;" class="cl-rv" data-d="200" style-hover="border-color:#1B4066;">
+          <div style="width:72px; height:72px; border-radius:3px; overflow:hidden; margin-bottom:14px; flex-shrink:0; border:1px solid rgba(11,27,38,.1);"><img src="site/assets/EffectiveDose_logo.png" alt="Effective Dose" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:6px;">Podcast</span>
+          <div style="font-family:'Fraunces',serif; font-size:20px; font-weight:500; line-height:1.05; letter-spacing:-.015em; color:#0B1B26; margin-bottom:6px;">Effective Dose</div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:13px; line-height:1.45; color:rgba(11,27,38,.55); margin:0; flex:1;">Long-form interviews with the people doing the science.</p>
+          <div style="margin-top:16px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#1B4066;">→</div>
+        </a>
+        <!-- Extended Release -->
+        <a href="capsule-programs.dc.html#extended-release" style="text-decoration:none; opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease, border-color .2s; border:1.5px solid #0B1B26; padding:24px 20px; background:#F5EFE2; display:flex; flex-direction:column; cursor:pointer;" class="cl-rv" data-d="300" style-hover="border-color:#C84B32;">
+          <div style="width:72px; height:72px; border-radius:3px; overflow:hidden; margin-bottom:14px; flex-shrink:0; border:1px solid rgba(11,27,38,.1);"><img src="site/assets/ExtendedRelease_logo.png" alt="Extended Release" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:6px;">Lecture Series</span>
+          <div style="font-family:'Fraunces',serif; font-size:20px; font-weight:500; line-height:1.05; letter-spacing:-.015em; color:#0B1B26; margin-bottom:6px;">Extended Release</div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:13px; line-height:1.45; color:rgba(11,27,38,.55); margin:0; flex:1;">Live lectures bringing researchers into community spaces.</p>
+          <div style="margin-top:16px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#C84B32;">→</div>
+        </a>
+        <!-- Prescribed Dose -->
+        <a href="capsule-programs.dc.html#prescribed-dose" style="text-decoration:none; opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease, border-color .2s; border:1.5px solid #0B1B26; padding:24px 20px; background:#F5EFE2; display:flex; flex-direction:column; cursor:pointer;" class="cl-rv" data-d="400" style-hover="border-color:#C84B32;">
+          <div style="width:72px; height:72px; border-radius:4px; overflow:hidden; margin-bottom:14px; flex-shrink:0; border:1px solid rgba(11,27,38,.1);"><img src="site/assets/PrescribedDose_logo.png" alt="Prescribed Dose" style="width:100%; height:100%; object-fit:contain; display:block;" /></div>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:6px;">Blog</span>
+          <div style="font-family:'Fraunces',serif; font-size:20px; font-weight:500; line-height:1.05; letter-spacing:-.015em; color:#0B1B26; margin-bottom:6px;">Prescribed Dose</div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:13px; line-height:1.45; color:rgba(11,27,38,.55); margin:0; flex:1;">Research, written like advice from a friend.</p>
+          <div style="margin-top:16px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#C84B32;">→</div>
+        </a>
+      </div>
+      <div class="cl-rv" data-d="360" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; margin-top:36px; text-align:center;">
+        <a href="capsule-programs.dc.html" style="display:inline-flex; align-items:center; gap:10px; padding:14px 28px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; transition:background .15s;" style-hover="background:#C84B32;">Explore all programs →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── §09 Donate CTA — dark ink ── -->
+  <section style="background:#0B1B26; color:#F5EFE2; position:relative; overflow:hidden;">
+    <div style="position:absolute; right:-60px; top:-48px; font-family:'Fraunces',serif; font-size:360px; font-weight:700; color:#F5EFE2; opacity:.028; line-height:1; pointer-events:none; user-select:none; letter-spacing:-.06em;">09</div>
+    <div style="position:absolute; right:-80px; bottom:60px; width:420px; height:180px; background:#C84B32; opacity:.09; border-radius:50%; transform:rotate(-22deg); pointer-events:none;"></div>
+    <div style="max-width:1260px; margin:0 auto; padding:80px 32px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #F5EFE2; padding-bottom:16px; margin-bottom:48px; flex-wrap:wrap; gap:8px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">§ 09 — Support the Lab</span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(245,239,226,.6);">100% tax-deductible</span>
+      </div>
+      <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1fr 1.4fr; gap:64px; align-items:end; margin-bottom:48px;">
+        <h2 style="font-family:'Fraunces',serif; font-size:clamp(44px,5.5vw,76px); font-weight:500; line-height:.95; letter-spacing:-.03em; margin:0; text-wrap:balance;">Help us put research in the <em style="color:#C84B32;">right hands.</em></h2>
+        <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.55; color:rgba(245,239,226,.8); margin:0; text-wrap:pretty;">Every episode, essay, and course we publish is donor-funded. We do not sell ads or put research behind a paywall. We translate the science and deliver it to the people raising the next generation.</p>
+      </div>
+      <div class="cl-rv" data-d="120" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:repeat(3,1fr) auto; gap:0; border:1.5px solid #F5EFE2;">
+        <div style="padding:28px 24px; border-right:1px solid rgba(245,239,226,.25); display:flex; flex-direction:column; gap:8px; transition:background .15s;" style-hover="background:rgba(245,239,226,.06);">
+          <div><div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:rgba(245,239,226,.45); margin-bottom:2px;">Starting at</div><div style="font-family:'Fraunces',serif; font-size:44px; font-weight:500; letter-spacing:-.025em; color:#F5EFE2;">$250</div></div>
+          <div style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:14px; color:rgba(245,239,226,.75); line-height:1.4;">Sponsor a Prescribed Dose article</div>
+        </div>
+        <div style="padding:28px 24px; border-right:1px solid rgba(245,239,226,.25); display:flex; flex-direction:column; gap:8px; transition:background .15s;" style-hover="background:rgba(245,239,226,.06);">
+          <div><div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:rgba(245,239,226,.45); margin-bottom:2px;">Starting at</div><div style="font-family:'Fraunces',serif; font-size:44px; font-weight:500; letter-spacing:-.025em; color:#F5EFE2;">$500</div></div>
+          <div style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:14px; color:rgba(245,239,226,.75); line-height:1.4;">Fund one Effective Dose episode</div>
+        </div>
+        <div style="padding:28px 24px; border-right:1px solid rgba(245,239,226,.25); display:flex; flex-direction:column; gap:8px; transition:background .15s;" style-hover="background:rgba(245,239,226,.06);">
+          <div><div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:rgba(245,239,226,.45); margin-bottom:2px;">Starting at</div><div style="font-family:'Fraunces',serif; font-size:44px; font-weight:500; letter-spacing:-.025em; color:#F5EFE2;">$1,000</div></div>
+          <div style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:14px; color:rgba(245,239,226,.75); line-height:1.4;">Sponsor a community lecture</div>
+        </div>
+        <a href="capsule-donate.dc.html" style="background:#C84B32; color:#F5EFE2; padding:0 36px; display:flex; align-items:center; justify-content:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; text-decoration:none; min-width:180px; transition:background .15s;" style-hover="background:#E05A3F;">Donate →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Blog post modal ── -->
+  <div id="cl-modal-bg" style="position:fixed; inset:0; z-index:200; background:rgba(11,27,38,.55); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; transition:opacity .35s ease; pointer-events:none;">
+    <div id="cl-modal" style="background:#F5EFE2; max-width:460px; width:100%; border:1.5px solid #0B1B26; position:relative; transform:translateY(20px); transition:transform .35s ease; padding:40px 36px 32px;">
+      <button id="cl-modal-close" aria-label="Close" style="position:absolute; top:14px; right:14px; background:none; border:none; cursor:pointer; padding:4px; color:#0B1B26; line-height:1;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:18px;">
+        <span style="width:7px; height:7px; background:#C84B32; border-radius:50%; display:inline-block; flex-shrink:0;"></span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32;">Fieldwork</span>
+      </div>
+      <h2 style="font-family:'Fraunces',serif; font-size:28px; font-weight:500; line-height:1.15; letter-spacing:-.02em; color:#0B1B26; margin:0 0 12px;">Here about Fieldwork?</h2>
+      <p style="font-family:'Source Serif 4',Georgia,serif; font-size:16px; line-height:1.6; color:rgba(11,27,38,.7); margin:0 0 24px;">Fieldwork is our guided classroom curriculum built on the <em style="color:#C84B32; font-style:italic;">SEED Framework</em>, teaching resilience through the hobby each student already loves. Contact us for more info.</p>
+      <a href="mailto:contact@thecapsl.org" style="display:inline-flex; align-items:center; gap:10px; padding:12px 20px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; transition:background .15s;" style-hover="background:#C84B32;">contact@thecapsl.org →</a>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer style="background:#E8E2D1; border-top:1.5px solid #0B1B26;">
+    <div style="max-width:1260px; margin:0 auto; padding:56px 32px 32px;">
+      <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(11,27,38,.12);">
+        <div>
+          <img src="site/assets/capsule-logo.png" alt="CAPSuLe" style="height:48px; width:auto; display:block; margin-bottom:14px;" />
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; line-height:1.55; color:rgba(11,27,38,.6); margin:0; max-width:280px;">The Child and Adolescent Performance Science Laboratory — a 501(c)(3) nonprofit translating youth development research into real-world guidance.</p>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">01 — Explore</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="index.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Home</a>
+            <a href="capsule-about.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">About</a>
+            <a href="capsule-programs.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Programs</a>
+            <a href="capsule-blog.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Blog</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">02 — Involved</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="capsule-donate.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Donate</a>
+            <a href="capsule-joinus.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Join the team</a>
+            <a href="capsule-joinus.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Partner with us</a>
+            <a href="capsule-joinus.dc.html#newsletter" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Join the newsletter</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">03 — Connect</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="https://www.linkedin.com/company/the-capsl-" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">LinkedIn</a>
+            <a href="https://www.instagram.com/the.capsl/" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Instagram</a>
+            <a href="https://www.youtube.com/@Effective-Dose" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">YouTube</a>
+            <a href="mailto:contact@thecapsl.org" style="display:inline-flex; align-items:center; gap:8px; padding:9px 16px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; text-decoration:none; transition:background .15s;">Email →</a>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">CAPSuLe © 2026 · 501(c)(3) Nonprofit</span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">Cat. № 240-80-22</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;showScrollHint&quot;: {
+    &quot;editor&quot;: &quot;boolean&quot;,
+    &quot;default&quot;: true,
+    &quot;tsType&quot;: &quot;boolean&quot;
+  }
+}">
+
+// ── Capsule logo animation — icon SVG builders ───────────────────────────────
+
+function _capIconApple(s) {
+  return '<g transform="scale('+s+')">'
+    +'<rect x="-2" y="-24" width="4" height="9" rx="2" fill="#4a7c20"/>'
+    +'<ellipse cx="7" cy="-22" rx="7" ry="4" fill="#5a9e28" transform="rotate(-30,7,-22)"/>'
+    +'<path d="M0,-15 C-20,-15 -22,2 -19,13 C-16,23 -9,25 0,25 C9,25 16,23 19,13 C22,2 20,-15 0,-15Z" fill="#e53935"/>'
+    +'<ellipse cx="-7" cy="-3" rx="4" ry="8" fill="rgba(255,255,255,0.38)" transform="rotate(-20,-7,-3)"/>'
+    +'</g>';
+}
+function _capIconBooks(s) {
+  return '<g transform="scale('+s+')">'
+    +'<rect x="-22" y="-16" width="13" height="30" rx="2" fill="#1565c0"/>'
+    +'<rect x="-7" y="-18" width="14" height="34" rx="2" fill="#1e88e5"/>'
+    +'<rect x="9" y="-13" width="14" height="27" rx="2" fill="#0d47a1"/>'
+    +'<line x1="-22" y1="-6" x2="-9" y2="-6" stroke="#fff" stroke-width="1.5"/>'
+    +'<line x1="-7" y1="-5" x2="7" y2="-5" stroke="#fff" stroke-width="1.5"/>'
+    +'<line x1="9" y1="-3" x2="23" y2="-3" stroke="#fff" stroke-width="1.5"/>'
+    +'</g>';
+}
+function _capIconSun(s) {
+  var rays = '';
+  for (var i = 0; i < 8; i++) {
+    var a = i / 8 * Math.PI * 2;
+    rays += '<line x1="'+(Math.cos(a)*14).toFixed(1)+'" y1="'+(Math.sin(a)*14).toFixed(1)
+          +'" x2="'+(Math.cos(a)*22).toFixed(1)+'" y2="'+(Math.sin(a)*22).toFixed(1)
+          +'" stroke="#f9a825" stroke-width="3.5" stroke-linecap="round"/>';
+  }
+  return '<g transform="scale('+s+')">' + rays + '<circle r="12" fill="#fdd835"/><circle r="7" fill="#fff176"/></g>';
+}
+function _capIconPalette(s) {
+  return '<g transform="scale('+s+')">'
+    +'<path d="M0,-22 C-24,-22 -24,12 -11,20 C-2,25 7,20 7,11 C7,4 11,2 15,5 C22,9 24,2 17,-11 C10,-22 5,-22 0,-22Z" fill="#ab47bc"/>'
+    +'<circle cx="-12" cy="-1" r="4.5" fill="#e53935"/>'
+    +'<circle cx="-5" cy="-15" r="4.5" fill="#1565c0"/>'
+    +'<circle cx="7" cy="-15" r="4.5" fill="#fdd835"/>'
+    +'<circle cx="13" cy="-1" r="4.5" fill="#43a047"/>'
+    +'</g>';
+}
+function _capIconHeart(s) {
+  return '<g transform="scale('+s+')">'
+    +'<path d="M0,20 C0,20 -24,-5 -24,-13 C-24,-22 -13,-27 0,-16 C13,-27 24,-22 24,-13 C24,-5 0,20 0,20Z" fill="#e53935"/>'
+    +'<ellipse cx="-8" cy="-11" rx="4" ry="6" fill="rgba(255,255,255,0.35)" transform="rotate(-30,-8,-11)"/>'
+    +'</g>';
+}
+function _capIconDumbbell(s) {
+  return '<g transform="scale('+s+')">'
+    +'<rect x="-26" y="-5.5" width="52" height="11" rx="5.5" fill="#1976d2"/>'
+    +'<rect x="-34" y="-14" width="12" height="28" rx="5" fill="#0d47a1"/>'
+    +'<rect x="22" y="-14" width="12" height="28" rx="5" fill="#0d47a1"/>'
+    +'</g>';
+}
+function _capIconFigure(s) {
+  var C1='#d61669', C2='#fc5c33';
+  return '<g transform="scale('+s+')">'
+    +'<circle cx="0" cy="-28" r="9" fill="'+C1+'"/>'
+    +'<line x1="0" y1="-19" x2="0" y2="-2" stroke="'+C2+'" stroke-width="6" stroke-linecap="round"/>'
+    +'<line x1="-2" y1="-13" x2="-20" y2="-4" stroke="'+C1+'" stroke-width="4.5" stroke-linecap="round"/>'
+    +'<line x1="2" y1="-13" x2="20" y2="-2" stroke="'+C1+'" stroke-width="4.5" stroke-linecap="round"/>'
+    +'<line x1="-2" y1="-2" x2="-14" y2="18" stroke="'+C2+'" stroke-width="4.5" stroke-linecap="round"/>'
+    +'<line x1="2" y1="-2" x2="16" y2="16" stroke="'+C2+'" stroke-width="4.5" stroke-linecap="round"/>'
+    +'</g>';
+}
+
+// ── Hero capsule — logo-accurate SVG scene (choreographed by GSAP timeline) ──
+// Square viewBox (1000x1000) matches the logo PNG's object-fit:contain box, so
+// the finished frame overlays the real logo 1:1 for a seamless cross-fade.
+
+var HERO_MOUTH = { x: 300, y: 500 };
+var HERO_ICONS = [
+  { fn:_capIconDumbbell, x:300, y:470, s:1.15 },
+  { fn:_capIconApple,    x:352, y:408, s:1.45 },
+  { fn:_capIconBooks,    x:424, y:408, s:1.48 },
+  { fn:_capIconSun,      x:494, y:394, s:1.32 },
+  { fn:_capIconPalette,  x:552, y:440, s:1.42 },
+  { fn:_capIconHeart,    x:650, y:418, s:1.52 },
+  { fn:_capIconFigure,   x:744, y:354, s:1.72 }
+];
+
+function buildHeroSVG() {
+  var icons='';
+  for (var i=0;i<HERO_ICONS.length;i++){
+    var ic=HERO_ICONS[i];
+    icons += '<g class="hg-icon-pos" transform="translate('+ic.x+','+ic.y+')">'
+           +   '<g class="hg-icon" data-i="'+i+'"><g class="hg-icon-bob"><g transform="scale('+ic.s+')">'+ic.fn(1)+'</g></g></g>'
+           + '</g>';
+  }
+  return ''
+  + '<svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" style="display:block; overflow:visible;">'
+  +   '<defs>'
+  +     '<linearGradient id="hg-blue" x1="10%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#223A8E"/><stop offset="55%" stop-color="#1466B4"/><stop offset="100%" stop-color="#0C9BD6"/></linearGradient>'
+  +     '<linearGradient id="hg-pink" x1="12%" y1="0%" x2="84%" y2="100%"><stop offset="0%" stop-color="#D6166A"/><stop offset="52%" stop-color="#F0455A"/><stop offset="100%" stop-color="#FC5C33"/></linearGradient>'
+  +     '<radialGradient id="hg-mouth" cx="50%" cy="36%" r="72%"><stop offset="0%" stop-color="#B01050"/><stop offset="100%" stop-color="#7E0C3E"/></radialGradient>'
+  +     '<radialGradient id="hg-ao" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(11,11,20,0.32)"/><stop offset="100%" stop-color="rgba(11,11,20,0)"/></radialGradient>'
+  +     '<radialGradient id="hg-contact" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(18,18,34,0.22)"/><stop offset="66%" stop-color="rgba(18,18,34,0.08)"/><stop offset="100%" stop-color="rgba(18,18,34,0)"/></radialGradient>'
+  +     '<linearGradient id="hg-teal" gradientUnits="userSpaceOnUse" x1="290" y1="0" x2="805" y2="0"><stop offset="0%" stop-color="#33CFB8"/><stop offset="38%" stop-color="#7FE3CB"/><stop offset="74%" stop-color="#E6B0CD"/><stop offset="100%" stop-color="#ECCBE6"/></linearGradient>'
+  +     '<linearGradient id="hg-glint" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="rgba(255,255,255,0.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></linearGradient>'
+  +     '<filter id="hg-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>'
+  +     '<filter id="hg-soft2" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="10"/></filter>'
+  +   '</defs>'
+  +   '<ellipse id="hg-shadow" cx="300" cy="612" rx="78" ry="16" fill="url(#hg-contact)" filter="url(#hg-soft2)"/>'
+  +   '<g id="hg-body">'
+  +     '<path d="M240,500 L240,548 A60,60 0 0 0 360,548 L360,500 Z" fill="url(#hg-pink)"/>'
+  +     '<path d="M250,512 Q244,542 268,562" fill="none" stroke="url(#hg-glint)" stroke-width="8" stroke-linecap="round" opacity="0.42" filter="url(#hg-soft)"/>'
+  +     '<path d="M240,500 L240,548 A60,60 0 0 0 360,548 L360,500" fill="none" stroke="#FFB59C" stroke-width="2" opacity="0.5"/>'
+  +   '</g>'
+  +   '<ellipse id="hg-mouth" cx="300" cy="500" rx="60" ry="15" fill="url(#hg-mouth)" opacity="0"/>'
+  +   '<ellipse id="hg-seam" cx="300" cy="500" rx="64" ry="11" fill="url(#hg-ao)" opacity="0"/>'
+  +   '<g id="hg-cap">'
+  +     '<path d="M240,500 L240,452 A60,60 0 0 1 360,452 L360,500 Z" fill="url(#hg-blue)"/>'
+  +     '<path d="M250,488 Q244,438 278,414 Q300,400 324,406" fill="none" stroke="url(#hg-glint)" stroke-width="10" stroke-linecap="round" opacity="0.5" filter="url(#hg-soft)"/>'
+  +     '<path d="M240,500 L240,452 A60,60 0 0 1 360,452 L360,500" fill="none" stroke="#7FD8F7" stroke-width="2" opacity="0.5"/>'
+  +     '<ellipse id="hg-glint-dot" cx="278" cy="444" rx="12" ry="5.3" fill="rgba(255,255,255,0.82)" filter="url(#hg-soft)" transform="rotate(-34 278 444)"/>'
+  +   '</g>'
+  +   '<g id="hg-lines" fill="none" stroke="url(#hg-teal)" stroke-linecap="round">'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="4.4" d="M300,500 C405,468 548,442 802,392"/>'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="3.6" d="M298,506 C416,496 562,468 810,418"/>'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="3.2" d="M300,494 C406,450 548,408 804,360"/>'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="2.9" d="M300,510 C436,514 572,498 814,442"/>'
+  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="2.7" d="M301,489 C412,430 552,382 802,340"/>'
+  +   '</g>'
+  +   '<g id="hg-icons">'+icons+'</g>'
+  +   '</svg>';
+}
+
+class Component extends DCLogic {
+  componentDidMount() {
+    // Mobile hamburger menu toggle
+    var _burger=document.querySelector('.cl-burger'), _mm=document.getElementById('cl-mobmenu');
+    if(_burger&&_mm){ _burger.addEventListener('click', function(){ _mm.style.display=(_mm.style.display==='flex'?'none':'flex'); }); }
+
+    // Nav hide-on-scroll-down / show-on-scroll-up
+    let _lastY = 0, _navHidden = false;
+    const nav = document.getElementById('cl-nav');
+
+    // Reading progress bar + nav hide/show (single scroll listener)
+    this._sc = () => {
+      const s = window.pageYOffset;
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      const b = document.getElementById('cl-prog');
+      if (b) b.style.width = (t > 0 ? Math.min(100, s / t * 100) : 0) + '%';
+      if (nav) {
+        const delta = s - _lastY;
+        if (delta > 6 && s > 80 && !_navHidden) {
+          nav.style.transform = 'translateY(-100%)';
+          _navHidden = true;
+        } else if (delta < -6 && _navHidden) {
+          nav.style.transform = 'translateY(0)';
+          _navHidden = false;
+        }
+        _lastY = s;
+      }
+    };
+    window.addEventListener('scroll', this._sc, { passive: true });
+
+    // Blog post modal — show once per session
+    const modalBg = document.getElementById('cl-modal-bg');
+    const modalClose = document.getElementById('cl-modal-close');
+    if (modalBg && !sessionStorage.getItem('cl-modal-seen')) {
+      setTimeout(() => {
+        modalBg.style.pointerEvents = 'auto';
+        modalBg.style.opacity = '1';
+        const m = document.getElementById('cl-modal');
+        if (m) m.style.transform = 'translateY(0)';
+      }, 800);
+      const closeModal = () => {
+        modalBg.style.opacity = '0';
+        modalBg.style.pointerEvents = 'none';
+        sessionStorage.setItem('cl-modal-seen', '1');
+      };
+      if (modalClose) modalClose.addEventListener('click', closeModal);
+      modalBg.addEventListener('click', (e) => { if (e.target === modalBg) closeModal(); });
+    }
+
+    // Capsule hero — GSAP scroll-scrubbed timeline
+    this._initHeroAnim();
+
+    // IntersectionObserver scroll reveals
+    this._obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const d = +(e.target.dataset.d || 0);
+        setTimeout(() => {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }, d);
+        this._obs.unobserve(e.target);
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.cl-rv').forEach(el => this._obs.observe(el));
+  }
+
+  _initHeroAnim() {
+    var root = document.getElementById('cl-anim-root');
+    var logo = document.getElementById('cl-logo-static');
+    var hero = document.getElementById('cl-hero');
+    var hint = document.getElementById('cl-vid-hint');
+    if (!root || !hero) return;
+    root.innerHTML = buildHeroSVG();
+    this._heroTweens = [];
+
+    var hintVisible = this.props.showScrollHint !== false;
+    if (hint && !hintVisible) hint.style.opacity = '0';
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hasGSAP = !!(window.gsap && window.ScrollTrigger);
+    if (reduce || !hasGSAP) {
+      root.style.display = 'none';
+      if (logo) logo.style.opacity = '1';
+      if (hint) hint.style.opacity = '0';
+      return;
+    }
+
+    var self = this;
+    gsap.registerPlugin(ScrollTrigger);
+    var isMobile = window.matchMedia('(max-width: 820px)').matches;
+
+    var q = function(sel){ return root.querySelector(sel); };
+    var cap = q('#hg-cap'), mouth = q('#hg-mouth'),
+        seam = q('#hg-seam'), shadow = q('#hg-shadow'), glint = q('#hg-glint-dot');
+    var lines = root.querySelectorAll('.hg-line');
+    var icons = root.querySelectorAll('.hg-icon');
+
+    // Pill sits closed exactly as drawn; only the shadow/lines/icons need hidden starting states
+    gsap.set(shadow, { transformOrigin: '50% 50%' });
+    gsap.set(lines,  { strokeDasharray: 1, strokeDashoffset: 1 });
+    icons.forEach(function(g){
+      var ic = HERO_ICONS[+g.getAttribute('data-i')];
+      gsap.set(g, { x: HERO_MOUTH.x - ic.x, y: HERO_MOUTH.y - ic.y, scale: 0.18, autoAlpha: 0, transformOrigin: '50% 50%' });
+    });
+
+    var tl = gsap.timeline({
+      defaults: { ease: 'none' },
+      scrollTrigger: {
+        trigger: hero,
+        start: 'top top',
+        end: '+=' + (isMobile ? 150 : 200) + '%',
+        pin: true,
+        scrub: 0.6,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: function(st){ if (hint && hintVisible) hint.style.opacity = st.progress > 0.04 ? '0' : '1'; }
+      }
+    });
+    self._heroST = tl.scrollTrigger;
+
+    // Unhinge — blue cap swings open from the seam like a real capsule (weighted, no bounce)
+    tl.to(cap,    { rotation: -42, svgOrigin: '247 500', y: -3, ease: 'power4.out', duration: 0.28 }, 0.06);
+    tl.to(seam,   { opacity: 1, ease: 'power1.in',  duration: 0.06 }, 0.06);
+    tl.to(seam,   { opacity: 0, ease: 'power1.out', duration: 0.16 }, 0.13);
+    tl.to(mouth,  { opacity: 1, ease: 'power2.out', duration: 0.16 }, 0.12);
+    tl.to(shadow, { scaleX: 1.18, opacity: 0.85, ease: 'power2.out', duration: 0.28 }, 0.06);
+    // Teal lines grow left-to-right out of the mouth — linear so the draw tracks scroll exactly
+    tl.to(lines,  { strokeDashoffset: 0, ease: 'none', duration: 0.32, stagger: 0.05 }, 0.18);
+    // Icons emerge from the mouth, in pour order, into the exact logo layout
+    tl.to(icons,  { x: 0, y: 0, scale: 1, autoAlpha: 1, ease: 'back.out(1.5)', duration: 0.30, stagger: 0.035 }, 0.40);
+    // Brief hold so the SVG rests exactly as the logo before the fade
+    tl.to({}, { duration: 0.06 }, 0.70);
+    // Seamless matched cross-fade to the real logo (positions already align)
+    tl.to(root,   { autoAlpha: 0, ease: 'power1.inOut', duration: 0.15 }, 0.77);
+    tl.fromTo(logo, { autoAlpha: 0 }, { autoAlpha: 1, ease: 'power1.inOut', duration: 0.15 }, 0.77);
+    tl.to({}, { duration: 0.08 }, 0.92);
+
+    // Moving reflection highlight on the cap (skipped on mobile for fewer simultaneous anims)
+    if (!isMobile) {
+      self._heroTweens.push(gsap.to(glint, { x: 26, y: -4, opacity: 0.4, duration: 2.4, ease: 'sine.inOut', repeat: -1, yoyo: true }));
+    }
+
+    if (logo && !logo.complete) logo.addEventListener('load', function(){ ScrollTrigger.refresh(); });
+    setTimeout(function(){ ScrollTrigger.refresh(); }, 80);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._sc);
+    if (this._heroST) this._heroST.kill();
+    if (this._heroTweens) this._heroTweens.forEach(function(t){ if (t) t.kill(); });
+    if (this._obs) this._obs.disconnect();
+  }
+}
+
+</script>
 </body>
 </html>
