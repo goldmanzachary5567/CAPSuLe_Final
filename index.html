@@ -127,7 +127,174 @@
         </div>
         <!-- animated capsule column (SVG scrubbed by GSAP → cross-fades to real logo) -->
         <div id="cl-anim-col" style="position:relative; height:100%; max-height:640px; min-height:340px; display:flex; align-items:center; justify-content:center; overflow:visible; will-change:transform, filter;">
-          <div id="cl-anim-root" style="width:100%; height:100%;"></div>
+
+          <div id="cl-stage" style="--u:.58px; --r:calc(var(--u)*40); position:absolute; left:50%; top:50%; width:calc(var(--u)*1000); height:calc(var(--u)*1000); margin-left:calc(var(--u)*-500); margin-top:calc(var(--u)*-500); perspective:calc(var(--u)*1100); perspective-origin:50% 50%;">
+            <div id="cl-scene" style="position:absolute; inset:0; transform-style:preserve-3d;">
+
+              <div id="pill-sh" style="position:absolute; left:0; top:0; width:calc(var(--u)*260); height:calc(var(--u)*70); background:radial-gradient(closest-side, rgba(24,14,34,.38), rgba(24,14,34,0)); filter:blur(calc(var(--u)*13)); will-change:transform,opacity;"></div>
+
+              <div id="pill-body" style="position:absolute; left:0; top:0; width:calc(var(--u)*80); height:calc(var(--u)*100); transform-style:preserve-3d; transform-origin:50% 0 0; will-change:transform;">
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#d6335f; transform:translateZ(calc(var(--u)*38.00)) scaleX(1.000);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#d0315c; transform:translateZ(calc(var(--u)*35.31)) scaleX(1.000);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#cb305a; transform:translateZ(calc(var(--u)*32.62)) scaleX(0.999);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#c52e57; transform:translateZ(calc(var(--u)*29.93)) scaleX(0.999);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#bf2d55; transform:translateZ(calc(var(--u)*27.24)) scaleX(0.997);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#b92b52; transform:translateZ(calc(var(--u)*24.55)) scaleX(0.995);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#b4294f; transform:translateZ(calc(var(--u)*21.86)) scaleX(0.993);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#ae284d; transform:translateZ(calc(var(--u)*19.17)) scaleX(0.990);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#a8264a; transform:translateZ(calc(var(--u)*16.48)) scaleX(0.986);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#a22548; transform:translateZ(calc(var(--u)*13.79)) scaleX(0.981);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#9d2345; transform:translateZ(calc(var(--u)*11.10)) scaleX(0.976);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#972142; transform:translateZ(calc(var(--u)*8.41)) scaleX(0.969);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#912040; transform:translateZ(calc(var(--u)*5.72)) scaleX(0.962);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#8b1e3d; transform:translateZ(calc(var(--u)*3.03)) scaleX(0.954);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#861d3b; transform:translateZ(calc(var(--u)*0.34)) scaleX(0.944);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#801b38; transform:translateZ(calc(var(--u)*-2.34)) scaleX(0.934);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#7a1935; transform:translateZ(calc(var(--u)*-5.03)) scaleX(0.923);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#751833; transform:translateZ(calc(var(--u)*-7.72)) scaleX(0.910);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#6f1630; transform:translateZ(calc(var(--u)*-10.41)) scaleX(0.896);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#69152e; transform:translateZ(calc(var(--u)*-13.10)) scaleX(0.880);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#63132b; transform:translateZ(calc(var(--u)*-15.79)) scaleX(0.864);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#5e1128; transform:translateZ(calc(var(--u)*-18.48)) scaleX(0.845);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#581026; transform:translateZ(calc(var(--u)*-21.17)) scaleX(0.825);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#520e23; transform:translateZ(calc(var(--u)*-23.86)) scaleX(0.803);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#4c0d21; transform:translateZ(calc(var(--u)*-26.55)) scaleX(0.779);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#470b1e; transform:translateZ(calc(var(--u)*-29.24)) scaleX(0.752);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#41091b; transform:translateZ(calc(var(--u)*-31.93)) scaleX(0.723);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#3b0819; transform:translateZ(calc(var(--u)*-34.62)) scaleX(0.691);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#350616; transform:translateZ(calc(var(--u)*-37.31)) scaleX(0.656);"></div>
+                <div style="position:absolute; inset:0; border-radius:0 0 calc(var(--u)*40) calc(var(--u)*40); background:#300514; transform:translateZ(calc(var(--u)*-40.00)) scaleX(0.616);"></div>
+                <svg viewBox="0 0 80 100" width="100%" height="100%" style="position:absolute; inset:0; overflow:visible; display:block; transform:translateZ(calc(var(--u)*38.4));">
+                  <defs>
+                    <linearGradient id="cyl-b" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#5A0526"/><stop offset="16%" stop-color="#A81450"/>
+                      <stop offset="34%" stop-color="#E8455F"/><stop offset="52%" stop-color="#F2604A"/>
+                      <stop offset="74%" stop-color="#C21C58"/><stop offset="90%" stop-color="#78092F"/>
+                      <stop offset="100%" stop-color="#4C0420"/>
+                    </linearGradient>
+                    <linearGradient id="cyl-b-v" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#2B0212" stop-opacity=".55"/><stop offset="26%" stop-color="#2B0212" stop-opacity="0"/>
+                      <stop offset="78%" stop-color="#FF8A5A" stop-opacity=".16"/><stop offset="100%" stop-color="#FFB089" stop-opacity=".34"/>
+                    </linearGradient>
+                    <radialGradient id="cav-b" cx="0.5" cy="0.3" r="0.8">
+                      <stop offset="0%" stop-color="#8E123F"/><stop offset="55%" stop-color="#460620"/><stop offset="100%" stop-color="#1E020E"/>
+                    </radialGradient>
+                    <linearGradient id="spec-b" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#fff" stop-opacity="0"/><stop offset="34%" stop-color="#fff" stop-opacity=".78"/><stop offset="100%" stop-color="#fff" stop-opacity=".08"/>
+                    </linearGradient>
+                  </defs>
+                  <g id="pb-shell">
+                    <path d="M0,0 L80,0 L80,60 A40,40 0 0 1 0,60 Z" fill="url(#cyl-b)"/>
+                    <path d="M0,0 L80,0 L80,60 A40,40 0 0 1 0,60 Z" fill="url(#cyl-b-v)"/>
+                    <ellipse id="pb-rim" cx="40" cy="0" rx="40" ry="11" fill="url(#cav-b)"/>
+                    <path id="pb-rimlip" d="M0,0 A40,11 0 0 0 80,0" fill="none" stroke="#FFB694" stroke-opacity=".62" stroke-width="2.6"/>
+                    <path d="M11,26 C7,52 14,74 30,86" fill="none" stroke="url(#spec-b)" stroke-width="6.5" stroke-linecap="round"/>
+                    <path d="M69,30 C73,54 68,74 56,86" fill="none" stroke="#2B0212" stroke-opacity=".3" stroke-width="7" stroke-linecap="round"/>
+                  </g>
+                </svg>
+              </div>
+
+              <div id="pill-cap" style="position:absolute; left:0; top:0; width:calc(var(--u)*80); height:calc(var(--u)*100); transform-style:preserve-3d; transform-origin:50% 100% 0; will-change:transform;">
+               <div id="cap-hinge" style="position:absolute; inset:0; transform-style:preserve-3d; transform-origin:50% 100% calc(var(--u)*-6);">
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#2e9ad6; transform:translateZ(calc(var(--u)*38.00)) scaleX(1.000);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#2d95d0; transform:translateZ(calc(var(--u)*35.31)) scaleX(1.000);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#2b91cb; transform:translateZ(calc(var(--u)*32.62)) scaleX(0.999);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#2a8cc5; transform:translateZ(calc(var(--u)*29.93)) scaleX(0.999);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#2988bf; transform:translateZ(calc(var(--u)*27.24)) scaleX(0.997);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#2783ba; transform:translateZ(calc(var(--u)*24.55)) scaleX(0.995);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#267eb4; transform:translateZ(calc(var(--u)*21.86)) scaleX(0.993);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#247aae; transform:translateZ(calc(var(--u)*19.17)) scaleX(0.990);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#2375a9; transform:translateZ(calc(var(--u)*16.48)) scaleX(0.986);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#2271a3; transform:translateZ(calc(var(--u)*13.79)) scaleX(0.981);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#206c9d; transform:translateZ(calc(var(--u)*11.10)) scaleX(0.976);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#1f6798; transform:translateZ(calc(var(--u)*8.41)) scaleX(0.969);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#1e6392; transform:translateZ(calc(var(--u)*5.72)) scaleX(0.962);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#1c5e8c; transform:translateZ(calc(var(--u)*3.03)) scaleX(0.954);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#1b5a87; transform:translateZ(calc(var(--u)*0.34)) scaleX(0.944);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#1a5581; transform:translateZ(calc(var(--u)*-2.34)) scaleX(0.934);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#18507b; transform:translateZ(calc(var(--u)*-5.03)) scaleX(0.923);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#174c76; transform:translateZ(calc(var(--u)*-7.72)) scaleX(0.910);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#154770; transform:translateZ(calc(var(--u)*-10.41)) scaleX(0.896);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#14436a; transform:translateZ(calc(var(--u)*-13.10)) scaleX(0.880);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#133e65; transform:translateZ(calc(var(--u)*-15.79)) scaleX(0.864);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#11395f; transform:translateZ(calc(var(--u)*-18.48)) scaleX(0.845);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#103559; transform:translateZ(calc(var(--u)*-21.17)) scaleX(0.825);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#0f3054; transform:translateZ(calc(var(--u)*-23.86)) scaleX(0.803);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#0d2c4e; transform:translateZ(calc(var(--u)*-26.55)) scaleX(0.779);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#0c2748; transform:translateZ(calc(var(--u)*-29.24)) scaleX(0.752);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#0a2243; transform:translateZ(calc(var(--u)*-31.93)) scaleX(0.723);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#091e3d; transform:translateZ(calc(var(--u)*-34.62)) scaleX(0.691);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#081937; transform:translateZ(calc(var(--u)*-37.31)) scaleX(0.656);"></div>
+                <div style="position:absolute; inset:0; border-radius:calc(var(--u)*40) calc(var(--u)*40) 0 0; background:#061532; transform:translateZ(calc(var(--u)*-40.00)) scaleX(0.616);"></div>
+                <svg viewBox="0 0 80 100" width="100%" height="100%" style="position:absolute; inset:0; overflow:visible; display:block; transform:translateZ(calc(var(--u)*38.4));">
+                  <defs>
+                    <linearGradient id="cyl-c" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#0B1E4C"/><stop offset="16%" stop-color="#173C82"/>
+                      <stop offset="36%" stop-color="#1E7FC6"/><stop offset="54%" stop-color="#43B4E4"/>
+                      <stop offset="76%" stop-color="#1A5EA4"/><stop offset="92%" stop-color="#102C63"/>
+                      <stop offset="100%" stop-color="#091840"/>
+                    </linearGradient>
+                    <linearGradient id="cyl-c-v" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#7FD8F7" stop-opacity=".34"/><stop offset="28%" stop-color="#7FD8F7" stop-opacity=".06"/>
+                      <stop offset="72%" stop-color="#050D28" stop-opacity=".12"/><stop offset="100%" stop-color="#050D28" stop-opacity=".5"/>
+                    </linearGradient>
+                    <radialGradient id="cav-c" cx="0.5" cy="0.68" r="0.8">
+                      <stop offset="0%" stop-color="#14356E"/><stop offset="58%" stop-color="#0A1B42"/><stop offset="100%" stop-color="#040A1E"/>
+                    </radialGradient>
+                    <linearGradient id="spec-c" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#fff" stop-opacity=".1"/><stop offset="62%" stop-color="#fff" stop-opacity=".82"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <g id="pc-shell">
+                    <path d="M0,100 L0,40 A40,40 0 0 1 80,40 L80,100 Z" fill="url(#cyl-c)"/>
+                    <path d="M0,100 L0,40 A40,40 0 0 1 80,40 L80,100 Z" fill="url(#cyl-c-v)"/>
+                    <ellipse id="pc-rim" cx="40" cy="100" rx="40" ry="11" fill="url(#cav-c)"/>
+                    <path id="pc-rimlip" d="M0,100 A40,11 0 0 0 80,100" fill="none" stroke="#A6E7FB" stroke-opacity=".5" stroke-width="2.6"/>
+                    <path d="M11,72 C7,44 15,22 31,12" fill="none" stroke="url(#spec-c)" stroke-width="6.5" stroke-linecap="round"/>
+                    <path d="M69,70 C73,46 67,24 55,13" fill="none" stroke="#050D28" stroke-opacity=".32" stroke-width="7" stroke-linecap="round"/>
+                  </g>
+                </svg>
+               </div>
+              </div>
+
+              <svg id="pour-lines" viewBox="0 0 1000 1000" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible; opacity:0;">
+                <defs>
+                  <linearGradient id="hg-teal" gradientUnits="userSpaceOnUse" x1="288" y1="0" x2="878" y2="0"><stop offset="0%" stop-color="#33CFB8"/><stop offset="38%" stop-color="#7FE3CB"/><stop offset="74%" stop-color="#E6B0CD"/><stop offset="100%" stop-color="#ECCBE6"/></linearGradient>
+                </defs>
+                <g fill="none" stroke="url(#hg-teal)" stroke-linecap="round">
+                  <path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="4.4" d="M288,504 C356,452 402,412 470,414 C538,416 574,470 624,492 C700,524 790,432 876,288"/>
+                  <path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="3.6" d="M286,513 C354,464 400,426 468,430 C536,434 572,486 622,506 C698,536 788,450 872,310"/>
+                  <path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="3.2" d="M290,495 C358,440 404,398 472,398 C540,398 576,454 626,478 C702,512 792,414 878,268"/>
+                  <path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="2.9" d="M288,521 C356,476 402,440 470,446 C538,452 574,500 624,518 C700,546 786,466 868,332"/>
+                  <path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="2.7" d="M291,487 C359,428 405,384 473,382 C541,380 577,440 627,466 C703,502 794,398 879,248"/>
+                </g>
+              </svg>
+
+              <div class="cl-ic" data-i="0" style="position:absolute; left:0; top:0; width:calc(var(--u)*100); height:calc(var(--u)*100); opacity:0; will-change:transform,filter,opacity;">
+                <svg viewBox="-50 -50 100 100" width="100%" height="100%" style="display:block; overflow:visible;"><g transform="scale(1.15)"><rect x="-26" y="-5.5" width="52" height="11" rx="5.5" fill="#1976d2"/><rect x="-34" y="-14" width="12" height="28" rx="5" fill="#0d47a1"/><rect x="22" y="-14" width="12" height="28" rx="5" fill="#0d47a1"/></g></svg>
+              </div>
+              <div class="cl-ic" data-i="1" style="position:absolute; left:0; top:0; width:calc(var(--u)*100); height:calc(var(--u)*100); opacity:0; will-change:transform,filter,opacity;">
+                <svg viewBox="-50 -50 100 100" width="100%" height="100%" style="display:block; overflow:visible;"><g transform="scale(1.45)"><rect x="-2" y="-24" width="4" height="9" rx="2" fill="#4a7c20"/><ellipse cx="7" cy="-22" rx="7" ry="4" fill="#5a9e28" transform="rotate(-30,7,-22)"/><path d="M0,-15 C-20,-15 -22,2 -19,13 C-16,23 -9,25 0,25 C9,25 16,23 19,13 C22,2 20,-15 0,-15Z" fill="#e53935"/><ellipse cx="-7" cy="-3" rx="4" ry="8" fill="rgba(255,255,255,0.38)" transform="rotate(-20,-7,-3)"/></g></svg>
+              </div>
+              <div class="cl-ic" data-i="2" style="position:absolute; left:0; top:0; width:calc(var(--u)*100); height:calc(var(--u)*100); opacity:0; will-change:transform,filter,opacity;">
+                <svg viewBox="-50 -50 100 100" width="100%" height="100%" style="display:block; overflow:visible;"><g transform="scale(1.48)"><rect x="-22" y="-16" width="13" height="30" rx="2" fill="#1565c0"/><rect x="-7" y="-18" width="14" height="34" rx="2" fill="#1e88e5"/><rect x="9" y="-13" width="14" height="27" rx="2" fill="#0d47a1"/><line x1="-22" y1="-6" x2="-9" y2="-6" stroke="#fff" stroke-width="1.5"/><line x1="-7" y1="-5" x2="7" y2="-5" stroke="#fff" stroke-width="1.5"/><line x1="9" y1="-3" x2="23" y2="-3" stroke="#fff" stroke-width="1.5"/></g></svg>
+              </div>
+              <div class="cl-ic" data-i="3" style="position:absolute; left:0; top:0; width:calc(var(--u)*100); height:calc(var(--u)*100); opacity:0; will-change:transform,filter,opacity;">
+                <svg viewBox="-50 -50 100 100" width="100%" height="100%" style="display:block; overflow:visible;"><g transform="scale(1.32)"><g stroke="#f9a825" stroke-width="3.5" stroke-linecap="round"><line x1="14" y1="0" x2="22" y2="0"/><line x1="9.9" y1="9.9" x2="15.6" y2="15.6"/><line x1="0" y1="14" x2="0" y2="22"/><line x1="-9.9" y1="9.9" x2="-15.6" y2="15.6"/><line x1="-14" y1="0" x2="-22" y2="0"/><line x1="-9.9" y1="-9.9" x2="-15.6" y2="-15.6"/><line x1="0" y1="-14" x2="0" y2="-22"/><line x1="9.9" y1="-9.9" x2="15.6" y2="-15.6"/></g><circle r="12" fill="#fdd835"/><circle r="7" fill="#fff176"/></g></svg>
+              </div>
+              <div class="cl-ic" data-i="4" style="position:absolute; left:0; top:0; width:calc(var(--u)*100); height:calc(var(--u)*100); opacity:0; will-change:transform,filter,opacity;">
+                <svg viewBox="-50 -50 100 100" width="100%" height="100%" style="display:block; overflow:visible;"><g transform="scale(1.42)"><path d="M0,-22 C-24,-22 -24,12 -11,20 C-2,25 7,20 7,11 C7,4 11,2 15,5 C22,9 24,2 17,-11 C10,-22 5,-22 0,-22Z" fill="#ab47bc"/><circle cx="-12" cy="-1" r="4.5" fill="#e53935"/><circle cx="-5" cy="-15" r="4.5" fill="#1565c0"/><circle cx="7" cy="-15" r="4.5" fill="#fdd835"/><circle cx="13" cy="-1" r="4.5" fill="#43a047"/></g></svg>
+              </div>
+              <div class="cl-ic" data-i="5" style="position:absolute; left:0; top:0; width:calc(var(--u)*100); height:calc(var(--u)*100); opacity:0; will-change:transform,filter,opacity;">
+                <svg viewBox="-50 -50 100 100" width="100%" height="100%" style="display:block; overflow:visible;"><g transform="scale(1.52)"><path d="M0,20 C0,20 -24,-5 -24,-13 C-24,-22 -13,-27 0,-16 C13,-27 24,-22 24,-13 C24,-5 0,20 0,20Z" fill="#e53935"/><ellipse cx="-8" cy="-11" rx="4" ry="6" fill="rgba(255,255,255,0.35)" transform="rotate(-30,-8,-11)"/></g></svg>
+              </div>
+              <div class="cl-ic" data-i="6" style="position:absolute; left:0; top:0; width:calc(var(--u)*100); height:calc(var(--u)*100); opacity:0; will-change:transform,filter,opacity;">
+                <svg viewBox="-50 -50 100 100" width="100%" height="100%" style="display:block; overflow:visible;"><g transform="scale(1.72)"><circle cx="0" cy="-28" r="9" fill="#d61669"/><line x1="0" y1="-19" x2="0" y2="-2" stroke="#fc5c33" stroke-width="6" stroke-linecap="round"/><line x1="-2" y1="-13" x2="-20" y2="-4" stroke="#d61669" stroke-width="4.5" stroke-linecap="round"/><line x1="2" y1="-13" x2="20" y2="-2" stroke="#d61669" stroke-width="4.5" stroke-linecap="round"/><line x1="-2" y1="-2" x2="-14" y2="18" stroke="#fc5c33" stroke-width="4.5" stroke-linecap="round"/><line x1="2" y1="-2" x2="16" y2="16" stroke="#fc5c33" stroke-width="4.5" stroke-linecap="round"/></g></svg>
+              </div>
+
+            </div>
+          </div>
+
           <img id="cl-logo-static" src="site/assets/Capsule logo for profile's.png" alt="CAPSuLe — Child and Adolescent Performance Science Laboratory" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; pointer-events:none; mix-blend-mode:multiply; will-change:opacity, filter, transform;" />
           <div id="cl-vid-hint" style="position:absolute; bottom:8px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:rgba(11,27,38,.35); white-space:nowrap; transition:opacity .4s; display:flex; flex-direction:column; align-items:center; gap:4px;">Scroll<svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:block;"><path d="M8 3v10M4 9l4 4 4-4" stroke="rgba(11,27,38,.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
@@ -389,130 +556,20 @@
   }
 }">
 
-// ── Capsule logo animation — icon SVG builders ───────────────────────────────
-
-function _capIconApple(s) {
-  return '<g transform="scale('+s+')">'
-    +'<rect x="-2" y="-24" width="4" height="9" rx="2" fill="#4a7c20"/>'
-    +'<ellipse cx="7" cy="-22" rx="7" ry="4" fill="#5a9e28" transform="rotate(-30,7,-22)"/>'
-    +'<path d="M0,-15 C-20,-15 -22,2 -19,13 C-16,23 -9,25 0,25 C9,25 16,23 19,13 C22,2 20,-15 0,-15Z" fill="#e53935"/>'
-    +'<ellipse cx="-7" cy="-3" rx="4" ry="8" fill="rgba(255,255,255,0.38)" transform="rotate(-20,-7,-3)"/>'
-    +'</g>';
-}
-function _capIconBooks(s) {
-  return '<g transform="scale('+s+')">'
-    +'<rect x="-22" y="-16" width="13" height="30" rx="2" fill="#1565c0"/>'
-    +'<rect x="-7" y="-18" width="14" height="34" rx="2" fill="#1e88e5"/>'
-    +'<rect x="9" y="-13" width="14" height="27" rx="2" fill="#0d47a1"/>'
-    +'<line x1="-22" y1="-6" x2="-9" y2="-6" stroke="#fff" stroke-width="1.5"/>'
-    +'<line x1="-7" y1="-5" x2="7" y2="-5" stroke="#fff" stroke-width="1.5"/>'
-    +'<line x1="9" y1="-3" x2="23" y2="-3" stroke="#fff" stroke-width="1.5"/>'
-    +'</g>';
-}
-function _capIconSun(s) {
-  var rays = '';
-  for (var i = 0; i < 8; i++) {
-    var a = i / 8 * Math.PI * 2;
-    rays += '<line x1="'+(Math.cos(a)*14).toFixed(1)+'" y1="'+(Math.sin(a)*14).toFixed(1)
-          +'" x2="'+(Math.cos(a)*22).toFixed(1)+'" y2="'+(Math.sin(a)*22).toFixed(1)
-          +'" stroke="#f9a825" stroke-width="3.5" stroke-linecap="round"/>';
-  }
-  return '<g transform="scale('+s+')">' + rays + '<circle r="12" fill="#fdd835"/><circle r="7" fill="#fff176"/></g>';
-}
-function _capIconPalette(s) {
-  return '<g transform="scale('+s+')">'
-    +'<path d="M0,-22 C-24,-22 -24,12 -11,20 C-2,25 7,20 7,11 C7,4 11,2 15,5 C22,9 24,2 17,-11 C10,-22 5,-22 0,-22Z" fill="#ab47bc"/>'
-    +'<circle cx="-12" cy="-1" r="4.5" fill="#e53935"/>'
-    +'<circle cx="-5" cy="-15" r="4.5" fill="#1565c0"/>'
-    +'<circle cx="7" cy="-15" r="4.5" fill="#fdd835"/>'
-    +'<circle cx="13" cy="-1" r="4.5" fill="#43a047"/>'
-    +'</g>';
-}
-function _capIconHeart(s) {
-  return '<g transform="scale('+s+')">'
-    +'<path d="M0,20 C0,20 -24,-5 -24,-13 C-24,-22 -13,-27 0,-16 C13,-27 24,-22 24,-13 C24,-5 0,20 0,20Z" fill="#e53935"/>'
-    +'<ellipse cx="-8" cy="-11" rx="4" ry="6" fill="rgba(255,255,255,0.35)" transform="rotate(-30,-8,-11)"/>'
-    +'</g>';
-}
-function _capIconDumbbell(s) {
-  return '<g transform="scale('+s+')">'
-    +'<rect x="-26" y="-5.5" width="52" height="11" rx="5.5" fill="#1976d2"/>'
-    +'<rect x="-34" y="-14" width="12" height="28" rx="5" fill="#0d47a1"/>'
-    +'<rect x="22" y="-14" width="12" height="28" rx="5" fill="#0d47a1"/>'
-    +'</g>';
-}
-function _capIconFigure(s) {
-  var C1='#d61669', C2='#fc5c33';
-  return '<g transform="scale('+s+')">'
-    +'<circle cx="0" cy="-28" r="9" fill="'+C1+'"/>'
-    +'<line x1="0" y1="-19" x2="0" y2="-2" stroke="'+C2+'" stroke-width="6" stroke-linecap="round"/>'
-    +'<line x1="-2" y1="-13" x2="-20" y2="-4" stroke="'+C1+'" stroke-width="4.5" stroke-linecap="round"/>'
-    +'<line x1="2" y1="-13" x2="20" y2="-2" stroke="'+C1+'" stroke-width="4.5" stroke-linecap="round"/>'
-    +'<line x1="-2" y1="-2" x2="-14" y2="18" stroke="'+C2+'" stroke-width="4.5" stroke-linecap="round"/>'
-    +'<line x1="2" y1="-2" x2="16" y2="16" stroke="'+C2+'" stroke-width="4.5" stroke-linecap="round"/>'
-    +'</g>';
-}
-
-// ── Hero capsule — logo-accurate SVG scene (choreographed by GSAP timeline) ──
-// Square viewBox (1000x1000) matches the logo PNG's object-fit:contain box, so
-// the finished frame overlays the real logo 1:1 for a seamless cross-fade.
-
-var HERO_MOUTH = { x: 300, y: 500 };
-var HERO_ICONS = [
-  { fn:_capIconDumbbell, x:300, y:470, s:1.15 },
-  { fn:_capIconApple,    x:352, y:408, s:1.45 },
-  { fn:_capIconBooks,    x:424, y:408, s:1.48 },
-  { fn:_capIconSun,      x:494, y:394, s:1.32 },
-  { fn:_capIconPalette,  x:552, y:440, s:1.42 },
-  { fn:_capIconHeart,    x:650, y:418, s:1.52 },
-  { fn:_capIconFigure,   x:744, y:354, s:1.72 }
+// ── Hero capsule — CSS-3D pill scene (choreographed by GSAP timeline) ──
+// 1000-unit stage matches the logo PNG's object-fit:contain box, so the
+// finished frame overlays the real logo 1:1 for a seamless cross-fade.
+const HERO_P = 1100, HERO_HALF = 100;
+const HERO_FINAL = [
+  {x:300,y:470}, {x:352,y:408}, {x:424,y:408}, {x:494,y:394},
+  {x:552,y:440}, {x:650,y:418}, {x:744,y:354}
 ];
-
-function buildHeroSVG() {
-  var icons='';
-  for (var i=0;i<HERO_ICONS.length;i++){
-    var ic=HERO_ICONS[i];
-    icons += '<g class="hg-icon-pos" transform="translate('+ic.x+','+ic.y+')">'
-           +   '<g class="hg-icon" data-i="'+i+'"><g class="hg-icon-bob"><g transform="scale('+ic.s+')">'+ic.fn(1)+'</g></g></g>'
-           + '</g>';
-  }
-  return ''
-  + '<svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" style="display:block; overflow:visible;">'
-  +   '<defs>'
-  +     '<linearGradient id="hg-blue" x1="10%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#223A8E"/><stop offset="55%" stop-color="#1466B4"/><stop offset="100%" stop-color="#0C9BD6"/></linearGradient>'
-  +     '<linearGradient id="hg-pink" x1="12%" y1="0%" x2="84%" y2="100%"><stop offset="0%" stop-color="#D6166A"/><stop offset="52%" stop-color="#F0455A"/><stop offset="100%" stop-color="#FC5C33"/></linearGradient>'
-  +     '<radialGradient id="hg-mouth" cx="50%" cy="36%" r="72%"><stop offset="0%" stop-color="#B01050"/><stop offset="100%" stop-color="#7E0C3E"/></radialGradient>'
-  +     '<radialGradient id="hg-ao" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(11,11,20,0.32)"/><stop offset="100%" stop-color="rgba(11,11,20,0)"/></radialGradient>'
-  +     '<radialGradient id="hg-contact" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(18,18,34,0.22)"/><stop offset="66%" stop-color="rgba(18,18,34,0.08)"/><stop offset="100%" stop-color="rgba(18,18,34,0)"/></radialGradient>'
-  +     '<linearGradient id="hg-teal" gradientUnits="userSpaceOnUse" x1="290" y1="0" x2="805" y2="0"><stop offset="0%" stop-color="#33CFB8"/><stop offset="38%" stop-color="#7FE3CB"/><stop offset="74%" stop-color="#E6B0CD"/><stop offset="100%" stop-color="#ECCBE6"/></linearGradient>'
-  +     '<linearGradient id="hg-glint" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="rgba(255,255,255,0.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></linearGradient>'
-  +     '<filter id="hg-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>'
-  +     '<filter id="hg-soft2" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="10"/></filter>'
-  +   '</defs>'
-  +   '<ellipse id="hg-shadow" cx="300" cy="612" rx="78" ry="16" fill="url(#hg-contact)" filter="url(#hg-soft2)"/>'
-  +   '<g id="hg-body">'
-  +     '<path d="M240,500 L240,548 A60,60 0 0 0 360,548 L360,500 Z" fill="url(#hg-pink)"/>'
-  +     '<path d="M250,512 Q244,542 268,562" fill="none" stroke="url(#hg-glint)" stroke-width="8" stroke-linecap="round" opacity="0.42" filter="url(#hg-soft)"/>'
-  +     '<path d="M240,500 L240,548 A60,60 0 0 0 360,548 L360,500" fill="none" stroke="#FFB59C" stroke-width="2" opacity="0.5"/>'
-  +   '</g>'
-  +   '<ellipse id="hg-mouth" cx="300" cy="500" rx="60" ry="15" fill="url(#hg-mouth)" opacity="0"/>'
-  +   '<ellipse id="hg-seam" cx="300" cy="500" rx="64" ry="11" fill="url(#hg-ao)" opacity="0"/>'
-  +   '<g id="hg-cap">'
-  +     '<path d="M240,500 L240,452 A60,60 0 0 1 360,452 L360,500 Z" fill="url(#hg-blue)"/>'
-  +     '<path d="M250,488 Q244,438 278,414 Q300,400 324,406" fill="none" stroke="url(#hg-glint)" stroke-width="10" stroke-linecap="round" opacity="0.5" filter="url(#hg-soft)"/>'
-  +     '<path d="M240,500 L240,452 A60,60 0 0 1 360,452 L360,500" fill="none" stroke="#7FD8F7" stroke-width="2" opacity="0.5"/>'
-  +     '<ellipse id="hg-glint-dot" cx="278" cy="444" rx="12" ry="5.3" fill="rgba(255,255,255,0.82)" filter="url(#hg-soft)" transform="rotate(-34 278 444)"/>'
-  +   '</g>'
-  +   '<g id="hg-lines" fill="none" stroke="url(#hg-teal)" stroke-linecap="round">'
-  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="4.4" d="M300,500 C405,468 548,442 802,392"/>'
-  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="3.6" d="M298,506 C416,496 562,468 810,418"/>'
-  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="3.2" d="M300,494 C406,450 548,408 804,360"/>'
-  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="2.9" d="M300,510 C436,514 572,498 814,442"/>'
-  +     '<path class="hg-line" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="2.7" d="M301,489 C412,430 552,382 802,340"/>'
-  +   '</g>'
-  +   '<g id="hg-icons">'+icons+'</g>'
-  +   '</svg>';
-}
+// mid-flight staging: desired SCREEN position + depth, so the burst reads wide and
+// perspective supplies the size difference (near = big, far = small)
+const HERO_APEX = [
+  {x:322,y:648,z:300}, {x:288,y:394,z:430}, {x:628,y:286,z:-130}, {x:772,y:530,z:190},
+  {x:410,y:236,z:-230}, {x:706,y:706,z:266}, {x:872,y:372,z:-70}
+];
 
 class Component extends DCLogic {
   componentDidMount() {
@@ -590,7 +647,9 @@ class Component extends DCLogic {
       io.observe(el);
     });
 
-    // Capsule hero — GSAP scroll-scrubbed timeline
+    // Capsule hero — GSAP scroll-scrubbed 3D timeline
+    this._onHeroResize = () => this._heroMeasure();
+    window.addEventListener('resize', this._onHeroResize);
     this._initHeroAnim();
 
     // IntersectionObserver scroll reveals
@@ -608,90 +667,175 @@ class Component extends DCLogic {
     document.querySelectorAll('.cl-rv').forEach(el => this._obs.observe(el));
   }
 
+  // screen(1000-space) -> world x at depth z, so an element at depth z lands on the
+  // intended screen position under the fixed camera
+  _heroW(s, z) { const k = HERO_P / (HERO_P - z); return 500 + (s - 500) / k; }
+
+  _heroMeasure() {
+    const col = document.getElementById('cl-anim-col');
+    const stage = document.getElementById('cl-stage');
+    if (!col || !stage) return;
+    const side = Math.min(col.clientWidth, col.clientHeight);
+    if (!side) return;
+    this._heroU = side / 1000;
+    stage.style.setProperty('--u', this._heroU + 'px');
+    this._heroRender();
+  }
+
+  _heroRender() {
+    const S = this._heroS; if (!S) return;
+    const u = this._heroU, px = v => (v * u).toFixed(2) + 'px';
+    const drift = (S.idle.v - 0.5) * 8 * S.live.v;
+    const el = this._heroEl;
+
+    el.body.style.transform = 'translate3d(' + px(this._heroW(S.body.x, S.body.z) - 40) + ',' +
+      px(this._heroW(S.body.y, S.body.z)) + ',' + px(S.body.z) + ') rotateZ(' + S.body.rz +
+      'deg) rotateY(' + (S.body.ry + drift) + 'deg) rotateX(' + S.body.rx + 'deg) scale(' + S.body.s.toFixed(3) + ')';
+    el.cap.style.transform = 'translate3d(' + px(this._heroW(S.cap.x, S.cap.z) - 40) + ',' +
+      px(this._heroW(S.cap.y, S.cap.z) - HERO_HALF) + ',' + px(S.cap.z) + ') rotateZ(' + S.cap.rz +
+      'deg) rotateY(' + (S.cap.ry + drift) + 'deg) rotateX(' + S.cap.rx + 'deg) scale(' + S.cap.s.toFixed(3) + ')';
+    el.hinge.style.transform = 'rotateX(' + S.cap.hx + 'deg) rotateZ(' + S.cap.hz + 'deg)';
+
+    el.sh.style.opacity = S.sh.op;
+    el.sh.style.transform = 'translate3d(' + px(this._heroW(S.body.x, S.body.z) - 130) + ',' +
+      px(this._heroW(S.body.y + 104, S.body.z) - 35) + ',' + px(S.body.z - 70) + ')';
+
+    // rims foreshorten: the more we look into a mouth, the rounder its ellipse
+    const mb = 3.5 + 26 * S.mouth.b, mc = 3.5 + 26 * S.mouth.c;
+    el.rimB.setAttribute('ry', mb.toFixed(2));
+    el.lipB.setAttribute('d', 'M0,0 A40,' + mb.toFixed(2) + ' 0 0 0 80,0');
+    el.rimC.setAttribute('ry', mc.toFixed(2));
+    el.lipC.setAttribute('d', 'M0,100 A40,' + mc.toFixed(2) + ' 0 0 0 80,100');
+    // the shading gradient slides with the turn, so the cylinder reads as lit from one side
+    const gx = -(S.body.ry + drift) / 90;
+    el.shellB.setAttribute('transform', 'translate(' + (gx * 3).toFixed(2) + ' 0)');
+    el.shellC.setAttribute('transform', 'translate(' + (gx * 3).toFixed(2) + ' 0)');
+
+    for (let i = 0; i < 7; i++) {
+      const s = S.icons[i], e = el.icons[i];
+      e.style.transform = 'translate3d(' + px(this._heroW(s.x, s.z) - 50) + ',' +
+        px(this._heroW(s.y, s.z) - 50) + ',' + px(s.z) + ') scale(' + s.s.toFixed(3) + ')';
+      e.style.opacity = s.op;
+      const b = Math.min(4.6, Math.abs(s.z) / 88);
+      e.style.filter = b > 0.05 ? 'blur(' + px(b) + ') saturate(' + (s.z < 0 ? 0.72 : 1) + ')' : 'none';
+    }
+
+    el.lines.style.opacity = S.lines.op;
+    el.linePaths.forEach((p, i) => {
+      p.style.strokeDashoffset = Math.max(0, Math.min(1, S.lines.d + i * 0.14));
+    });
+    el.scene.style.opacity = S.root.op;
+    el.logo.style.opacity = S.logo.op;
+  }
+
   _initHeroAnim() {
-    var root = document.getElementById('cl-anim-root');
-    var logo = document.getElementById('cl-logo-static');
-    var hero = document.getElementById('cl-hero');
-    var hint = document.getElementById('cl-vid-hint');
-    if (!root || !hero) return;
-    root.innerHTML = buildHeroSVG();
-    this._heroTweens = [];
+    const q = id => document.getElementById(id);
+    const hero = q('cl-hero'), hint = q('cl-vid-hint');
+    if (!hero) return;
+    this._heroEl = {
+      scene: q('cl-scene'), body: q('pill-body'), cap: q('pill-cap'), sh: q('pill-sh'),
+      hinge: q('cap-hinge'), rimB: q('pb-rim'), lipB: q('pb-rimlip'), rimC: q('pc-rim'),
+      lipC: q('pc-rimlip'), shellB: q('pb-shell'), shellC: q('pc-shell'), lines: q('pour-lines'), logo: q('cl-logo-static'),
+      icons: Array.from(document.querySelectorAll('.cl-ic')),
+      linePaths: Array.from(document.querySelectorAll('.hg-line'))
+    };
 
-    var hintVisible = this.props.showScrollHint !== false;
-    if (hint && !hintVisible) hint.style.opacity = '0';
+    const hintOn = this.props.showScrollHint !== false;
+    if (hint && !hintOn) hint.style.opacity = '0';
 
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var hasGSAP = !!(window.gsap && window.ScrollTrigger);
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasGSAP = !!(window.gsap && window.ScrollTrigger);
     if (reduce || !hasGSAP) {
-      root.style.display = 'none';
-      if (logo) logo.style.opacity = '1';
+      if (this._heroEl.scene) this._heroEl.scene.style.display = 'none';
+      if (this._heroEl.logo) this._heroEl.logo.style.opacity = '1';
       if (hint) hint.style.opacity = '0';
       return;
     }
 
-    var self = this;
+    // closed capsule, held near the camera; seam just below the optical centre so we
+    // look down into the mouth once the cap lifts
+    const seam = {x:500, y:524, z:560};
+    const S = this._heroS = {
+      body: {x:seam.x, y:seam.y, z:seam.z, rz:8, ry:-17, rx:-16, s:1},
+      cap:  {x:seam.x, y:seam.y, z:seam.z, rz:8, ry:-17, rx:-16, hx:0, hz:0, s:1},
+      sh:   {op:0.5},
+      lines:{d:1, op:0}, mouth:{b:0.12, c:0.1},
+      logo: {op:0}, root: {op:1},
+      idle: {v:0.5}, live: {v:1},
+      icons: HERO_FINAL.map(() => ({x:seam.x + 14, y:seam.y - 4, z:seam.z + 30, s:0.14, op:0}))
+    };
+
+    this._heroU = 0.58;
+    this._heroMeasure();
     gsap.registerPlugin(ScrollTrigger);
-    var isMobile = window.matchMedia('(max-width: 820px)').matches;
+    const isMobile = window.matchMedia('(max-width: 820px)').matches;
+    const len = 220;
 
-    var q = function(sel){ return root.querySelector(sel); };
-    var cap = q('#hg-cap'), mouth = q('#hg-mouth'),
-        seam = q('#hg-seam'), shadow = q('#hg-shadow'), glint = q('#hg-glint-dot');
-    var lines = root.querySelectorAll('.hg-line');
-    var icons = root.querySelectorAll('.hg-icon');
-
-    // Pill sits closed exactly as drawn; only the shadow/lines/icons need hidden starting states
-    gsap.set(shadow, { transformOrigin: '50% 50%' });
-    gsap.set(lines,  { strokeDasharray: 1, strokeDashoffset: 1 });
-    icons.forEach(function(g){
-      var ic = HERO_ICONS[+g.getAttribute('data-i')];
-      gsap.set(g, { x: HERO_MOUTH.x - ic.x, y: HERO_MOUTH.y - ic.y, scale: 0.18, autoAlpha: 0, transformOrigin: '50% 50%' });
-    });
-
-    var tl = gsap.timeline({
-      defaults: { ease: 'none' },
+    const tl = this._heroTL = gsap.timeline({
+      defaults: {ease:'none'},
+      onUpdate: () => this._heroRender(),
       scrollTrigger: {
-        trigger: hero,
-        start: 'top top',
-        end: '+=' + (isMobile ? 150 : 200) + '%',
-        pin: true,
-        scrub: 0.6,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        onUpdate: function(st){ if (hint && hintVisible) hint.style.opacity = st.progress > 0.04 ? '0' : '1'; }
+        trigger: hero, start:'top top', end:'+=' + (isMobile ? len * 0.7 : len) + '%',
+        pin:true, pinType:'transform', scrub:0.8, anticipatePin:1, invalidateOnRefresh:true,
+        fastScrollEnd:true,
+        onUpdate: st => { if (hint && hintOn) hint.style.opacity = st.progress > 0.04 ? '0' : '1'; }
       }
     });
-    self._heroST = tl.scrollTrigger;
+    this._heroST = tl.scrollTrigger;
 
-    // Unhinge — blue cap swings open from the seam like a real capsule (weighted, no bounce)
-    tl.to(cap,    { rotation: -42, svgOrigin: '247 500', y: -3, ease: 'power4.out', duration: 0.28 }, 0.06);
-    tl.to(seam,   { opacity: 1, ease: 'power1.in',  duration: 0.06 }, 0.06);
-    tl.to(seam,   { opacity: 0, ease: 'power1.out', duration: 0.16 }, 0.13);
-    tl.to(mouth,  { opacity: 1, ease: 'power2.out', duration: 0.16 }, 0.12);
-    tl.to(shadow, { scaleX: 1.18, opacity: 0.85, ease: 'power2.out', duration: 0.28 }, 0.06);
-    // Teal lines grow left-to-right out of the mouth — linear so the draw tracks scroll exactly
-    tl.to(lines,  { strokeDashoffset: 0, ease: 'none', duration: 0.32, stagger: 0.05 }, 0.18);
-    // Icons emerge from the mouth, in pour order, into the exact logo layout
-    tl.to(icons,  { x: 0, y: 0, scale: 1, autoAlpha: 1, ease: 'back.out(1.5)', duration: 0.30, stagger: 0.035 }, 0.40);
-    // Brief hold so the SVG rests exactly as the logo before the fade
-    tl.to({}, { duration: 0.06 }, 0.70);
-    // Seamless matched cross-fade to the real logo (positions already align)
-    tl.to(root,   { autoAlpha: 0, ease: 'power1.inOut', duration: 0.15 }, 0.77);
-    tl.fromTo(logo, { autoAlpha: 0 }, { autoAlpha: 1, ease: 'power1.inOut', duration: 0.15 }, 0.77);
-    tl.to({}, { duration: 0.08 }, 0.92);
+    // 1 — the cap tips back off the seam, hinged on its rear lip, and the mouth opens up
+    tl.to(S.cap, {hx:78, hz:-7, duration:0.26, ease:'power3.out'}, 0.04);
+    tl.to(S.mouth, {b:1, duration:0.24, ease:'power2.out'}, 0.06);
+    tl.to(S.mouth, {c:0.62, duration:0.20, ease:'power2.out'}, 0.05);
+    tl.to(S.cap, {y:'-=26', duration:0.26, ease:'power2.out'}, 0.04);
+    tl.to(S.cap, {z:'-=80', duration:0.30, ease:'power2.out'}, 0.06);
+    // 2 — the whole capsule turns a little so its roundness reads
+    tl.to([S.body, S.cap], {ry:22, duration:0.36, ease:'sine.inOut'}, 0.05);
+    tl.to(S.body, {rx:-22, duration:0.30, ease:'sine.out'}, 0.06);
+    tl.to(S.sh, {op:0.3, duration:0.30}, 0.05);
 
-    // Moving reflection highlight on the cap (skipped on mobile for fewer simultaneous anims)
-    if (!isMobile) {
-      self._heroTweens.push(gsap.to(glint, { x: 26, y: -4, opacity: 0.4, duration: 2.4, ease: 'sine.inOut', repeat: -1, yoyo: true }));
-    }
+    // 3 — contents pour out: up through the mouth, past the camera, then back to the
+    // logo plane. Depth is the story, so each one takes a different z lane.
+    S.icons.forEach((ic, i) => {
+      const a = HERO_APEX[i], f = HERO_FINAL[i], t0 = 0.20 + i * 0.042;
+      tl.to(ic, {op:1, duration:0.06, ease:'power1.out'}, t0);
+      tl.to(ic, {x:a.x, y:a.y, z:a.z, s:1, duration:0.26, ease:'power2.out'}, t0);
+      tl.to(ic, {x:f.x, y:f.y, z:0, s:1, duration:0.26, ease:'power2.inOut'}, 0.56 + i * 0.018);
+    });
 
-    if (logo && !logo.complete) logo.addEventListener('load', function(){ ScrollTrigger.refresh(); });
-    setTimeout(function(){ ScrollTrigger.refresh(); }, 80);
+    // 4 — resolve: both halves fall back to the logo plane and its exact pose
+    tl.to(S.live, {v:0, duration:0.16}, 0.58);
+    // measured off the logo PNG: the capsule stays OPEN — body upright with its mouth
+    // toward camera at seam (253,503), cap tipped back up-left from seam (236,461)
+    tl.to(S.body, {x:258, y:487, z:0, rz:8, ry:0, rx:-9, s:1.24, duration:0.26, ease:'power2.inOut'}, 0.58);
+    tl.to(S.cap,  {x:236, y:461, z:0, rz:-54, ry:0, rx:0, hx:46, hz:0, s:1.05, duration:0.26, ease:'power2.inOut'}, 0.58);
+    tl.to(S.sh, {op:0, duration:0.18}, 0.60);
+    tl.to(S.lines, {op:1, duration:0.05}, 0.70);
+    tl.to(S.lines, {d:0, duration:0.16, ease:'power1.out'}, 0.71);
+
+    // 5 — matched hand-off to the real logo artwork
+    tl.to(S.root, {op:0, duration:0.15, ease:'power1.inOut'}, 0.84);
+    tl.to(S.logo, {op:1, duration:0.17, ease:'power1.inOut'}, 0.83);
+    tl.to({}, {duration:0.02}, 0.98);
+
+    // idle breathing only while the pill is still closed, so it never fights the scrub
+    this._heroIdle = gsap.to(S.idle, {
+      v:1, duration:3.4, ease:'sine.inOut', repeat:-1, yoyo:true,
+      onUpdate: () => { if (tl.progress() < 0.02) this._heroRender(); }
+    });
+
+    const logo = this._heroEl.logo;
+    if (logo && !logo.complete) logo.addEventListener('load', () => ScrollTrigger.refresh());
+    setTimeout(() => { this._heroMeasure(); ScrollTrigger.refresh(); }, 90);
+    setTimeout(() => { this._heroMeasure(); ScrollTrigger.refresh(); }, 600);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this._sc);
-    if (this._heroST) this._heroST.kill();
-    if (this._heroTweens) this._heroTweens.forEach(function(t){ if (t) t.kill(); });
+    window.removeEventListener('resize', this._onHeroResize);
+    if (this._heroIdle) this._heroIdle.kill();
+    if (this._heroST) this._heroST.kill(true);
+    if (this._heroTL) this._heroTL.kill();
     if (this._obs) this._obs.disconnect();
   }
 }
