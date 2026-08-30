@@ -581,10 +581,31 @@ class Component extends DCLogic {
     let _lastY = 0, _navHidden = false;
     const nav = document.getElementById('cl-nav');
 
-    // Reading progress bar + nav hide/show (single scroll listener)
-    this._sc = () => {
+    // document.documentElement.scrollHeight is a layout-dependent read — calling it on
+    // every scroll event forces a synchronous layout flush against whatever DOM writes
+    // the hero's own per-frame render just made, which reads as scroll jank/shake. Cache
+    // it and only refresh when the page's height can actually change.
+    this._pageTotal = 0;
+    this._updatePageTotal = () => {
+      this._pageTotal = document.documentElement.scrollHeight - window.innerHeight;
+    };
+    this._updatePageTotal();
+    window.addEventListener('resize', this._updatePageTotal);
+    window.addEventListener('load', this._updatePageTotal);
+    if (window.ResizeObserver) {
+      this._pageRO = new ResizeObserver(this._updatePageTotal);
+      this._pageRO.observe(document.body);
+    }
+
+    // Reading progress bar + nav hide/show (single scroll listener). Native 'scroll'
+    // events can fire more than once per rendered frame (e.g. high-frequency trackpad
+    // deltas); rAF-batch so this never runs more than once per frame alongside the
+    // hero's own GSAP-driven render.
+    let _scScheduled = false;
+    const _scRun = () => {
+      _scScheduled = false;
       const s = window.pageYOffset;
-      const t = document.documentElement.scrollHeight - window.innerHeight;
+      const t = this._pageTotal;
       const b = document.getElementById('cl-prog');
       if (b) b.style.width = (t > 0 ? Math.min(100, s / t * 100) : 0) + '%';
       if (nav) {
@@ -598,6 +619,11 @@ class Component extends DCLogic {
         }
         _lastY = s;
       }
+    };
+    this._sc = () => {
+      if (_scScheduled) return;
+      _scScheduled = true;
+      requestAnimationFrame(_scRun);
     };
     window.addEventListener('scroll', this._sc, { passive: true });
 
@@ -856,6 +882,9 @@ class Component extends DCLogic {
   componentWillUnmount() {
     window.removeEventListener('scroll', this._sc);
     window.removeEventListener('resize', this._onHeroResize);
+    window.removeEventListener('resize', this._updatePageTotal);
+    window.removeEventListener('load', this._updatePageTotal);
+    if (this._pageRO) this._pageRO.disconnect();
     if (this._heroIdle) this._heroIdle.kill();
     if (this._heroST) this._heroST.kill(true);
     if (this._heroTL) this._heroTL.kill();
