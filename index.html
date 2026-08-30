@@ -679,6 +679,9 @@ class Component extends DCLogic {
     if (!side) return;
     this._heroU = side / 1000;
     stage.style.setProperty('--u', this._heroU + 'px');
+    // the icon blur is expressed in scaled px, so a rescale needs a fresh write
+    // even when the underlying depth value hasn't moved
+    if (this._heroLast) this._heroLast.iconBlur.fill(null);
     this._heroRender();
   }
 
@@ -686,8 +689,9 @@ class Component extends DCLogic {
     const S = this._heroS; if (!S) return;
     const u = this._heroU, px = v => (v * u).toFixed(2) + 'px';
     const drift = (S.idle.v - 0.5) * 8 * S.live.v;
-    const el = this._heroEl;
+    const el = this._heroEl, last = this._heroLast;
 
+    // transform/opacity writes are compositor-only (cheap), so these stay unconditional
     el.body.style.transform = 'translate3d(' + px(this._heroW(S.body.x, S.body.z) - 40) + ',' +
       px(this._heroW(S.body.y, S.body.z)) + ',' + px(S.body.z) + ') rotateZ(' + S.body.rz +
       'deg) rotateY(' + (S.body.ry + drift) + 'deg) rotateX(' + S.body.rx + 'deg) scale(' + S.body.s.toFixed(3) + ')';
@@ -700,24 +704,43 @@ class Component extends DCLogic {
     el.sh.style.transform = 'translate3d(' + px(this._heroW(S.body.x, S.body.z) - 130) + ',' +
       px(this._heroW(S.body.y + 104, S.body.z) - 35) + ',' + px(S.body.z - 70) + ')';
 
-    // rims foreshorten: the more we look into a mouth, the rounder its ellipse
+    // SVG attribute writes force layout + repaint, unlike the transform writes above — skip
+    // them unless the underlying value actually moved, since S.mouth/S.body.ry hold steady
+    // (closed mouth, settled turn) across most of the pinned scroll range.
     const mb = 3.5 + 26 * S.mouth.b, mc = 3.5 + 26 * S.mouth.c;
-    el.rimB.setAttribute('ry', mb.toFixed(2));
-    el.lipB.setAttribute('d', 'M0,0 A40,' + mb.toFixed(2) + ' 0 0 0 80,0');
-    el.rimC.setAttribute('ry', mc.toFixed(2));
-    el.lipC.setAttribute('d', 'M0,100 A40,' + mc.toFixed(2) + ' 0 0 0 80,100');
+    if (last.mb === null || Math.abs(mb - last.mb) > 0.03) {
+      el.rimB.setAttribute('ry', mb.toFixed(2));
+      el.lipB.setAttribute('d', 'M0,0 A40,' + mb.toFixed(2) + ' 0 0 0 80,0');
+      last.mb = mb;
+    }
+    if (last.mc === null || Math.abs(mc - last.mc) > 0.03) {
+      el.rimC.setAttribute('ry', mc.toFixed(2));
+      el.lipC.setAttribute('d', 'M0,100 A40,' + mc.toFixed(2) + ' 0 0 0 80,100');
+      last.mc = mc;
+    }
     // the shading gradient slides with the turn, so the cylinder reads as lit from one side
     const gx = -(S.body.ry + drift) / 90;
-    el.shellB.setAttribute('transform', 'translate(' + (gx * 3).toFixed(2) + ' 0)');
-    el.shellC.setAttribute('transform', 'translate(' + (gx * 3).toFixed(2) + ' 0)');
+    if (last.gx === null || Math.abs(gx - last.gx) > 0.01) {
+      const t = (gx * 3).toFixed(2);
+      el.shellB.setAttribute('transform', 'translate(' + t + ' 0)');
+      el.shellC.setAttribute('transform', 'translate(' + t + ' 0)');
+      last.gx = gx;
+    }
 
     for (let i = 0; i < 7; i++) {
       const s = S.icons[i], e = el.icons[i];
       e.style.transform = 'translate3d(' + px(this._heroW(s.x, s.z) - 50) + ',' +
         px(this._heroW(s.y, s.z) - 50) + ',' + px(s.z) + ') scale(' + s.s.toFixed(3) + ')';
       e.style.opacity = s.op;
-      const b = Math.min(4.6, Math.abs(s.z) / 88);
-      e.style.filter = b > 0.05 ? 'blur(' + px(b) + ') saturate(' + (s.z < 0 ? 0.72 : 1) + ')' : 'none';
+      // blur() is one of the costlier CSS filters to rasterize — recomputing it on 7
+      // elements every frame is a leading cause of scroll jank, so quantize it and only
+      // touch the DOM when the depth has moved enough to actually look different.
+      const b = Math.min(3.2, Math.abs(s.z) / 100);
+      const lastB = last.iconBlur[i];
+      if (lastB === null || Math.abs(b - lastB) > 0.15) {
+        e.style.filter = b > 0.05 ? 'blur(' + px(b) + ') saturate(' + (s.z < 0 ? 0.72 : 1) + ')' : 'none';
+        last.iconBlur[i] = b;
+      }
     }
 
     el.lines.style.opacity = S.lines.op;
@@ -764,6 +787,7 @@ class Component extends DCLogic {
       idle: {v:0.5}, live: {v:1},
       icons: HERO_FINAL.map(() => ({x:seam.x + 14, y:seam.y - 4, z:seam.z + 30, s:0.14, op:0}))
     };
+    this._heroLast = { mb: null, mc: null, gx: null, iconBlur: [null,null,null,null,null,null,null] };
 
     this._heroU = 0.58;
     this._heroMeasure();
