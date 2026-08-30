@@ -800,7 +800,7 @@ class Component extends DCLogic {
       onUpdate: () => this._heroRender(),
       scrollTrigger: {
         trigger: hero, start:'top top', end:'+=' + (isMobile ? len * 0.7 : len) + '%',
-        pin:true, pinType:'transform', scrub:0.8, anticipatePin:1, invalidateOnRefresh:true,
+        pin:true, scrub:0.8, anticipatePin:1, invalidateOnRefresh:true,
         onUpdate: st => { if (hint && hintOn) hint.style.opacity = st.progress > 0.04 ? '0' : '1'; }
       }
     });
