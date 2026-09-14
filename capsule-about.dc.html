@@ -45,7 +45,17 @@
       [style*="gap: 80px"]{gap:32px !important;}
       [style*="gap: 64px"]{gap:28px !important;}
       [style*="gap: 56px"]{gap:28px !important;}
+      .cl-teamgrid{grid-template-columns:1fr !important; gap:14px !important;}
+      .cl-teamnav{display:none !important;}
+      .cl-teamcard{min-height:0 !important;}
+      .cl-teamphoto{min-height:260px !important;}
+      .cl-teamtext{padding:28px 24px !important;}
+      .cl-bio-clamp{display:-webkit-box !important; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden !important;}
+      .cl-bio-toggle{display:inline-flex !important;}
     }
+    .cl-bio-toggle{display:none; align-items:center; gap:6px; margin-top:14px; background:none; border:none; padding:0; cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#C84B32;}
+    .cl-bio-toggle svg{transition:transform .2s ease;}
+    .cl-bio-toggle.is-open svg{transform:rotate(180deg);}
   </style>
 </helmet>
 
@@ -134,19 +144,20 @@
         <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">{{ teamCounter }}</span>
       </div>
       <!-- carousel: prev arrow | card | next arrow -->
-      <div style="display:grid; grid-template-columns:64px 1fr 64px; gap:20px; align-items:center;">
-        <button onClick="{{ teamPrev }}" style="width:64px; height:64px; border:1.5px solid #0B1B26; background:transparent; color:#0B1B26; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s; flex-shrink:0; font-family:Georgia,serif;" style-hover="background:#0B1B26; color:#F5EFE2;">←</button>
-        <div style="opacity:{{ teamCardOpacity }}; transform:{{ teamCardTransform }}; overflow:hidden; background:#F5EFE2; border:1.5px solid #0B1B26; display:grid; grid-template-columns:300px 1fr; overflow:hidden; min-height:440px;">
+      <div class="cl-teamgrid" style="display:grid; grid-template-columns:64px 1fr 64px; gap:20px; align-items:center;">
+        <button class="cl-teamnav" onClick="{{ teamPrev }}" style="width:64px; height:64px; border:1.5px solid #0B1B26; background:transparent; color:#0B1B26; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s; flex-shrink:0; font-family:Georgia,serif;" style-hover="background:#0B1B26; color:#F5EFE2;">←</button>
+        <div class="cl-teamcard" style="opacity:{{ teamCardOpacity }}; transform:{{ teamCardTransform }}; overflow:hidden; background:#F5EFE2; border:1.5px solid #0B1B26; display:grid; grid-template-columns:300px 1fr; overflow:hidden; min-height:440px;">
           <!-- photo — rendered entirely from renderVals to avoid src-hole requests -->
-          <div style="position:relative; overflow:hidden; background:#E8E2D1; min-height:440px; flex-shrink:0;">{{ teamPhoto }}</div>
+          <div class="cl-teamphoto" style="position:relative; overflow:hidden; background:#E8E2D1; min-height:440px; flex-shrink:0;">{{ teamPhoto }}</div>
           <!-- text -->
-          <div style="padding:48px 52px; display:flex; flex-direction:column; justify-content:flex-start;">
+          <div class="cl-teamtext" style="padding:48px 52px; display:flex; flex-direction:column; justify-content:flex-start;">
             <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">{{ teamMember.title }}</div>
             <div style="font-family:'Fraunces',serif; font-size:40px; font-weight:500; letter-spacing:-.022em; line-height:1.04; color:#0B1B26; margin-bottom:28px;">{{ teamMember.name }}</div>
-            <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.72; color:#0B1B26; margin:0; text-wrap:pretty;">{{ teamMember.bio }}</p>
+            <p class="{{ teamBioClass }}" style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.72; color:#0B1B26; margin:0; text-wrap:pretty;">{{ teamMember.bio }}</p>
+            {{ teamBioToggle }}
           </div>
         </div>
-        <button onClick="{{ teamNext }}" style="width:64px; height:64px; border:1.5px solid #0B1B26; background:transparent; color:#0B1B26; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s; flex-shrink:0; font-family:Georgia,serif;" style-hover="background:#0B1B26; color:#F5EFE2;">→</button>
+        <button class="cl-teamnav" onClick="{{ teamNext }}" style="width:64px; height:64px; border:1.5px solid #0B1B26; background:transparent; color:#0B1B26; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s; flex-shrink:0; font-family:Georgia,serif;" style-hover="background:#0B1B26; color:#F5EFE2;">→</button>
       </div>
       <!-- dot navigation -->
       <div style="margin-top:28px; display:flex; justify-content:center; align-items:center; gap:8px;">{{ teamDots }}</div>
@@ -250,7 +261,7 @@
 class Component extends DCLogic {
   static _team = [
     { name: 'Nate Roy M.S.',      title: 'Founder & Vision Director',                    photo: 'site/assets/Nate headshot.png',                  bio: 'Nate is a Medical Student at Cornell University and Team USA Bobsled athlete. His mission is to translate neuroscience into practical tools for clinics and communities around the world.' },
-    { name: 'Keton Johnson',       title: 'President & Community Connection Director',    photo: 'site/assets/keton headshot.jpg',                  bio: 'Keton is a pre-med graduate from Seattle Pacific University. She is driven to provide thoughtful, compassionate, patient-centered care.' },
+    { name: 'Keton Roy',           title: 'President & Community Connection Director',    photo: 'site/assets/keton headshot.jpg',                  bio: 'Keton is a pre-med graduate from Seattle Pacific University. She is driven to provide thoughtful, compassionate, patient-centered care.' },
     { name: 'Emily Smith Ph.D',    title: 'Director of Scientific Translation',           photo: 'site/assets/emily headshot.jpg',                  bio: 'Emily is a postdoctoral research fellow at the Centre for Addiction and Mental Health. She is passionate about applying her expertise in the brain\u2013body connection to support mental and physical well-being across the lifespan.' },
     { name: 'Gabriella Cha',       title: 'Director of Digital Product Design',           photo: 'site/assets/gabrielle headshot.jpg',              bio: 'Gabriella is an undergraduate student in biochemistry and neuroscience at McGill University. She is passionate about exploring the neuroscience of addiction and aspires to pursue a medical career with a focus in neuroscience.' },
     { name: 'Matt Shumway',        title: 'Clinical Integration Advisor',                 photo: 'site/assets/Matt bio pic.jpg',                    bio: 'Matt is a medical student at LECOM. He is dedicated to bridging the gap between complex clinical research and everyday wellness.' },
@@ -262,18 +273,18 @@ class Component extends DCLogic {
     { name: 'Johanna Kunz',        title: 'Creative Visual Associate',                    photo: 'site/assets/johanna_headshot.jpg',                bio: "Johanna is a senior at Auburn University studying PR & studio art. She brings her creative visual expertise to CAPSuLe's storytelling and design work." },
   ];
 
-  state = { teamIdx: 0, teamDir: 0, teamAnim: false };
+  state = { teamIdx: 0, teamDir: 0, teamAnim: false, bioExpanded: false };
 
   _goTo(i, dir) {
     const T = Component._team;
     const newIdx = ((i % T.length) + T.length) % T.length;
     // Switch immediately — photo and text update in the same render so they never desync.
-    this.setState({ teamIdx: newIdx, teamDir: 0, teamAnim: false });
+    this.setState({ teamIdx: newIdx, teamDir: 0, teamAnim: false, bioExpanded: false });
   }
 
   renderVals() {
     const T = Component._team;
-    const { teamIdx, teamDir, teamAnim } = this.state;
+    const { teamIdx, teamDir, teamAnim, bioExpanded } = this.state;
     const m = T[teamIdx];
     const initials = m.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
     return {
@@ -288,6 +299,17 @@ class Component extends DCLogic {
         React.createElement('div', { className: 'cl-photo-ph', style: { position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, background: '#E8E2D1' } },
           React.createElement('span', { style: { fontFamily: "'Fraunces',serif", fontSize: 64, fontWeight: 500, color: 'rgba(11,27,38,.2)', lineHeight: 1 } }, initials),
           React.createElement('span', { style: { fontFamily: "'JetBrains Mono',monospace", fontSize: 9, letterSpacing: '.18em', textTransform: 'uppercase', color: 'rgba(11,27,38,.3)' } }, 'Photo coming soon')
+        )
+      ),
+      teamBioClass: 'cl-bio' + (bioExpanded ? '' : ' cl-bio-clamp'),
+      teamBioToggle: React.createElement('button', {
+        className: 'cl-bio-toggle' + (bioExpanded ? ' is-open' : ''),
+        onClick: () => this.setState({ bioExpanded: !bioExpanded }),
+        'aria-expanded': bioExpanded
+      },
+        React.createElement('span', null, bioExpanded ? 'Show less' : 'Read more'),
+        React.createElement('svg', { width: 10, height: 10, viewBox: '0 0 10 10', fill: 'none' },
+          React.createElement('path', { d: 'M1.5 3.5L5 7l3.5-3.5', stroke: '#C84B32', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' })
         )
       ),
       teamCounter: String(teamIdx + 1).padStart(2, '0') + ' / ' + String(T.length).padStart(2, '0'),
