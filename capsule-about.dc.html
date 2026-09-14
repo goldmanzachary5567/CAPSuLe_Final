@@ -45,10 +45,12 @@
       [style*="gap: 80px"]{gap:32px !important;}
       [style*="gap: 64px"]{gap:28px !important;}
       [style*="gap: 56px"]{gap:28px !important;}
-      .cl-teamgrid{grid-template-columns:1fr !important; gap:14px !important;}
-      .cl-teamnav{display:none !important;}
-      .cl-teamcard{min-height:0 !important;}
-      .cl-teamphoto{min-height:260px !important;}
+      .cl-teamgrid{grid-template-columns:1fr 1fr !important; grid-template-areas:"card card" "prev next" !important; gap:12px !important;}
+      .cl-teamnav{display:flex !important; width:100% !important; height:48px !important;}
+      .cl-teamnav.cl-teamprev{grid-area:prev;}
+      .cl-teamnav.cl-teamnext{grid-area:next;}
+      .cl-teamcard{grid-area:card; min-height:0 !important;}
+      .cl-teamphoto{min-height:0 !important; aspect-ratio:0.72 !important;}
       .cl-teamtext{padding:28px 24px !important;}
       .cl-bio-clamp{display:-webkit-box !important; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden !important;}
       .cl-bio-toggle{display:inline-flex !important;}
@@ -145,7 +147,7 @@
       </div>
       <!-- carousel: prev arrow | card | next arrow -->
       <div class="cl-teamgrid" style="display:grid; grid-template-columns:64px 1fr 64px; gap:20px; align-items:center;">
-        <button class="cl-teamnav" onClick="{{ teamPrev }}" style="width:64px; height:64px; border:1.5px solid #0B1B26; background:transparent; color:#0B1B26; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s; flex-shrink:0; font-family:Georgia,serif;" style-hover="background:#0B1B26; color:#F5EFE2;">←</button>
+        <button class="cl-teamnav cl-teamprev" onClick="{{ teamPrev }}" style="width:64px; height:64px; border:1.5px solid #0B1B26; background:transparent; color:#0B1B26; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s; flex-shrink:0; font-family:Georgia,serif;" style-hover="background:#0B1B26; color:#F5EFE2;">←</button>
         <div class="cl-teamcard" style="opacity:{{ teamCardOpacity }}; transform:{{ teamCardTransform }}; overflow:hidden; background:#F5EFE2; border:1.5px solid #0B1B26; display:grid; grid-template-columns:300px 1fr; overflow:hidden; min-height:440px;">
           <!-- photo — rendered entirely from renderVals to avoid src-hole requests -->
           <div class="cl-teamphoto" style="position:relative; overflow:hidden; background:#E8E2D1; min-height:440px; flex-shrink:0;">{{ teamPhoto }}</div>
@@ -157,7 +159,7 @@
             {{ teamBioToggle }}
           </div>
         </div>
-        <button class="cl-teamnav" onClick="{{ teamNext }}" style="width:64px; height:64px; border:1.5px solid #0B1B26; background:transparent; color:#0B1B26; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s; flex-shrink:0; font-family:Georgia,serif;" style-hover="background:#0B1B26; color:#F5EFE2;">→</button>
+        <button class="cl-teamnav cl-teamnext" onClick="{{ teamNext }}" style="width:64px; height:64px; border:1.5px solid #0B1B26; background:transparent; color:#0B1B26; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s; flex-shrink:0; font-family:Georgia,serif;" style-hover="background:#0B1B26; color:#F5EFE2;">→</button>
       </div>
       <!-- dot navigation -->
       <div style="margin-top:28px; display:flex; justify-content:center; align-items:center; gap:8px;">{{ teamDots }}</div>
